@@ -17,37 +17,16 @@ from django.utils.translation import ugettext_lazy as _
 from horizon import exceptions
 from horizon import tabs
 
-import openstack_dashboard.api.glance as glance_api
-
-import a10_neutron_lbaas.dashboard.a10devices.tables as p_tables
-import a10_neutron_lbaas.dashboard.api.a10devices as a10api
-
-GLANCE_API_VERSION = 2
+import a10_horizon.dashboard.a10devices.tables as p_tables
+import a10_horizon.dashboard.api.base as base
+import a10_neutron_lbaas.instance_manager as im
+import a10_horizon.dashboard.api.a10devices as a10api
 
 
-class A10ImagesTab(tabs.TableTab):
-
-    table_classes = (p_tables.A10ImageTable, )
-    name = _("A10 Images")
-    slug = "a10imagestab"
-    template_name = "horizon/common/_detail_table.html"
-
-    def get_a10imagestable_data(self):
-        result = []
-        image_filter = {
-            "tag": ["a10"]
-        }
-
-        try:
-            images = glance_api.glanceclient(self.tab_group.request,
-                                             version=GLANCE_API_VERSION
-                                             ).images.list(filters=image_filter)
-            result = images
-        except Exception:
-            result = []
-            exceptions.handle(self.tab.group.request, _('Unable to retrieve image list'))
-
-        return result
+def instance_manager_for(request):
+    return im.InstanceManager(
+        base.project_id_for(request),
+        session=base.session_for(request))
 
 
 class A10AppliancesTab(tabs.TableTab):
@@ -58,6 +37,16 @@ class A10AppliancesTab(tabs.TableTab):
 
     def get_a10appliancestable_data(self):
         result = []
+
+        # i_filter = {
+        #     "image": {
+        #         "tag": [
+        #             "a10"
+        #         ]
+
+        #     }
+        # }
+
         try:
             result = a10api.get_a10_appliances(self.request)
         except Exception:
@@ -69,5 +58,5 @@ class A10AppliancesTab(tabs.TableTab):
 
 class A10Tabs(tabs.TabGroup):
     slug = "a10tabs"
-    tabs = (A10AppliancesTab, A10ImagesTab, )
+    tabs = (A10AppliancesTab, )
     sticky = True

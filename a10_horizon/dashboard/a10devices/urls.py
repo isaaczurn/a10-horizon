@@ -23,5 +23,6 @@ urlpatterns = patterns(
     'a10_neutron_lbaas.dashboard.a10devices.views',
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^addappliance$', views.AddApplianceView.as_view(), name='addappliance'),
-    url(r'^addimage$', views.AddImageView.as_view(), name="addimage")
+    # url(r'^deleteappliance$', views.DeleteApplianceView.as_view(), name='deleteappliance')
+    # url(r'^addimage$', views.AddImageView.as_view(), name="addimage")
 )

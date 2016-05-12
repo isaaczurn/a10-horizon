@@ -43,7 +43,3 @@ class AddApplianceView(workflows.WorkflowView):
     workflow_class = p_workflows.AddAppliance
     # template_name = "_add_appliance.html"
 
-
-class AddImageView(workflows.WorkflowView):
-    workflow_class = p_workflows.AddImage
-    # template_name = "_add_image.html"
