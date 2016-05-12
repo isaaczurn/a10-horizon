@@ -1,3 +1,5 @@
+# Copyright 2015,  A10 Networks
+#
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
 #    a copy of the License at
@@ -10,16 +12,16 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-# The slug of the dashboard to be added to HORIZON['dashboards']. Required.
-PANEL = "a10appliances"
-PANEL_DASHBOARD = 'project'
-PANEL_GROUP = "network"
 
-# ADD_PANEL = u"a10_horizon.dashboard.a10devices.panel.A10Appliances"
-ADD_PANEL = "a10_horizon.dashboard.a10devices.panel.A10Appliances"
-# A dictionary of exception classes to be added to HORIZON['exceptions'].
-# ADD_EXCEPTIONS = {}
-# A list of applications to be added to INSTALLED_APPS.
-ADD_INSTALLED_APPS = ['a10_horizon.dashboard.a10devices']
-# DISABLED = False
+from django.conf.urls import patterns
+from django.conf.urls import url
 
+from a10_neutron_lbaas.dashboard.a10devices import views
+
+
+urlpatterns = patterns(
+    'a10_neutron_lbaas.dashboard.a10devices.views',
+    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^addappliance$', views.AddApplianceView.as_view(), name='addappliance'),
+    url(r'^addimage$', views.AddImageView.as_view(), name="addimage")
+)

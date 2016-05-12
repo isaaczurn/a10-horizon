@@ -1,3 +1,5 @@
+# Copyright 2015,  A10 Networks
+#
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
 #    a copy of the License at
@@ -9,17 +11,13 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
+# from django.core.urlresolvers import reverse
+# from django.core.urlresolvers import reverse_lazy
+# from django.utils.translation import ugettext_lazy as _
 
-# The slug of the dashboard to be added to HORIZON['dashboards']. Required.
-PANEL = "a10appliances"
-PANEL_DASHBOARD = 'project'
-PANEL_GROUP = "network"
-
-# ADD_PANEL = u"a10_horizon.dashboard.a10devices.panel.A10Appliances"
-ADD_PANEL = "a10_horizon.dashboard.a10devices.panel.A10Appliances"
-# A dictionary of exception classes to be added to HORIZON['exceptions'].
-# ADD_EXCEPTIONS = {}
-# A list of applications to be added to INSTALLED_APPS.
-ADD_INSTALLED_APPS = ['a10_horizon.dashboard.a10devices']
-# DISABLED = False
-
+# from horizon import exceptions
+# from horizon import forms
+# from horizon import tabs
+# from horizon.utils import memoized
+# from horizon import workflows
+pass
