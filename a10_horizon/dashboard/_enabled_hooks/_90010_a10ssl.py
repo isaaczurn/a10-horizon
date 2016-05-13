@@ -12,11 +12,12 @@
 #    under the License.
 
 
-from django.utils.translation import ugettext_lazy as _
-
-# The slug of the panel group to be added to HORIZON_CONFIG. Required.
+# The slug of the panel to be added to HORIZON_CONFIG. Required.
+PANEL = 'a10ssl'
+# The slug of the dashboard the PANEL associated with. Required.
+PANEL_DASHBOARD = 'project'
+# The slug of the panel group the PANEL is associated with.
 PANEL_GROUP = 'a10networks'
-# The display name of the PANEL_GROUP. Required.
-PANEL_GROUP_NAME = _('A10 Networks')
-# The slug of the dashboard the PANEL_GROUP associated with. Required.
-PANEL_GROUP_DASHBOARD = 'project'
+
+# Python panel class of the PANEL to be added.
+ADD_PANEL = 'a10_horizon.dashboard.a10networks.panel.A10SSLPanel'

@@ -7,8 +7,8 @@
 __version__ = "0.1.0"
 __version_info__ = ('0', '1', '0')
 
-from a10_horizon.dashboard import base
+# from a10_horizon.dashboard import base
 
 
-add_tab = base.add_tab
-post_hack = base.post_hack
+# add_tab = base.add_tab
+# post_hack = base.post_hack
