@@ -26,27 +26,26 @@ class A10SSLPanel(horizon.Panel):
     permissions = ("openstack.services.network", )
 
 
-# class A10NetworksPanel(horizon.Panel):
-#     name = _("A10 Networks")
-#     slug = "a10networks"
-#     panel_group = "a10networks"
-#     permissions = ('openstack.services.network',)
-
-
 class A10LoadBalancingPanel(horizon.Panel):
     name = _("Load Balancing")
     slug = "a10loadbalancing"
     permissions = ('openstack.services.network',)
 
-    # def allowed(self, context):
-    #     result = False
-    #     try:
-    #         import a10_openstack
-    #         result = True
-    #     except ImportError as ex:
-    #         LOG.error("a10_openstack must be installed to use this panel.")
-    #         LOG.exception(ex)
-    #     return result
+
+class A10ScalingPanel(horizon.Panel):
+    name =_("Scaling LB")
+    slug = "a10scaling"
+    permissions = ("openstack.services.network", )
+
+    def allowed(self, context):
+        result = False
+        try:
+            import a10_openstack
+            result = True
+        except ImportError as ex:
+            LOG.error("a10_openstack must be installed to use this panel.")
+            LOG.exception(ex)
+        return result
 
 
 network_config = (
