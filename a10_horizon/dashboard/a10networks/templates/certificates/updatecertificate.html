@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Edit Certificate" %}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_page_header.html" with title=_("Edit Certificate") %}
+{% endblock page_header %}
+
+{% block main %}
+  {% include 'project/certificates/_updatecertificate.html' %}
+{% endblock %}
