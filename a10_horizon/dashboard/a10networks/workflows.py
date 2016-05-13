@@ -8,8 +8,8 @@ from horizon import exceptions
 from horizon import forms
 from horizon import workflows
 
-# a10_openstack.horizon_ext.api.client.Client extends neutron.api.client.Client
-from a10_openstack.horizon_ext.api import certificates as api
+# a10_horizon.dashboard.api.client.Client extends neutron.api.client.Client
+from a10_horizon.dashboard.api import certificates as api
 from openstack_dashboard.api import lbaas as lbaas_api
 
 # TODO(Pull these from A10 constants)

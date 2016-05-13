@@ -8,9 +8,9 @@ from a10_neutron_lbaas import a10_config
 from horizon import tabs
 from horizon import exceptions
 
-from a10_openstack.horizon_ext.dashboards.project.a10networks import tables
+from a10_horizon.dashboard.a10networks import tables
 from a10scaling import tabs as scaling_tabs
-from a10_openstack.horizon_ext.api import certificates as cert_api
+from a10_horizon.dashboard.api import certificates as cert_api
 
 
 LOG = LOG = logging.getLogger(__name__)

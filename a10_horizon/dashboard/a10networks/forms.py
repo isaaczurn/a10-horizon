@@ -10,7 +10,7 @@ from horizon import forms
 from horizon import messages
 
 # from openstack_dashboard import api
-from a10_openstack.horizon_ext.api import certificates as api
+from a10_horizon.dashboard.api import certificates as api
 
 LOG = logging.getLogger(__name__)
 

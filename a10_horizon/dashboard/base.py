@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def post_hack(self, request, *args, **kwargs):
     # These import statements break the pip install when they're global
-    from a10_openstack.horizon_ext.api import certificates as cert_api
+    from a10_horizon.dashboard.api import certificates as cert_api
     from horizon import exceptions
     from horizon import messages
     from openstack_dashboard import api

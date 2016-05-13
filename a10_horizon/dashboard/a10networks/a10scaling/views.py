@@ -12,8 +12,8 @@ from horizon import tabs
 from horizon import tables
 from horizon import workflows
 
-from a10_openstack.horizon_ext.api import scaling as api
-from a10_openstack.horizon_ext.dashboards.project.a10networks import tabs as p_tabs
+from a10_horizon.dashboard.api import scaling as api
+from a10_horizon.dashboard.a10networks import tabs as p_tabs
 
 import forms as project_forms
 import tables as project_tables

@@ -11,11 +11,11 @@ from horizon import tabs
 from horizon import workflows
 import logging
 
-from a10_openstack.horizon_ext.api import certificates as cert_api
-from a10_openstack.horizon_ext.api import scaling as scaling_api
-from a10_openstack.horizon_ext.dashboards.project.a10networks import forms as project_forms
-from a10_openstack.horizon_ext.dashboards.project.a10networks import workflows as project_workflows
-from a10_openstack.horizon_ext.dashboards.project.a10networks import tabs as project_tabs
+from a10_horizon.dashboard.api import certificates as cert_api
+from a10_horizon.dashboard.api import scaling as scaling_api
+from a10_horizon.dashboard.a10networks import forms as project_forms
+from a10_horizon.dashboard.a10networks import workflows as project_workflows
+from a10_horizon.dashboard.a10networks import tabs as project_tabs
 
 import re
 

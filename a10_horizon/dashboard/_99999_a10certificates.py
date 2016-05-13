@@ -15,13 +15,13 @@ PANEL = "a10networks"
 PANEL_DASHBOARD = 'project'
 PANEL_GROUP = "network"
 # ADD_PANEL = u"a10_neutron_lbaas.dashboard.a10devices.panel.A10Appliances"
-ADD_PANEL = "a10_openstack.horizon_ext.dashboards.project.a10networks.panel.A10Networks"
+ADD_PANEL = "a10_horizon.dashboard.a10networks.panel.A10Networks"
 # If set to True, this dashboard will be set as the default dashboard.
 # DEFAULT = False
 # A dictionary of exception classes to be added to HORIZON['exceptions'].
 # ADD_EXCEPTIONS = {}
 # A list of applications to be added to INSTALLED_APPS.
-ADD_INSTALLED_APPS = ['a10_openstack.horizon_ext.dashboards.project.a10networks']
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.a10networks']
 # DISABLED = False
 
 # ADD_ANGULAR_MODULES = [

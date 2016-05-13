@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from horizon import tabs
 from horizon import exceptions
 
-from a10_openstack.horizon_ext.api import scaling as scaling_api
+from a10_horizon.dashboard.api import scaling as scaling_api
 import tables
 
 

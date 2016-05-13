@@ -7,7 +7,7 @@ import horizon
 
 from openstack_dashboard.dashboards.project import dashboard
 
-from a10_openstack.horizon_ext.dashboards.project.a10networks.panel import A10NetworksPanel
+from a10_horizon.dashboard.a10networks.panel import A10NetworksPanel
 
 network_config = (
     getattr(settings, 'OPENSTACK_NEUTRON_NETWORK', {}) or

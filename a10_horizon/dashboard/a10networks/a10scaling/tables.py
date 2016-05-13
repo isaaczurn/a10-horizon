@@ -15,7 +15,7 @@ from constants import AGG_DICT
 from constants import OP_DICT
 from constants import UNIT_DICT
 
-from a10_openstack.horizon_ext.api import scaling as scaling_api
+from a10_horizon.dashboard.api import scaling as scaling_api
 
 
 LOG = logging.getLogger(__name__)
