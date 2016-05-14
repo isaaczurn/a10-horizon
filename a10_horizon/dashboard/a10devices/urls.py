@@ -16,11 +16,11 @@
 from django.conf.urls import patterns
 from django.conf.urls import url
 
-from a10_neutron_lbaas.dashboard.a10devices import views
+from a10_horizon.dashboard.a10devices import views
 
 
 urlpatterns = patterns(
-    'a10_neutron_lbaas.dashboard.a10devices.views',
+    'a10_horizon.dashboard.a10devices.views',
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^addappliance$', views.AddApplianceView.as_view(), name='addappliance'),
     # url(r'^deleteappliance$', views.DeleteApplianceView.as_view(), name='deleteappliance')
