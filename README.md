@@ -31,7 +31,7 @@ LBaaS driver, for the Havana release.  Pypi package 'a10-openstack-lbaas-havana'
 
 ### Step 1:
 
-Make sure you have horizon installed.  This dashboard will need to be installed on all of your Horizon nodes if you are running Horizon in an HA setup.
+Make sure you have horizon installed.  This dashboard will need to be installed on all of your Horizon nodes if you are running Horizon in an HA environment.
 
 
 ### Step 2:
