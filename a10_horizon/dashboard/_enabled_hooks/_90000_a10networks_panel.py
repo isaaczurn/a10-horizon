@@ -20,3 +20,4 @@ PANEL_GROUP = 'a10networks'
 PANEL_GROUP_NAME = _('A10 Networks')
 # The slug of the dashboard the PANEL_GROUP associated with. Required.
 PANEL_GROUP_DASHBOARD = 'project'
+AUTO_DISCOVER_STATIC_FILES = True
