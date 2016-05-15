@@ -16,13 +16,12 @@ from django.utils.translation import ugettext_lazy as _
 import horizon
 
 from openstack_dashboard.dashboards.project import dashboard
-from  a10_horizon.dashboard.a10devices import panel as a10devices_panel
+from a10_horizon.dashboard.a10networks.a10devices import panel as a10devices_panel
 
 
 class A10SSLPanel(horizon.Panel):
     name = _("SSL")
     slug = "a10ssl"
-    panel_group = "a10networks"
     permissions = ("openstack.services.network", )
 
 

@@ -29,8 +29,8 @@ from horizon import workflows
 #     import workflows as project_workflows
 
 # import a10_neutron_lbaas.dashboard.a10devices.tables as p_tables
-import a10_horizon.dashboard.a10devices.tabs as p_tabs
-import a10_horizon.dashboard.a10devices.workflows as p_workflows
+import a10_horizon.dashboard.a10networks.a10devices.tabs as p_tabs
+import a10_horizon.dashboard.a10networks.a10devices.workflows as p_workflows
 
 
 class IndexView(tabs.TabbedTableView):

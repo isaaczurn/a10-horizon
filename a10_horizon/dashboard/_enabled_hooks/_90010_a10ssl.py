@@ -21,3 +21,5 @@ PANEL_GROUP = 'a10networks'
 
 # Python panel class of the PANEL to be added.
 ADD_PANEL = 'a10_horizon.dashboard.a10networks.panel.A10SSLPanel'
+
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.a10networks.a10ssl']

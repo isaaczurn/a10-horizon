@@ -75,10 +75,13 @@ class CertificateBindingsTab(tabs.TableTab):
         return bindings
 
 
-class A10NetworksTabs(tabs.TabGroup):
-    slug = "a10tabs"
-    tabs = (CertificatesTab, CertificateBindingsTab, AdvancedTab,
-            scaling_tabs.A10ScalingGroupsTab,
-            scaling_tabs.A10ScalingPoliciesTab,
-            scaling_tabs.A10ScalingActionTab, scaling_tabs.A10ScalingAlarmTab)
-    sticky = True
+class A10SSLTabs(tabs.TabGroup):
+    slug = "a10ssltabs"
+    tabs = (CertificatesTab,
+            CertificateBindingsTab,
+            AdvancedTab,
+            # scaling_tabs.A10ScalingGroupsTab,
+            # scaling_tabs.A10ScalingPoliciesTab,
+            # scaling_tabs.A10ScalingActionTab, scaling_tabs.A10ScalingAlarmTab
+            )
+    sticky = False

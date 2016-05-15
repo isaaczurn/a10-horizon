@@ -114,3 +114,11 @@ class A10ScalingAlarmTab(tabs.TableTab):
             exceptions.handle(self.tab_group.request, errmsg)
 
         return rv
+
+
+class A10ScalingTabs(tabs.TabGroup):
+    slug = "a10scalingtabs"
+    tabs = (A10ScalingGroupsTab,
+            A10ScalingPoliciesTab,
+            A10ScalingActionTab,
+            A10ScalingAlarmTab)

@@ -15,7 +15,7 @@
 # from django.conf import settings
 # from django.utils.translation import ugettext_lazy as _
 # import horizon
-
+import pdb; pdb.set_trace()
 # from openstack_dashboard.dashboards.project import dashboard
 
 # from a10_horizon.dashboard.a10networks import panel as a10networks_panel

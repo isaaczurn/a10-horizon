@@ -28,8 +28,8 @@ PLURAL = "plural"
 
 
 class IndexView(tabs.TabView):
-    tab_group_class = (project_tabs.A10NetworksTabs)
-    template_name = 'details_tabs.html'
+    tab_group_class = (project_tabs.A10SSLTabs)
+    template_name = 'templates/details_tabs.html'
 
     delete_actions = {
         "certificate": {

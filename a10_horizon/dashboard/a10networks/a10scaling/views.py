@@ -13,10 +13,11 @@ from horizon import tables
 from horizon import workflows
 
 from a10_horizon.dashboard.api import scaling as api
-from a10_horizon.dashboard.a10networks import tabs as p_tabs
+# from a10_horizon.dashboard.a10networks import tabs as p_tabs
 
 import forms as project_forms
 import tables as project_tables
+import tabs as p_tabs
 import workflows as project_workflows
 
 
@@ -24,8 +25,8 @@ LOG = logging.getLogger(__name__)
 
 
 class IndexView(tabs.TabView):
-    name = _("A10 Load Balancing Overview")
-    tab_group_class = p_tabs.A10NetworksTabs
+    name = _("A10 Scaling Load Balancing")
+    tab_group_class = p_tabs.A10ScalingTabs
     template_name = 'details_tabs.html'
 
 

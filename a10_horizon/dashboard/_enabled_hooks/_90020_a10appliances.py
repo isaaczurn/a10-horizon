@@ -20,4 +20,5 @@ PANEL_DASHBOARD = 'project'
 PANEL_GROUP = 'a10networks'
 
 # Python panel class of the PANEL to be added.
-ADD_PANEL = 'a10_horizon.dashboard.a10devices.panel.A10Appliances'
+ADD_PANEL = 'a10_horizon.dashboard.a10networks.a10devices.panel.A10Appliances'
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.a10networks.a10devices']
