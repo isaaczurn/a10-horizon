@@ -12,7 +12,7 @@ LOG = logging.getLogger(__name__)
 class AddCertificateLink(tables.LinkAction):
     name = "addcertificate"
     verbose_name = _("Add Certificate")
-    url = "horizon:project:a10networks:addcertificate"
+    url = "horizon:project:a10ssl:addcertificate"
     classes = ("ajax-modal",)
     icon = "plus"
     policy_rules = (("network", "create_certificate"),)  # FIXME(traff)
@@ -48,7 +48,7 @@ class DeleteCertificateBindingLink(tables.DeleteAction):
 class AddCertificateBindingLink(tables.LinkAction):
     name = "addcertificatebinding"
     verbose_name = _("Add Certificate Association")
-    url = "horizon:project:a10networks:addcertificatebinding"
+    url = "horizon:project:a10ssl:addcertificatebinding"
     classes = ("ajax-modal",)
     icon = "plus"
     policy_rules = (("network", "create_certificate_binding"),)  # FIXME(traff)
@@ -60,7 +60,7 @@ class UpdateCertificateLink(tables.LinkAction):
     classes = ("ajax-modal", "btn-update",)
 
     def get_link_url(self, certificate):
-        base_url = reverse("horizon:project:a10networks:updatecertificate",
+        base_url = reverse("horizon:project:a10ssl:updatecertificate",
                            kwargs={'certificate_id': certificate.id})
         return base_url
 

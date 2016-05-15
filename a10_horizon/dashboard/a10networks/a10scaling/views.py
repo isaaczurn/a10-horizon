@@ -54,7 +54,7 @@ class IndexView(tabs.TabView):
 class AddPolicyView(workflows.WorkflowView):
     name = _("Create Scaling Policy")
     workflow_class = project_workflows.AddPolicyWorkflow
-    success_url = reverse_lazy("horizon:project:a10networks:index")
+    success_url = reverse_lazy("horizon:project:a10networks:a10scaling:index")
 
 
 class UpdatePolicyView(forms.views.ModalFormView):
