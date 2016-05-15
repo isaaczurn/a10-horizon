@@ -59,4 +59,4 @@ class A10AppliancesTab(tabs.TableTab):
 class A10Tabs(tabs.TabGroup):
     slug = "a10tabs"
     tabs = (A10AppliancesTab, )
-    sticky = False
+    sticky = True

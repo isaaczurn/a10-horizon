@@ -122,3 +122,4 @@ class A10ScalingTabs(tabs.TabGroup):
             A10ScalingPoliciesTab,
             A10ScalingActionTab,
             A10ScalingAlarmTab)
+    sticky = True

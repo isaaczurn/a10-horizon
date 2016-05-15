@@ -7,7 +7,7 @@ from django.conf.urls import url
 import views
 
 urlpatterns = patterns(
-    'a10_horizon.dashboard.a10networks.a10scaling.views',
+    'a10_horizon.dashboard.a10networks.a10ssl.views',
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^addcertificate/$', views.AddCertificateView.as_view(),
         name='addcertificate'),

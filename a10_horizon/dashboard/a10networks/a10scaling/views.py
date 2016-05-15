@@ -8,6 +8,7 @@ import logging
 from horizon import exceptions
 from horizon import forms
 from horizon.utils import memoized
+from horizon import messages
 from horizon import tabs
 from horizon import tables
 from horizon import workflows
@@ -34,6 +35,7 @@ class IndexView(tabs.TabView):
     name = _("A10 Scaling Load Balancing")
     tab_group_class = (project_tabs.A10ScalingTabs)
     template_name = 'details_tabs.html'
+    page_title = _("A10 Scaling Load Balancing")
 
     delete_actions = {
         "scalingpolicy": {

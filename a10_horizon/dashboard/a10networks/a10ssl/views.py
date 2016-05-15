@@ -29,6 +29,7 @@ PLURAL = "plural"
 class IndexView(tabs.TabView):
     tab_group_class = (project_tabs.A10SSLTabs)
     template_name = 'details_tabs.html'
+    page_title = _("A10 SSL Certificates")
 
     delete_actions = {
         "certificate": {
