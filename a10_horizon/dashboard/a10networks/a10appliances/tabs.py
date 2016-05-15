@@ -34,6 +34,7 @@ class A10AppliancesTab(tabs.TableTab):
     name = _("A10 Appliances")
     slug = "a10appliancestab"
     template_name = "horizon/common/_detail_table.html"
+    preload = False
 
     def get_a10appliancestable_data(self):
         result = []

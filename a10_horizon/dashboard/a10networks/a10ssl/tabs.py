@@ -20,6 +20,7 @@ class CertificatesTab(tabs.TableTab):
     name = _("Certificates")
     slug = "certificates"
     template_name = "certificates/_certificates_tab.html"
+    preload = False
 
     def get_certificatestable_data(self):
         try:

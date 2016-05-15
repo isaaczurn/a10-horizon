@@ -18,6 +18,7 @@ class A10ScalingGroupsTab(tabs.TableTab):
     name = _("Scaling Groups")
     slug = "a10scalinggroups"
     template_name = "horizon/common/_detail_table.html"
+    preload = False
 
     def get_a10scalinggrouptable_data(self):
         try:
@@ -40,6 +41,7 @@ class A10ScalingGroupMembersTab(tabs.TableTab):
     name = _("Scaling Group Members")
     slug = "a10scalinggroupmembers"
     template_name = "horizon/common/_detail_table.html"
+    preload = False
 
     def get_a10scalinggroupmemberstable_data(self):
         try:
@@ -61,6 +63,7 @@ class A10ScalingPoliciesTab(tabs.TableTab):
     name = _("Scaling Group Policies")
     slug = "a10scalinggrouppolicies"
     template_name = "horizon/common/_detail_table.html"
+    preload = False
 
     def get_a10scalingpolicytable_data(self):
         try:
@@ -81,6 +84,7 @@ class A10ScalingActionTab(tabs.TableTab):
     name = _("Scaling Actions")
     slug = "a10scalingactions"
     template_name = "horizon/common/_detail_table.html"
+    preload = False
 
     def get_a10scalingactiontable_data(self):
         try:
@@ -101,6 +105,7 @@ class A10ScalingAlarmTab(tabs.TableTab):
     name = _("Scaling Alarms")
     slug = "a10scalingalarms"
     template_name = "horizon/common/_detail_table.html"
+    preload = False
 
     def get_a10scalingalarmtable_data(self):
         try:
