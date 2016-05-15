@@ -42,9 +42,9 @@ class UpdatePolicy(forms.SelfHandlingForm):
     max_instances = forms.IntegerField(label=_("Maximum Instances"),
                                        required=False)
 
-    failure_url = "horizon:project:a10networks:a10scaling:index"
-    success_url = "horizon:project:a10networks:a10scaling:index"
-    # redirect_url = reverse_lazy('horizon:project:a10networks:a10scaling:updatescalingpolicy')
+    failure_url = "horizon:project:a10scaling:index"
+    success_url = "horizon:project:a10scaling:index"
+    # redirect_url = reverse_lazy('horizon:project:a10scaling:updatescalingpolicy')
 
     def handle(self, request, context):
         try:
@@ -85,8 +85,8 @@ class UpdateAlarm(forms.SelfHandlingForm):
                                     choices=array_to_choices(scaling_resources.ALARM_PERIOD_UNITS),
                                     required=True)
 
-    failure_url = "horizon:project:a10networks:a10scaling:index"
-    success_url = "horizon:project:a10networks:a10scaling:index"
+    failure_url = "horizon:project:a10scaling:index"
+    success_url = "horizon:project:a10scaling:index"
 
     def handle(self, request, context):
         try:
@@ -112,8 +112,8 @@ class UpdateAction(forms.SelfHandlingForm):
                                required=True)
     amount = forms.IntegerField(label=_("Amount"), required=True)
 
-    failure_url = "horizon:project:a10networks:a10scaling:index"
-    success_url = "horizon:project:a10networks:a10scaling:index"
+    failure_url = "horizon:project:a10scaling:index"
+    success_url = "horizon:project:a10scaling:index"
 
     def handle(self, request, context):
         try:

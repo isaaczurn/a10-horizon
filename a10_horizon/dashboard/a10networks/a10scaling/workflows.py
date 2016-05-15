@@ -75,7 +75,7 @@ class DeletePolicyWorkflow(workflows.Workflow):
         for obj_id in object_ids:
             try:
                 api.delete_a10_scaling_policy(request, obj_id)
-                redirect_url = 'horizon:project:a10networks:a10scaling:index'
+                redirect_url = 'horizon:project:a10scaling:index'
             except Exception as ex:
                 LOG.exception(ex)
                 exceptions.handle(request, _("Unable to delete scaling policy"))
@@ -127,7 +127,7 @@ class DeleteScalingActionAction(tables.BatchAction):
     action_past = _("Scheduled deletion of %(data_type)s")
     data_type_singular = _("Scaling Action")
     data_type_plural = _("Scaling Policies")
-    success_url = "horizon:project:a10networks:a10scaling:index"
+    success_url = "horizon:project:a10scaling:index"
 
     def handle(self, data_table, request, object_ids):
         for obj_id in object_ids:
@@ -215,14 +215,14 @@ class DeleteScalingAlarmAction(tables.BatchAction):
                 LOG.exception(ex)
                 exceptions.handle(request, _("Unable to delete scaling alarms"))
 
-        return redirect("horizon:project:a10networks:a10scaling:index")
+        return redirect("horizon:project:a10scaling:index")
 
 
 class AddReactionAction(workflows.Action):
     scaling_policy_id = forms.Field(widget=forms.HiddenInput, initial="")
     alarm_id = forms.ChoiceField(label=_("Alarm"))
     action_id = forms.ChoiceField(label=_("Action"))
-    detail_url = "horizon:project:a10networks:a10scaling:scalingpolicydetail"
+    detail_url = "horizon:project:a10scaling:scalingpolicydetail"
 
     def __init__(self, request, *args, **kwargs):
         alarms = []
@@ -309,8 +309,8 @@ class AddReactionWorkflow(workflows.Workflow):
     name = _("Add Scaling Reaction")
     default_steps = (AddReactionStep, )
     finalize_button_name = "Create Reaction"
-    redirect_url = "horizon:project:a10networks:a10scaling:index"
-    detail_url = "horizon:project:a10networks:a10scaling:scalingpolicydetail"
+    redirect_url = "horizon:project:a10scaling:index"
+    detail_url = "horizon:project:a10scaling:scalingpolicydetail"
     success_message = _("Created Scaling Reaction")  # noqa
     failure_message = _("Unable to create scaling reaction")  # noqa
 

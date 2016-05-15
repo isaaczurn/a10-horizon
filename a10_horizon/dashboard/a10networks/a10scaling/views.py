@@ -11,6 +11,7 @@ from horizon.utils import memoized
 from horizon import tabs
 from horizon import tables
 from horizon import workflows
+import re
 
 from a10_horizon.dashboard.api import scaling as api
 
@@ -50,18 +51,40 @@ class IndexView(tabs.TabView):
         },
     }
 
+    def post(self, request, *args, **kwargs):
+        obj_ids = request.POST.getlist('object_ids')
+        action = request.POST['action']
+        m = re.search('.delete([a-z]+)', action).group(1)
+        if obj_ids == []:
+            obj_ids.append(re.search('([0-9a-z-]+)$', action).group(1))
+
+        if m in self.delete_actions:
+            delete_action = self.delete_actions[m]
+            for obj_id in obj_ids:
+                success_msg = "Deleted {0} {1}".format(delete_action[NOUN], obj_id)
+                failure_msg = "Unable to delete {0} {1}".format(delete_action[NOUN], obj_id)
+
+                try:
+                    delete_action[ACTION](request, obj_id)
+                    messages.success(request, success_msg)
+                except Exception as ex:
+                    exceptions.handle(request, failure_msg)
+                    LOG.exception(ex)
+
+        return self.get(request, *args, **kwargs)
+
 
 class AddPolicyView(workflows.WorkflowView):
     name = _("Create Scaling Policy")
     workflow_class = project_workflows.AddPolicyWorkflow
-    success_url = reverse_lazy("horizon:project:a10networks:a10scaling:index")
+    success_url = reverse_lazy("horizon:project:a10scaling:index")
 
 
 class UpdatePolicyView(forms.views.ModalFormView):
     name = _("Update Scaling Policy")
     form_class = project_forms.UpdatePolicy
     context_object_name = "scaling_policy"
-    success_url = reverse_lazy("horizon:project:a10networks:a10scaling:index")
+    success_url = reverse_lazy("horizon:project:a10scaling:index")
     template_name = "policy/update.html"
 
     def get_context_data(self, **kwargs):
@@ -91,7 +114,7 @@ class PolicyDetailView(tables.MultiTableView):
     table_classes = (project_tables.UpdatePolicyReactionTable,)
     template_name = "policy/detail.html"
     page_title = "Scaling Policy {{ scaling_policy.name }}"
-    failure_url = "horizon:project:a10networks:a10scaling:index"
+    failure_url = "horizon:project:a10scaling:index"
 
     def __init__(self, *args, **kwargs):
         super(PolicyDetailView, self).__init__(*args, **kwargs)
@@ -153,7 +176,7 @@ class UpdateAlarmView(forms.views.ModalFormView):
     title = name
     form_class = project_forms.UpdateAlarm
     context_object_name = "scaling_alarm"
-    success_url = reverse_lazy("horizon:project:a10networks:a10scaling:index")
+    success_url = reverse_lazy("horizon:project:a10scaling:index")
     template_name = "policy/alarm/update.html"
 
     def get_context_data(self, **kwargs):
@@ -180,14 +203,14 @@ class UpdateAlarmView(forms.views.ModalFormView):
 class AddActionView(workflows.WorkflowView):
     name = _("Create Action")
     workflow_class = project_workflows.AddActionWorkflow
-    success_url = reverse_lazy("horizon:project:a10networks:a10scaling:index")
+    success_url = reverse_lazy("horizon:project:a10scaling:index")
 
 
 class UpdateActionView(forms.views.ModalFormView):
     name = _("Update Action")
     form_class = project_forms.UpdateAction
     context_object_name = "scaling_action"
-    success_url = reverse_lazy("horizon:project:a10networks:a10scaling:index")
+    success_url = reverse_lazy("horizon:project:a10scaling:index")
     template = "policy/action/update.html"
 
     def get_context_data(self, **kwargs):
@@ -197,7 +220,7 @@ class UpdateActionView(forms.views.ModalFormView):
     @memoized.memoized_method
     def _get_object(self, *args, **kwargs):
         id = self.kwargs['id']
-        self.submit_url = reverse_lazy("horizon:project:a10networks:a10scaling:updateaction",
+        self.submit_url = reverse_lazy("horizon:project:a10scaling:updateaction",
                                        kwargs={"id": id})
         if id:
             try:
@@ -214,14 +237,14 @@ class UpdateActionView(forms.views.ModalFormView):
 class AddReactionView(workflows.WorkflowView):
     name = _("Create Reaction")
     workflow_class = project_workflows.AddReactionWorkflow
-    success_url = reverse_lazy("horizon:project:a10networks:a10scaling:index")
+    success_url = reverse_lazy("horizon:project:a10scaling:index")
     template = "policy/reaction/create.html"
 
     def get_context_data(self, **kwargs):
         return super(AddReactionView, self).get_context_data(**kwargs)
 
     def get_initial(self):
-        self.submit_url = reverse_lazy("horizon:project:a10networks:a10scaling:addreaction",
+        self.submit_url = reverse_lazy("horizon:project:a10scaling:addreaction",
                                        kwargs=self.kwargs)
         return self.kwargs
 
