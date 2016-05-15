@@ -34,7 +34,7 @@ class UpdateCertificate(forms.SelfHandlingForm):
         label=_("Intermediate Certificate Data"), min_length=1, max_length=8000,
         widget=forms.Textarea(attrs={'cols': 80, 'rows': 15}), required=False)
 
-    failure_url = 'horizon:project:a10networks:index'
+    failure_url = 'horizon:project:a10ssl:index'
 
     def handle(self, request, context):
         LOG.debug("UpdateCertificate:handle(): context" % context)

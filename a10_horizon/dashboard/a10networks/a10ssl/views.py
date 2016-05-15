@@ -78,7 +78,7 @@ class UpdateCertificateView(forms.ModalFormView):
     form_class = project_forms.UpdateCertificate
     template_name = "certificates/updatecertificate.html"
     context_object_name = 'certificate'
-    success_url = reverse_lazy("horizon:project:a10networks:index")
+    success_url = reverse_lazy("horizon:project:a10ssl:index")
 
     def get_context_data(self, **kwargs):
         context = super(UpdateCertificateView, self).get_context_data(**kwargs)

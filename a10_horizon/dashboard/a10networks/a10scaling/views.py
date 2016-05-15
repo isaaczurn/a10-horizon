@@ -27,6 +27,8 @@ ACTION = "action"
 NOUN = "noun"
 PLURAL = "plural"
 
+URL_PREFIX = "horizon_project:a10scaling:"
+
 
 class IndexView(tabs.TabView):
     name = _("A10 Scaling Load Balancing")
@@ -77,14 +79,14 @@ class IndexView(tabs.TabView):
 class AddPolicyView(workflows.WorkflowView):
     name = _("Create Scaling Policy")
     workflow_class = project_workflows.AddPolicyWorkflow
-    success_url = reverse_lazy("horizon:project:a10scaling:index")
+    success_url = reverse_lazy(URL_PREFIX + "index")
 
 
 class UpdatePolicyView(forms.views.ModalFormView):
     name = _("Update Scaling Policy")
     form_class = project_forms.UpdatePolicy
     context_object_name = "scaling_policy"
-    success_url = reverse_lazy("horizon:project:a10scaling:index")
+    success_url = reverse_lazy(URL_PREFIX + "index")
     template_name = "policy/update.html"
 
     def get_context_data(self, **kwargs):
@@ -94,7 +96,7 @@ class UpdatePolicyView(forms.views.ModalFormView):
     @memoized.memoized_method
     def _get_object(self, *args, **kwargs):
         id = self.kwargs['scaling_policy_id']
-        self.submit_url = reverse_lazy("horizon_project:a10networks:a10scaling:updatescalingpolicy",
+        self.submit_url = reverse_lazy(URL_PREFIX + "updatescalingpolicy",
                                        kwargs={"scaling_policy_id": id})
         if id:
             try:
@@ -114,7 +116,7 @@ class PolicyDetailView(tables.MultiTableView):
     table_classes = (project_tables.UpdatePolicyReactionTable,)
     template_name = "policy/detail.html"
     page_title = "Scaling Policy {{ scaling_policy.name }}"
-    failure_url = "horizon:project:a10scaling:index"
+    failure_url = URL_PREFIX + "index"
 
     def __init__(self, *args, **kwargs):
         super(PolicyDetailView, self).__init__(*args, **kwargs)
@@ -158,7 +160,7 @@ class PolicyDetailView(tables.MultiTableView):
 
     @staticmethod
     def get_redirect_url():
-        return reverse_lazy('horizon:project:a10networks:index')
+        return reverse_lazy("horizon:project:a10scaling:index")
 
     class Meta(object):
         name = "scalingpolicydetail"
@@ -168,7 +170,7 @@ class PolicyDetailView(tables.MultiTableView):
 class AddAlarmView(workflows.WorkflowView):
     name = _("Create Alarm")
     workflow_class = project_workflows.AddScalingAlarmWorkflow
-    success_url = reverse_lazy("horizon:project:a10networks:index")
+    success_url = reverse_lazy("horizon:project:a10scaling:index")
 
 
 class UpdateAlarmView(forms.views.ModalFormView):
@@ -176,7 +178,7 @@ class UpdateAlarmView(forms.views.ModalFormView):
     title = name
     form_class = project_forms.UpdateAlarm
     context_object_name = "scaling_alarm"
-    success_url = reverse_lazy("horizon:project:a10scaling:index")
+    success_url = reverse_lazy(URL_PREFIX + "index")
     template_name = "policy/alarm/update.html"
 
     def get_context_data(self, **kwargs):
@@ -186,7 +188,7 @@ class UpdateAlarmView(forms.views.ModalFormView):
     @memoized.memoized_method
     def _get_object(self, *args, **kwargs):
         id = self.kwargs['id']
-        self.submit_url = reverse_lazy("horizon_project:a10networks:a10scaling:updatealarm",
+        self.submit_url = reverse_lazy(URL_PREFIX + "updatealarm",
                                        kwargs={"id": id})
         if id:
             try:
@@ -203,14 +205,14 @@ class UpdateAlarmView(forms.views.ModalFormView):
 class AddActionView(workflows.WorkflowView):
     name = _("Create Action")
     workflow_class = project_workflows.AddActionWorkflow
-    success_url = reverse_lazy("horizon:project:a10scaling:index")
+    success_url = reverse_lazy(URL_PREFIX + "index")
 
 
 class UpdateActionView(forms.views.ModalFormView):
     name = _("Update Action")
     form_class = project_forms.UpdateAction
     context_object_name = "scaling_action"
-    success_url = reverse_lazy("horizon:project:a10scaling:index")
+    success_url = reverse_lazy(URL_PREFIX + "index")
     template = "policy/action/update.html"
 
     def get_context_data(self, **kwargs):
@@ -220,7 +222,7 @@ class UpdateActionView(forms.views.ModalFormView):
     @memoized.memoized_method
     def _get_object(self, *args, **kwargs):
         id = self.kwargs['id']
-        self.submit_url = reverse_lazy("horizon:project:a10scaling:updateaction",
+        self.submit_url = reverse_lazy(URL_PREFIX + "updateaction",
                                        kwargs={"id": id})
         if id:
             try:
@@ -237,14 +239,14 @@ class UpdateActionView(forms.views.ModalFormView):
 class AddReactionView(workflows.WorkflowView):
     name = _("Create Reaction")
     workflow_class = project_workflows.AddReactionWorkflow
-    success_url = reverse_lazy("horizon:project:a10scaling:index")
+    success_url = reverse_lazy(URL_PREFIX + "index")
     template = "policy/reaction/create.html"
 
     def get_context_data(self, **kwargs):
         return super(AddReactionView, self).get_context_data(**kwargs)
 
     def get_initial(self):
-        self.submit_url = reverse_lazy("horizon:project:a10scaling:addreaction",
+        self.submit_url = reverse_lazy(URL_PREFIX + "addreaction",
                                        kwargs=self.kwargs)
         return self.kwargs
 

@@ -51,7 +51,7 @@ class AddPolicyWorkflow(workflows.Workflow):
     slug = "addscalingpolicy"
     name = _("Add Scaling Policy")
     default_steps = (AddPolicyStep, )
-    success_url = "horizon:project:a10networks:index"
+    success_url = "horizon:project:a10scaling:index"
     finalize_button_name = "Create Scaling Policy"
 
     def handle(self, request, context):
@@ -109,7 +109,7 @@ class AddActionWorkflow(workflows.Workflow):
     slug = "addscalingaction"
     name = _("Add Scaling Action")
     default_steps = (AddActionStep, )
-    success_url = "horizon:project:a10networks:index"
+    success_url = "horizon:project:a10scaling:index"
     finalize_button_name = "Create Action"
 
     def handle(self, request, context):
@@ -187,7 +187,7 @@ class AddScalingAlarmWorkflow(workflows.Workflow):
     slug = "addscalingalarm"
     name = _("Add Scaling Alarm")
     default_steps = (AddAlarmStep, )
-    success_url = "horizon:project:a10networks:index"
+    success_url = "horizon:project:a10scaling:index"
     finalize_button_name = "Create Alarm"
 
     def handle(self, request, context):

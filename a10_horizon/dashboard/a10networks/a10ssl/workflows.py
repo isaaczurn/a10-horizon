@@ -70,7 +70,7 @@ class AddCertificate(workflows.Workflow):
     finalize_button_name = _("Add")
     success_message = _('Added certificate')
     failure_message = _('Unable to add certificate')
-    success_url = "horizon:project:a10networks:index"
+    success_url = "horizon:project:a10ssl:index"
     default_steps = (AddCertificateStep,)
 
     def handle(self, request, context):
@@ -148,7 +148,7 @@ class AddCertificateBinding(workflows.Workflow):
     success_message = _("Added association between VIP:'%s' and Certificate:'%s'.")  # noqa
     failure_message = _("Unable to create association for VIP:'%s',Certificate:'%s'")  # noqa
     default_steps = (AddCertificateBindingStep,)
-    success_url = "horizon:project:a10networks:index"
+    success_url = "horizon:project:a10ssl:index"
 
     def format_status_message(self, message):
         vip_id = self.context.get('vip_id')

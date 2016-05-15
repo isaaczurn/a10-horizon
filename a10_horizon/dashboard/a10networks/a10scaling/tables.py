@@ -25,11 +25,11 @@ URL_PREFIX = "horizon:project:a10scaling:"
 class AddScalingPolicyLink(tables.LinkAction):
     name = "addscalingpolicy"
     verbose_name = _("Add Scaling Policy")
-    url = "horizon:project:a10scaling:addscalingpolicy"
+    url = URL_PREFIX + "addscalingpolicy"
     classes = ("ajax-modal",)
     icon = "plus"
     policy_rules = ("network",)  # FIXME(mdurrant) - A10-specific policies?
-    success_url = "horizon:project:a10networks:index"
+    success_url = "horizon:project:a10scaling:index"
 
 
 class UpdateScalingPolicyLink(tables.LinkAction):
@@ -37,11 +37,11 @@ class UpdateScalingPolicyLink(tables.LinkAction):
     verbose_name = _("Edit Scaling Policy")
     classes = ("btn-update", "ajax-modal")
     icon = "pencil"
-    # url = "horizon:project:a10scaling:updatescalingpolicy"
-    # success_url = "horizon:project:a10networks:index"
+    # url = URL_PREFIX + "updatescalingpolicy"
+    # success_url = "horizon:project:a10scaling:index"
 
     def get_link_url(self, datum):
-        base_url = reverse("horizon:project:a10scaling:updatescalingpolicy",
+        base_url = reverse(URL_PREFIX + "updatescalingpolicy",
                            kwargs={'scaling_policy_id': datum["id"]})
         return base_url
 
@@ -76,7 +76,7 @@ class DeleteScalingPolicyAction(tables.DeleteAction):
                 LOG.exception(ex)
                 exceptions.handle(request, msg, redirect=self.redirect_url)
 
-        return redirect("horizon:project:a10scaling:index")
+        return redirect(URL_PREFIX + "index")
 
     def allowed(self, request, obj):
         return True
@@ -85,11 +85,11 @@ class DeleteScalingPolicyAction(tables.DeleteAction):
 class AddAlarmLink(tables.LinkAction):
     name = "addscalingalarm"
     verbose_name = _("Add Scaling Alarm")
-    url = "horizon:project:a10scaling:addalarm"
+    url = URL_PREFIX + "addalarm"
     classes = ("ajax-modal",)
     icon = "plus"
     alarm_rules = ("network",)  # FIXME(mdurrant) - A10-specific policies?
-    success_url = "horizon:project:a10networks:index"
+    success_url = "horizon:project:a10scaling:index"
 
 
 class UpdateAlarmLink(tables.LinkAction):
@@ -97,11 +97,11 @@ class UpdateAlarmLink(tables.LinkAction):
     verbose_name = _("Edit Scaling Alarm")
     classes = ("btn-update", "ajax-modal")
     icon = "pencil"
-    # url = "horizon:project:a10scaling:updatescalingalarm"
-    # success_url = "horizon:project:a10networks:index"
+    # url = URL_PREFIX + "updatescalingalarm"
+    # success_url = "horizon:project:a10scaling:index"
 
     def get_link_url(self, datum):
-        base_url = reverse("horizon:project:a10scaling:updatealarm",
+        base_url = reverse(URL_PREFIX + "updatealarm",
                            kwargs={'id': datum["id"]})
         return base_url
 
@@ -109,7 +109,7 @@ class UpdateAlarmLink(tables.LinkAction):
 class DeleteAlarmLink(tables.DeleteAction):
     name = "deletescalingalarm"
     verbose_name = _("Delete Scaling Alarm")
-    redirect_url = reverse_lazy("horizon:project:a10scaling:index")
+    redirect_url = reverse_lazy(URL_PREFIX + "index")
     failure_message = _('Failed to delete reaction')
     # method = "GET"
 
@@ -153,11 +153,11 @@ class DeleteAlarmLink(tables.DeleteAction):
 class AddActionLink(tables.LinkAction):
     name = "addscalingaction"
     verbose_name = _("Add Scaling Action")
-    url = "horizon:project:a10scaling:addaction"
+    url = URL_PREFIX + "addaction"
     classes = ("ajax-modal",)
     icon = "plus"
     action_rules = ("network",)  # FIXME(mdurrant) - A10-specific policies?
-    success_url = "horizon:project:a10networks:index"
+    success_url = "horizon:project:a10scaling:index"
 
 
 class UpdateActionLink(tables.LinkAction):
@@ -167,7 +167,7 @@ class UpdateActionLink(tables.LinkAction):
     icon = "pencil"
 
     def get_link_url(self, datum):
-        base_url = reverse("horizon:project:a10scaling:updateaction",
+        base_url = reverse(URL_PREFIX + "updateaction",
                            kwargs={'id': datum["id"]})
         return base_url
 
@@ -175,7 +175,7 @@ class UpdateActionLink(tables.LinkAction):
 class DeleteActionLink(tables.DeleteAction):
     name = "deletescalingaction"
     verbose_name = _("Delete Scaling Action")
-    redirect_url = reverse_lazy("horizon:project:a10scaling:index")
+    redirect_url = reverse_lazy(URL_PREFIX + "index")
     failure_message = _('Failed to delete reaction')
 
     @staticmethod
@@ -219,7 +219,7 @@ class AddReactionLink(tables.LinkAction):
     verbose_name = _("Add Scaling Reaction")
     classes = ("ajax-modal",)
     icon = "plus"
-    url = "horizon:project:a10scaling:addreaction"
+    url = URL_PREFIX + "addreaction"
 
     def get_link_url(self, datum=None):
         id = None
@@ -234,7 +234,7 @@ class DeleteReactionLink(tables.DeleteAction):
     name = "deletereaction"
     verbose_name = _("Delete Reaction")
     icon = "minus"
-    _redirect_url = "horizon:project:a10scaling:scalingpolicydetail"
+    _redirect_url = URL_PREFIX + "scalingpolicydetail"
     failure_message = _('Failed to delete reaction')
 
     @staticmethod
@@ -368,7 +368,7 @@ class A10ScalingGroupMemberTable(tables.DataTable):
 
 
 def get_policy_detail(datum):
-    return reverse_lazy("horizon:project:a10scaling:scalingpolicydetail",
+    return reverse_lazy(URL_PREFIX + "scalingpolicydetail",
                         kwargs={"scaling_policy_id": datum["id"]})
 
 
