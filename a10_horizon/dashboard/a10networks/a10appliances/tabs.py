@@ -17,7 +17,7 @@ from django.utils.translation import ugettext_lazy as _
 from horizon import exceptions
 from horizon import tabs
 
-import a10_horizon.dashboard.a10networks.a10devices.tables as p_tables
+import a10_horizon.dashboard.a10networks.a10appliances.tables as p_tables
 import a10_horizon.dashboard.api.base as base
 import a10_neutron_lbaas.instance_manager as im
 import a10_horizon.dashboard.api.a10devices as a10api
