@@ -20,5 +20,6 @@ PANEL_DASHBOARD = 'project'
 PANEL_GROUP = 'a10networks'
 
 # Python panel class of the PANEL to be added.
-ADD_PANEL = 'a10_horizon.dashboard.a10networks.panel.A10ScalingPanel'
+ADD_PANEL = 'a10_horizon.dashboard.a10networks.a10scaling.panel.A10ScalingPanel'
 ADD_INSTALLED_APPS = ['a10_horizon.dashboard.a10networks.a10scaling']
+AUTO_DISCOVER_STATIC_FILES = True

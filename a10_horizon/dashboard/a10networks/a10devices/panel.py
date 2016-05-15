@@ -26,7 +26,3 @@ class A10Appliances(horizon.Panel):
     name = unicode(_("LB Appliances"))
     slug = "a10appliances"
     permissions = ('openstack.services.network',)
-
-
-# if network_config.get('enable_lb'):
-#     dashboard.Project.register(A10NetworksPanel)

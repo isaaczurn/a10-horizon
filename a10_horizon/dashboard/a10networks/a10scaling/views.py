@@ -13,21 +13,42 @@ from horizon import tables
 from horizon import workflows
 
 from a10_horizon.dashboard.api import scaling as api
-# from a10_horizon.dashboard.a10networks import tabs as p_tabs
 
 import forms as project_forms
 import tables as project_tables
-import tabs as p_tabs
+import tabs as project_tabs
 import workflows as project_workflows
 
 
 LOG = logging.getLogger(__name__)
 
+ACTION = "action"
+NOUN = "noun"
+PLURAL = "plural"
+
 
 class IndexView(tabs.TabView):
     name = _("A10 Scaling Load Balancing")
-    tab_group_class = p_tabs.A10ScalingTabs
+    tab_group_class = (project_tabs.A10ScalingTabs)
     template_name = 'details_tabs.html'
+
+    delete_actions = {
+        "scalingpolicy": {
+            ACTION: api.delete_a10_scaling_policy,
+            NOUN: "Scaling Policy",
+            PLURAL: "Scaling Policies",
+        },
+        "scalingaction": {
+            ACTION: api.delete_a10_scaling_action,
+            NOUN: "Scaling Action",
+            PLURAL: "Scaling Actions",
+        },
+        "scalingalarm": {
+            ACTION: api.delete_a10_scaling_alarm,
+            NOUN: "Scaling Alarm",
+            PLURAL: "Scaling Alarms",
+        },
+    }
 
 
 class AddPolicyView(workflows.WorkflowView):

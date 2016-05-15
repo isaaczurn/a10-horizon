@@ -15,36 +15,36 @@ from django.utils.translation import ugettext_lazy as _
 
 import horizon
 
-from openstack_dashboard.dashboards.project import dashboard
-from a10_horizon.dashboard.a10networks.a10devices import panel as a10devices_panel
+# from openstack_dashboard.dashboards.project import dashboard
+# from a10_horizon.dashboard.a10networks.a10devices import panel as a10devices_panel
 
 
-class A10SSLPanel(horizon.Panel):
-    name = _("SSL")
-    slug = "a10ssl"
-    permissions = ("openstack.services.network", )
+# class A10SSLPanel(horizon.Panel):
+#     name = _("SSL")
+#     slug = "a10ssl"
+#     permissions = ("openstack.services.network", )
 
 
-class A10LoadBalancingPanel(horizon.Panel):
-    name = _("Load Balancing")
-    slug = "a10loadbalancing"
-    permissions = ('openstack.services.network',)
+# class A10LoadBalancingPanel(horizon.Panel):
+#     name = _("Load Balancing")
+#     slug = "a10loadbalancing"
+#     permissions = ('openstack.services.network',)
 
 
-class A10ScalingPanel(horizon.Panel):
-    name =_("Scaling LB")
-    slug = "a10scaling"
-    permissions = ("openstack.services.network", )
+# class A10ScalingPanel(horizon.Panel):
+#     name =_("Scaling LB")
+#     slug = "a10scaling"
+#     permissions = ("openstack.services.network", )
 
-    def allowed(self, context):
-        result = False
-        try:
-            import a10_openstack
-            result = True
-        except ImportError as ex:
-            LOG.error("a10_openstack must be installed to use this panel.")
-            LOG.exception(ex)
-        return result
+#     def allowed(self, context):
+#         result = False
+#         try:
+#             import a10_openstack
+#             result = True
+#         except ImportError as ex:
+#             LOG.error("a10_openstack must be installed to use this panel.")
+#             LOG.exception(ex)
+#         return result
 
 
 network_config = (
