@@ -5,7 +5,7 @@ from django.conf.urls import url
 from a10_horizon.dashboard.a10networks.a10scaling import views
 
 # TODO(mdurrant): Create urls from cross product of nouns/verbs...itertools.product?
-urlpatterns = patterns("",
+urlpatterns = patterns("a10_horizon.dashboard.a10networks.a10scaling.views",
                        url(r'^/$',
                            views.IndexView.as_view(),
                            name='index'),
