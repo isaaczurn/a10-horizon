@@ -1,1 +1,1 @@
-a10_neutron_lbaas>=1.5.0alpha
+a10-neutron-lbaas
