@@ -35,11 +35,8 @@ import a10_horizon.dashboard.a10networks.a10appliances.workflows as p_workflows
 
 class IndexView(tabs.TabbedTableView):
     tab_group_class = p_tabs.A10Tabs
-    template_name = "index_tab.html"
-    page_title = _("A10 Appliances")
+    template_name = "appliances_tabs.html"
 
 
 class AddApplianceView(workflows.WorkflowView):
     workflow_class = p_workflows.AddAppliance
-    # template_name = "_add_appliance.html"
-

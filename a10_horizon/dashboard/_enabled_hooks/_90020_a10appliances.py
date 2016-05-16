@@ -23,3 +23,4 @@ PANEL_GROUP = 'a10networks'
 ADD_PANEL = 'a10_horizon.dashboard.a10networks.a10appliances.panel.A10Appliances'
 ADD_INSTALLED_APPS = ['a10_horizon.dashboard.a10networks.a10appliances']
 AUTO_DISCOVER_STATIC_FILES = True
+STATIC_URL = "/static/"

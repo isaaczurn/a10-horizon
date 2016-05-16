@@ -3,6 +3,7 @@
 import logging
 
 from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from horizon import tables
 
@@ -60,7 +61,7 @@ class UpdateCertificateLink(tables.LinkAction):
     classes = ("ajax-modal", "btn-update",)
 
     def get_link_url(self, certificate):
-        base_url = reverse("horizon:project:a10ssl:updatecertificate",
+        base_url = reverse_lazy("horizon:project:a10ssl:updatecertificate",
                            kwargs={'certificate_id': certificate.id})
         return base_url
 

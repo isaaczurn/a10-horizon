@@ -28,14 +28,13 @@ ACTION = "action"
 NOUN = "noun"
 PLURAL = "plural"
 
-URL_PREFIX = "horizon_project:a10scaling:"
+URL_PREFIX = "horizon:project:a10scaling:"
 
 
 class IndexView(tabs.TabView):
-    name = _("A10 Scaling Load Balancing")
     tab_group_class = (project_tabs.A10ScalingTabs)
-    template_name = 'details_tabs.html'
-    page_title = _("A10 Scaling Load Balancing")
+    template_name = 'scaling_tabs.html'
+    form_url = reverse_lazy(URL_PREFIX + "index")
 
     delete_actions = {
         "scalingpolicy": {
@@ -89,7 +88,8 @@ class UpdatePolicyView(forms.views.ModalFormView):
     form_class = project_forms.UpdatePolicy
     context_object_name = "scaling_policy"
     success_url = reverse_lazy(URL_PREFIX + "index")
-    template_name = "policy/update.html"
+    template_name = "update.html"
+    page_title = "Update Scaling Policy"
 
     def get_context_data(self, **kwargs):
         context = super(UpdatePolicyView, self).get_context_data(**kwargs)
@@ -116,7 +116,7 @@ class UpdatePolicyView(forms.views.ModalFormView):
 class PolicyDetailView(tables.MultiTableView):
     name = _("Update Policy Reactions")
     table_classes = (project_tables.UpdatePolicyReactionTable,)
-    template_name = "policy/detail.html"
+    template_name = "detail.html"
     page_title = "Scaling Policy {{ scaling_policy.name }}"
     failure_url = URL_PREFIX + "index"
 
@@ -181,7 +181,8 @@ class UpdateAlarmView(forms.views.ModalFormView):
     form_class = project_forms.UpdateAlarm
     context_object_name = "scaling_alarm"
     success_url = reverse_lazy(URL_PREFIX + "index")
-    template_name = "policy/alarm/update.html"
+    template_name = "alarm/update.html"
+    page_title = "Update Alarm"
 
     def get_context_data(self, **kwargs):
         context = super(UpdateAlarmView, self).get_context_data(**kwargs)
@@ -215,7 +216,7 @@ class UpdateActionView(forms.views.ModalFormView):
     form_class = project_forms.UpdateAction
     context_object_name = "scaling_action"
     success_url = reverse_lazy(URL_PREFIX + "index")
-    template = "policy/action/update.html"
+    template_name = "action/update.html"
 
     def get_context_data(self, **kwargs):
         context = super(UpdateActionView, self).get_context_data(**kwargs)
@@ -242,7 +243,7 @@ class AddReactionView(workflows.WorkflowView):
     name = _("Create Reaction")
     workflow_class = project_workflows.AddReactionWorkflow
     success_url = reverse_lazy(URL_PREFIX + "index")
-    template = "policy/reaction/create.html"
+    template_name = "reaction/create.html"
 
     def get_context_data(self, **kwargs):
         return super(AddReactionView, self).get_context_data(**kwargs)

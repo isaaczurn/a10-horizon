@@ -24,3 +24,4 @@ ADD_PANEL = 'a10_horizon.dashboard.a10networks.a10ssl.panel.A10SSLPanel'
 
 ADD_INSTALLED_APPS = ['a10_horizon.dashboard.a10networks.a10ssl']
 AUTO_DISCOVER_STATIC_FILES = True
+STATIC_URL = "/static/"
