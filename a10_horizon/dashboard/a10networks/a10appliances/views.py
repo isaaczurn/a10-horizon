@@ -12,23 +12,11 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-# from django.core.urlresolvers import reverse
-# from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
-# from horizon import exceptions
-# from horizon import forms
-# from horizon import messages
 from horizon import tabs
 from horizon import workflows
-# from horizon.utils import memoized
 
-
-# from openstack_dashboard import api
-# from openstack_dashboard.dashboards.project.loadbalancers \
-#     import workflows as project_workflows
-
-# import a10_neutron_lbaas.dashboard.a10devices.tables as p_tables
 import a10_horizon.dashboard.a10networks.a10appliances.tabs as p_tabs
 import a10_horizon.dashboard.a10networks.a10appliances.workflows as p_workflows
 
