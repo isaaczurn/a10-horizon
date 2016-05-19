@@ -61,6 +61,16 @@ sudo pip install -e .
 
 ## Configuration
 
+Horizon provides a plugin architecture for adding external panels.  To enable the A10 Networks Horizon UI dashboard, simply copy the files from `a10-horizon/a10_horizon/_enabled_scripts` to the `local/enabled` directory in your Horizon Openstack dashboard directory.  These paths can be auto-discovered by typing the following commands:
+
+### a10-horizon path
+```sh
+python -c "import a10_horizon; print(a10_horizon.__path__[0])"
+```
+### Horizon dashboard path
+```sh
+python -c "import openstack_dashboard; print (openstack_dashboard.__path__[0]"
+```
 ## Restart necessary services
 
 Restart horizon after configuration updates (exact command may vary depending
