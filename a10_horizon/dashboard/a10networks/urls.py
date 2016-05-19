@@ -2,12 +2,15 @@
 from django.conf.urls import url
 from django.conf.urls import include
 from django.conf.urls import patterns
+from django.conf import settings
 from django.conf.urls import static
 
-import views
+import a10_horizon
+from a10devices import urls as device_urls
 from a10scaling import urls as scaling_urls
 from a10ssl import urls as ssl_urls
-from a10devices import urls as device_urls
+import views
+
 
 urlpatterns = patterns("",
     url(r'^a10networks/', views.IndexView.as_view(), name='index'),
