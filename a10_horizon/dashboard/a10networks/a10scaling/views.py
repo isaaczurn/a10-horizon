@@ -255,3 +255,13 @@ class AddReactionView(workflows.WorkflowView):
 
     # def post(self, request, *args, **kwargs):
     #     return super(AddReactionView, self).post(request, *args, **kwargs)
+
+
+class GroupDetailView(workflows.WorkflowView):
+    name = _("Scaling Policy Group - Overview")
+    table_classes = (project_tables.UpdatePolicyReactionTable,)
+    template_name = "detail.html"
+    page_title = "Scaling Group {{ scaling_group.name }}"
+    failure_url = URL_PREFIX + "index"
+
+

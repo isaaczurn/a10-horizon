@@ -21,6 +21,8 @@ from a10_horizon.dashboard.api import scaling as scaling_api
 LOG = logging.getLogger(__name__)
 URL_PREFIX = "horizon:project:a10scaling:"
 
+# This file has a lot of DRY violations sacrificing elegance for ease of maintenance
+
 
 class AddScalingPolicyLink(tables.LinkAction):
     name = "addscalingpolicy"
@@ -334,12 +336,16 @@ class DeleteReactionLink(tables.DeleteAction):
         return True
 
 
+def get_group_detail_link(datum):
+    return reverse_lazy(URL_PREFIX + "scalinggroupdetail", kwargs={"scaling_group_id": datum["id"]})
+
+
 class A10ScalingGroupTable(tables.DataTable):
     # form fields
     id = tables.Column("id", verbose_name=_("ID"), hidden=True)
     # TODO(tenant name lookup?)
     tenant_id = tables.Column("tenant_id", verbose_name=_("Tenant ID"), hidden=True)
-    name = tables.Column("name", verbose_name="Name")
+    name = tables.Column("name", verbose_name="Name", link=get_group_detail_link)
     description = tables.Column("description", verbose_name="Description")
 
     class Meta(object):

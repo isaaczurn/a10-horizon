@@ -19,7 +19,7 @@ from horizon import tabs
 
 import a10_horizon.dashboard.a10networks.a10appliances.tables as p_tables
 import a10_horizon.dashboard.api.base as base
-import a10_neutron_lbaas.instance_manager as im
+import a10_neutron_lbaas.vthunder.instance_manager as im
 import a10_horizon.dashboard.api.a10devices as a10api
 
 
@@ -55,6 +55,12 @@ class A10AppliancesTab(tabs.TableTab):
             exceptions.handle(self.tab_group.request,
                               _('Unable to retrieve appliance list.'))
         return result
+
+
+class A10DeviceInstanceTab(tabs.TableTab):
+    table_classes = (p_tables.A10DeviceInstanceTable,)
+    name = "a10deviceinstancestab"
+
 
 
 class A10Tabs(tabs.TabGroup):

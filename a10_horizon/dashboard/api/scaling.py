@@ -16,7 +16,7 @@ from __future__ import absolute_import
 import logging
 from openstack_dashboard.api import neutron
 
-from a10_openstack_client.resources import a10_scaling_group
+from a10_neutronclient.resources import a10_scaling_group
 
 neutronclient = neutron.neutronclient
 NeutronAPIDictWrapper = neutron.NeutronAPIDictWrapper
@@ -196,3 +196,8 @@ def update_a10_scaling_action(request, id, **kwargs):
         .update_a10_scaling_action(id, body=body)\
         .get(a10_scaling_group.SCALING_ACTION)
     return A10ScalingAction(rv)
+
+
+# Scaling Members
+def get_a10_scaling_members(request, id, **kwargs):
+    return A10ScalingMember({})

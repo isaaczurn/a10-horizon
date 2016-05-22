@@ -22,7 +22,7 @@ from horizon import tables
 
 import a10_horizon.dashboard.api.a10devices as a10api
 import a10_horizon.dashboard.api.base as base
-import a10_neutron_lbaas.instance_manager as im
+import a10_neutron_lbaas.vthunder.instance_manager as im
 
 LOG = logging.getLogger(__name__)
 
@@ -87,3 +87,17 @@ class A10ApplianceTable(tables.DataTable):
         verbose_name = _("A10 Appliances")
         table_actions = (AddApplianceAction, )
         row_actions = (DeleteApplianceAction,)
+
+
+class A10DeviceInstanceTable(tables.DataTable):
+    id = tables.Column("id", verbose_name=_("ID"), hidden=True)
+    tenant_id = tables.Column("tenant_id", verbose_name=_("Tenant ID"), hidden=True)
+    ip_address = tables.Column("ip_address", verbose_name=_("IP Address"), hidden=True)
+    nova_instance_id = tables.Column("nova_instance_id", verbose_name=_("Nova Instance ID"),
+                                     hidden=True)
+
+    class Meta(object):
+        name = "a10deviceinstancetable"
+        verbose_name = "a10deviceinstancetable"
+        table_actions = ()
+        row_actions = ()

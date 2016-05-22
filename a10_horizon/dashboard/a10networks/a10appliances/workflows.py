@@ -19,7 +19,7 @@ from django.utils.translation import ugettext_lazy as _
 
 import a10_neutron_lbaas.a10_config as a10_config
 import a10_horizon.dashboard.api.base as base
-import a10_neutron_lbaas.instance_manager as im
+import a10_neutron_lbaas.vthunder.instance_manager as im
 
 
 import horizon.forms as forms

@@ -11,7 +11,7 @@ from horizon import messages
 
 # from openstack_dashboard import api
 from a10_horizon.dashboard.api import scaling as api
-from a10_openstack_client.resources import a10_scaling_group as scaling_resources
+from a10_neutronclient.resources import a10_scaling_group as scaling_resources
 
 
 LOG = logging.getLogger(__name__)

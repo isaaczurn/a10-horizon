@@ -62,7 +62,7 @@ class UpdateCertificateLink(tables.LinkAction):
 
     def get_link_url(self, certificate):
         base_url = reverse_lazy("horizon:project:a10ssl:updatecertificate",
-                           kwargs={'certificate_id': certificate.id})
+                                kwargs={'certificate_id': certificate.id})
         return base_url
 
 

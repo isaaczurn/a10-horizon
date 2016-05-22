@@ -18,7 +18,7 @@ import logging
 from openstack_dashboard.api.neutron import NeutronAPIDictWrapper
 from openstack_dashboard.api.neutron import neutronclient
 
-from a10_neutron_lbaas_client.resources import a10_appliance
+from a10_neutronclient.resources import a10_device_instance
 
 LOG = logging.getLogger(__name__)
 
