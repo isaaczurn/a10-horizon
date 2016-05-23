@@ -416,7 +416,6 @@ def reaction_summary(alarm, action):
 
 
 class UpdatePolicyReactionTable(tables.DataTable):
-    id = tables.Column("id", verbose_name=_("ID"), hidden=True)
     position = tables.Column("position", verbose_name=_("Position"), hidden=True)
     alarm_id = tables.Column("alarm_id", hidden=True)
     action_id = tables.Column("action_id", hidden=True)

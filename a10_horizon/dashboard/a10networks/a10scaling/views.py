@@ -138,6 +138,7 @@ class PolicyDetailView(tables.MultiTableView):
         for reaction in reactions:
             reaction['position'] = position
             position += 1
+
         return reactions
 
     def _get_data(self):
