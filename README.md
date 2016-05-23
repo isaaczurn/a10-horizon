@@ -55,7 +55,7 @@ sudo pip install git+https://github.com/a10networks/a10-horizon.git
 
 ```sh
 git clone https://github.com/a10networks/a10-horizon.git
-cd a10-neutron-lbaas
+cd a10-horizon
 sudo pip install -e .
 ```
 
