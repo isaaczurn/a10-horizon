@@ -151,7 +151,6 @@ class DeleteApplianceAction(tables.Action):
         )
 
     def handle(self, data_table, request, object_ids):
-        import pdb; pdb.set_trace
         for obj_id in object_ids:
             instance_id = data_table.get_object_by_id(obj_id)["nova_instance_id"]
             appliance_id = obj_id

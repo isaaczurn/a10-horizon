@@ -72,7 +72,6 @@ def get_a10_scaling_groups(request, **kwargs):
 
 def get_a10_scaling_group(request, id, **params):
     rv = neutronclient(request).show_a10_scaling_group(id).get(a10_scaling_group.SCALING_GROUP)
-    import pdb; pdb.set_trace()
     return A10ScalingGroup(rv)
 
 
