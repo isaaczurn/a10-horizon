@@ -69,7 +69,7 @@ python -c "import a10_horizon; print(a10_horizon.__path__[0])"
 ```
 ### Horizon dashboard path
 ```sh
-python -c "import openstack_dashboard; print (openstack_dashboard.__path__[0]"
+python -c "import openstack_dashboard; print (openstack_dashboard.__path__[0])"
 ```
 ## Restart necessary services
 
