@@ -73,12 +73,19 @@ python -c "import openstack_dashboard; print (openstack_dashboard.__path__[0])"
 ```
 ## Restart necessary services
 
+a10-horizon has static resources that must be "collected" by Horizon.  Following the installation of a10-horizon, execute the following command in the directory where you have installed Horizon:
+```sh
+./manage.py collectstatic
+./manage.py compress
+```
+
 Restart horizon after configuration updates (exact command may vary depending
   on OpenStack packaging.)
 
 ```sh
 service apache2 restart
 ```
+
 
 ## Examples
 
