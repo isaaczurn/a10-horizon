@@ -357,17 +357,15 @@ class A10ScalingGroupTable(tables.DataTable):
 
 class A10ScalingGroupMemberTable(tables.DataTable):
     id = tables.Column("id", verbose_name=_("ID"), hidden=True)
-    type = tables.Column("type", verbose_name=_("Type"))
-    # TODO(group name lookup?)
-    scaling_group_id = tables.Column("scaling_group_id", verbose_name=_("Scaling Group ID"))
+    scaling_group_id = tables.Column("scaling_group_id", verbose_name=_("Scaling Group ID"),
+                                     hidden=True)
     tenant_id = tables.Column("tenant_id", verbose_name=_("Tenant ID"), hidden=True)
     name = tables.Column("name", verbose_name=("Name"))
-    description = tables.Column("description", verbose_name=_("Description"))
     host = tables.Column("host", verbose_name=_("Host"))
-    nova_instance_id = tables.Column("nova_instance_id", verbose_name="Instance ID", hidden=True)
+    nova_instance_id = tables.Column("nova_instance_id", verbose_name="Instance ID")
 
     class Meta(object):
-        name = "a10scalinggroupmemberstable"
+        name = "a10scalinggroupmembertable"
         verbose_name = _("Scaling Group Members")
         table_actions = ()
         row_actions = ()

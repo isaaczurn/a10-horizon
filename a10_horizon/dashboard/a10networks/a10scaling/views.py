@@ -258,11 +258,56 @@ class AddReactionView(workflows.WorkflowView):
     #     return super(AddReactionView, self).post(request, *args, **kwargs)
 
 
-class GroupDetailView(workflows.WorkflowView):
-    name = _("Scaling Policy Group - Overview")
-    table_classes = (project_tables.UpdatePolicyReactionTable,)
-    template_name = "detail.html"
+class GroupDetailView(tables.MultiTableView):
+    name = _("Scaling Group Overview")
+    table_classes = (project_tables.A10ScalingGroupMemberTable,)
+    template_name = "group/detail.html"
     page_title = "Scaling Group {{ scaling_group.name }}"
     failure_url = URL_PREFIX + "index"
 
+    def __init__(self, *args, **kwargs):
+        super(GroupDetailView, self).__init__(*args, **kwargs)
 
+    # every table needs a get_<tablename>_data method
+    def get_a10scalinggroupmembertable_data(self):
+        try:
+            group = self._get_data()
+            workers = group.get("workers", [])
+
+        except Exception as ex:
+            import pdb; pdb.set_trace()
+            LOG.exception(ex)
+            redirect = self.failure_url
+            msg = _("Unable to retrieve scaling group: %s") % exceptions
+            exceptions.handle(self.request, msg, redirect=redirect)
+
+        return workers
+
+    def _get_data(self):
+        try:
+            id = self.kwargs['scaling_group_id']
+            group = api.get_a10_scaling_group_with_children(self.request, id)
+        except Exception:
+            msg = _('Unable to retrieve details for scaling group "%s".') \
+                % (id)
+            exceptions.handle(self.request, msg,
+                              redirect=self.failure_url)
+        return group
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupDetailView, self).get_context_data(**kwargs)
+        group = self._get_data()
+
+        context["scaling_group"] = group
+        context["url"] = self.get_redirect_url()
+
+        return context
+
+    @staticmethod
+    def get_redirect_url():
+        # update redirect to go back to scaling group.
+        return reverse_lazy("horizon:project:a10scaling:index")
+
+    class Meta(object):
+        name = "scalinggroupdetail"
+        verbose_name = _("Scaling Group Details")

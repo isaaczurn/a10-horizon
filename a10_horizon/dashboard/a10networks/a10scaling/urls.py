@@ -33,6 +33,6 @@ urlpatterns = patterns("a10_horizon.dashboard.a10networks.a10scaling.views",
                        url(r'^scalingpolicy/(?P<scaling_policy_id>[^/]*)/detail$',
                            views.PolicyDetailView.as_view(),
                            name='scalingpolicydetail'),
-                       url(r'^scalinggroup/(<?P<scaling_group_id>[^/]*)/detail$',
+                       url(r'^scalinggroup/(?P<scaling_group_id>[^/]*)/detail$',
                            views.GroupDetailView.as_view(),
                            name='scalinggroupdetail'))
