@@ -84,8 +84,8 @@ class A10ApplianceTable(tables.DataTable):
     class Meta(object):
         name = "a10appliancestable"
         verbose_name = _("A10 Appliances")
-        table_actions = (AddApplianceAction, )
-        row_actions = (DeleteApplianceAction,)
+        table_actions = ()
+        row_actions = ()
 
 
 class A10DeviceInstanceTable(tables.DataTable):

@@ -62,7 +62,6 @@ class A10DeviceInstanceTab(tabs.TableTab):
     name = "a10deviceinstancestab"
 
 
-
 class A10Tabs(tabs.TabGroup):
     slug = "a10tabs"
     tabs = (A10AppliancesTab, )

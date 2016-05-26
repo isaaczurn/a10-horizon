@@ -92,7 +92,6 @@ class AddApplianceAction(workflows.Action):
             target.append(transform(x))
 
 
-
 class AddApplianceStep(workflows.Step):
     action_class = AddApplianceAction
     contributes = ("name", "flavor", "image", "networks")
