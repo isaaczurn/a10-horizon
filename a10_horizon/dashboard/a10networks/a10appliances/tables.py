@@ -20,8 +20,6 @@ from django.utils.translation import ungettext_lazy
 
 from horizon import tables
 
-import a10_horizon.dashboard.api.a10devices as a10api
-import a10_horizon.dashboard.api.base as base
 
 LOG = logging.getLogger(__name__)
 
@@ -32,6 +30,7 @@ class A10ApplianceTable(tables.DataTable):
     ip = tables.Column("host", verbose_name="Management IP")
     api_ver = tables.Column("api_version", verbose_name="API Version")
     nova_instance_id = tables.Column("nova_instance_id", hidden=True)
+
     class Meta(object):
         name = "a10appliancestable"
         verbose_name = _("A10 Appliances")
