@@ -342,7 +342,7 @@ def get_group_detail_link(datum):
 
 class A10ScalingGroupTable(tables.DataTable):
     # form fields
-    id = tables.Column("id", verbose_name=_("ID"), hidden=True)
+    id = tables.Column("id", verbose_name=_("ID"), link=get_group_detail_link)
     # TODO(tenant name lookup?)
     tenant_id = tables.Column("tenant_id", verbose_name=_("Tenant ID"), hidden=True)
     name = tables.Column("name", verbose_name="Name", link=get_group_detail_link)
@@ -356,11 +356,11 @@ class A10ScalingGroupTable(tables.DataTable):
 
 
 class A10ScalingGroupMemberTable(tables.DataTable):
-    id = tables.Column("id", verbose_name=_("ID"), hidden=True)
+    id = tables.Column("id", verbose_name=_("ID"))
     scaling_group_id = tables.Column("scaling_group_id", verbose_name=_("Scaling Group ID"),
                                      hidden=True)
     tenant_id = tables.Column("tenant_id", verbose_name=_("Tenant ID"), hidden=True)
-    name = tables.Column("name", verbose_name=("Name"))
+    name = tables.Column("name", verbose_name=("Name"), hidden=True)
     host = tables.Column("host", verbose_name=_("Host"))
     nova_instance_id = tables.Column("nova_instance_id", verbose_name="Instance ID")
 
