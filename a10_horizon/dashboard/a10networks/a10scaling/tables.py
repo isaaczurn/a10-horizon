@@ -342,7 +342,7 @@ def get_group_detail_link(datum):
 
 class A10ScalingGroupTable(tables.DataTable):
     # form fields
-    id = tables.Column("id", verbose_name=_("ID"), hidden=True)
+    id = tables.Column("id", verbose_name=_("ID"), link=get_group_detail_link)
     # TODO(tenant name lookup?)
     tenant_id = tables.Column("tenant_id", verbose_name=_("Tenant ID"), hidden=True)
     name = tables.Column("name", verbose_name="Name", link=get_group_detail_link)
