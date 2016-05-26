@@ -19,14 +19,7 @@ from horizon import tabs
 
 import a10_horizon.dashboard.a10networks.a10appliances.tables as p_tables
 import a10_horizon.dashboard.api.base as base
-import a10_neutron_lbaas.vthunder.instance_manager as im
 import a10_horizon.dashboard.api.a10devices as a10api
-
-
-def instance_manager_for(request):
-    return im.InstanceManager(
-        base.project_id_for(request),
-        session=base.session_for(request))
 
 
 class A10AppliancesTab(tabs.TableTab):
@@ -38,15 +31,6 @@ class A10AppliancesTab(tabs.TableTab):
 
     def get_a10appliancestable_data(self):
         result = []
-
-        # i_filter = {
-        #     "image": {
-        #         "tag": [
-        #             "a10"
-        #         ]
-
-        #     }
-        # }
 
         try:
             result = a10api.get_a10_appliances(self.request)
