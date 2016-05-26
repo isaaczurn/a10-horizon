@@ -275,7 +275,6 @@ class GroupDetailView(tables.MultiTableView):
             workers = group.get("workers", [])
 
         except Exception as ex:
-            import pdb; pdb.set_trace()
             LOG.exception(ex)
             redirect = self.failure_url
             msg = _("Unable to retrieve scaling group: %s") % exceptions

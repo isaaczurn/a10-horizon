@@ -13,7 +13,6 @@
 
 
 from django.utils.translation import ugettext_lazy as _
-# import pdb; pdb.set_trace()
 from openstack_dashboard.local import local_settings
 import a10_horizon
 
@@ -28,4 +27,4 @@ AUTO_DISCOVER_STATIC_FILES = True
 ADD_INSTALLED_APPS = ['a10_horizon.dashboard.a10networks']
 
 STATIC_URL = "/a10static/"
-STATIC_DIR = "{0}/dashboard/project/a10networks{1}".format(a10_horizon.__path__[0], STATIC_URL)
+STATICFILES_DIR = "{0}/dashboard/project/a10networks{1}".format(a10_horizon.__path__[0], STATIC_URL)
