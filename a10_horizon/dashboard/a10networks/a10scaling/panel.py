@@ -25,7 +25,7 @@ class A10ScalingPanel(horizon.Panel):
     slug = "a10scaling"
     permissions = ("openstack.services.network", )
 
-    def can_register():
+    def can_register(self):
         rv = False
 
         try:

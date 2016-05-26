@@ -23,14 +23,14 @@ class A10SSLPanel(horizon.Panel):
     slug = "a10ssl"
     permissions = ("openstack.services.network", )
 
-    def can_register():
-        rv = False
+    # def can_register(self):
+    #     rv = False
 
-        try:
-            import a10_openstack  # noqa
-            rv = True
-        except Exception:
-            msg = "{0} cannot be displayed.  Please contact A10 Account Team to enable."
-            rv = False
-            LOG.exception(msg.format("A10 SSL"))
-        return rv
+    #     try:
+    #         import a10_openstack  # noqa
+    #         rv = True
+    #     except Exception:
+    #         msg = "{0} cannot be displayed.  Please contact A10 Account Team to enable."
+    #         rv = False
+    #         LOG.exception(msg.format("A10 SSL"))
+    #     return rv
