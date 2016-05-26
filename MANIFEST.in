@@ -1,3 +1,4 @@
 include README.md
 include LICENSE
 recursive-include a10_horizon *
+include scripts/a10-horizon

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "`basename $0`: <install>"
+    echo "    install - Perform one-time setup after package install"
+    echo " All checks are safe to run multiple times."
+    exit 1
+fi
+
+d=$(python -c 'import a10_horizon; print(a10_horizon.__path__[0])' 2>/dev/null)
+if [ $? -ne 0 ]; then
+    echo "error: unable to find a10_horizon package"
+    exit 1
+fi
+
+od=$(python -c "import openstack_dashboard; print (openstack_dashboard.__path__[0])" 2>/dev/null)
+if [ $? -ne 0 ]; then
+    echo "error: unable to find openstack_dashboard package"
+    exit 1
+fi
+
+# Install horizon hooks for our panels
+
+hooks=$(ls $d/_enabled_hooks/*.py | grep -v ssl)
+sudo ln -sf $hooks "$od/local/enabled"
+
+# Rebuild assets
+
+echo yes | sudo `python -c 'import horizon; print(horizon.__path__[0])'`/../manage.py collectstatic
+
+# Web server needs a kick
+
+echo ""
+echo "Web server needs to be restarted, example:"
+echo sudo service apache2 restart

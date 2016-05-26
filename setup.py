@@ -28,5 +28,7 @@ setup(
 
     include_package_data=True,
 
+    scripts=['scripts/a10-horizon'],
+
     install_requires = ['a10-neutronclient>=0.1.4']
 )
