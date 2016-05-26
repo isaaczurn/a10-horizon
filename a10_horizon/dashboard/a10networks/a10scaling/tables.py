@@ -355,6 +355,10 @@ class A10ScalingGroupTable(tables.DataTable):
         row_actions = ()
 
 
+def get_instance_detail(datum):
+    return reverse_lazy('horizon:project:instances:detail', args=[datum["nova_instance_id"]])
+
+
 class A10ScalingGroupMemberTable(tables.DataTable):
     id = tables.Column("id", verbose_name=_("ID"), hidden=True)
     scaling_group_id = tables.Column("scaling_group_id", verbose_name=_("Scaling Group ID"),
@@ -362,7 +366,8 @@ class A10ScalingGroupMemberTable(tables.DataTable):
     tenant_id = tables.Column("tenant_id", verbose_name=_("Tenant ID"), hidden=True)
     name = tables.Column("name", verbose_name=("Name"))
     host = tables.Column("host", verbose_name=_("Host"))
-    nova_instance_id = tables.Column("nova_instance_id", verbose_name="Instance ID")
+    nova_instance_id = tables.Column("nova_instance_id", verbose_name="Instance ID",
+                                     link=get_instance_detail)
 
     class Meta(object):
         name = "a10scalinggroupmembertable"
