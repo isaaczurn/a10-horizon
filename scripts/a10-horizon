@@ -21,7 +21,7 @@ fi
 
 # Install horizon hooks for our panels
 
-hooks=$(ls $ah/_enabled_hooks/*.py | grep -v ssl)
+hooks=$(ls $d/_enabled_hooks/*.py | grep -v ssl)
 sudo ln -sf $hooks "$od/local/enabled"
 
 # Rebuild assets
