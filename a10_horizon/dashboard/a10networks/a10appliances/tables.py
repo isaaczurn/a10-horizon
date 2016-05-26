@@ -20,59 +20,8 @@ from django.utils.translation import ungettext_lazy
 
 from horizon import tables
 
-import a10_horizon.dashboard.api.a10devices as a10api
-import a10_horizon.dashboard.api.base as base
-import a10_neutron_lbaas.vthunder.instance_manager as im
 
 LOG = logging.getLogger(__name__)
-
-
-#TODO(orchestration) - Move this method to a shareable location.
-def instance_manager_for(request):
-    return im.InstanceManager(
-        base.project_id_for(request),
-        session=base.session_for(request))
-
-
-class AddApplianceAction(tables.LinkAction):
-    name = "addappliance"
-    verbose_name = _("Create Appliance")
-    url = "horizon:project:a10appliances:addappliance"
-    icon = "plus"
-    classes = ("ajax-modal",)
-
-
-class DeleteApplianceAction(tables.Action):
-    name = "deleteappliance"
-    verbose_name = _("Delete Appliance")
-    # url = "horizon:project:a10appliances:deleteappliance"
-    # icon = "minus"
-    # classes = ("ajax-modal", )
-
-    @staticmethod
-    def action_present(count):
-        return ungettext_lazy(
-            u"Delete Appliance",
-            u"Delete A10 Appliances",
-            count
-        )
-
-    @staticmethod
-    def action_past(count):
-        return ungettext_lazy(
-            u"Scheduled deletion of A10 Appliance",
-            u"Scheduled deletion of A10 Appliances",
-            count
-        )
-
-    def handle(self, data_table, request, object_ids):
-        for obj_id in object_ids:
-            instance_id = data_table.get_object_by_id(obj_id)["nova_instance_id"]
-            appliance_id = obj_id
-            a10api.delete_a10_appliance(request, obj_id)
-            imgr = instance_manager_for(request)
-            imgr.delete_instance(instance_id)
-            # super(DeleteApplianceAction, self).handle(data_table, request, object_ids)
 
 
 class A10ApplianceTable(tables.DataTable):
@@ -81,6 +30,7 @@ class A10ApplianceTable(tables.DataTable):
     ip = tables.Column("host", verbose_name="Management IP")
     api_ver = tables.Column("api_version", verbose_name="API Version")
     nova_instance_id = tables.Column("nova_instance_id", hidden=True)
+
     class Meta(object):
         name = "a10appliancestable"
         verbose_name = _("A10 Appliances")

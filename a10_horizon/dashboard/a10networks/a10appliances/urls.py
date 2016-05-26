@@ -21,8 +21,7 @@ from a10_horizon.dashboard.a10networks.a10appliances import views
 
 urlpatterns = patterns(
     'a10_horizon.dashboard.a10networks.a10appliances.views',
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^addappliance$', views.AddApplianceView.as_view(), name='addappliance'),
+    url(r'^$', views.IndexView.as_view(), name='index')
     # url(r'^deleteappliance$', views.DeleteApplianceView.as_view(), name='deleteappliance')
     # url(r'^addimage$', views.AddImageView.as_view(), name="addimage")
 )

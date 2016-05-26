@@ -25,6 +25,3 @@ class IndexView(tabs.TabbedTableView):
     tab_group_class = p_tabs.A10Tabs
     template_name = "appliances_tabs.html"
 
-
-class AddApplianceView(workflows.WorkflowView):
-    workflow_class = p_workflows.AddAppliance
