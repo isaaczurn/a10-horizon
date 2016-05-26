@@ -10,13 +10,27 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+import logging
 
 import horizon
+
+LOG = logging.getLogger(__name__)
 
 
 class A10SSLPanel(horizon.Panel):
     name = _("SSL")
     slug = "a10ssl"
     permissions = ("openstack.services.network", )
+
+    def can_register():
+        rv = False
+
+        try:
+            import a10_openstack  # noqa
+            rv = True
+        except Exception:
+            msg = "{0} cannot be displayed.  Please contact A10 Account Team to enable."
+            rv = False
+            LOG.exception(msg.format("A10 SSL"))
+        return rv
