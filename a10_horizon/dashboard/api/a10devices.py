@@ -30,26 +30,26 @@ class A10Appliance(NeutronAPIDictWrapper):
 
 
 def get_a10_appliances(request, **kwargs):
-    rv = neutronclient(request).list_a10_appliances(**kwargs).get(a10_appliance.RESOURCES)
+    rv = neutronclient(request).list_a10_device_instances(**kwargs).get(a10_device_instance.RESOURCES)
     return map(A10Appliance, rv)
 
 
 def get_a10_appliance(request, id, **params):
-    rv = neutronclient(request).show_a10_appliance(id).get(a10_appliance.RESOURCE)
+    rv = neutronclient(request).show_a10_device_instance(id).get(a10_device_instance.RESOURCE)
     return A10Appliance(rv)
 
 
 def delete_a10_appliance(request, id):
-    neutronclient(request).delete_a10_appliance(id)
+    neutronclient(request).delete_a10_device_instances(id)
 
 
 def create_a10_appliance(request, **kwargs):
-    body = {a10_appliance.RESOURCE: kwargs}
-    rv = neutronclient(request).create_a10_appliance(body=body).get(a10_appliance.RESOURCE)
+    body = {a10_device_instance.RESOURCE: kwargs}
+    rv = neutronclient(request).create_a10_device_instances(body=body).get(a10_device_instance.RESOURCE)
     return A10Appliance(rv)
 
 
 def update_a10_appliance(request, id, **kwargs):
-    body = {a10_appliance.RESOURCE: kwargs}
-    rv = neutronclient(request).update_a10_appliance(id, body=body).get(a10_appliance.RESOURCE)
+    body = {a10_device_instance.RESOURCE: kwargs}
+    rv = neutronclient(request).update_a10_device_instances(id, body=body).get(a10_device_instance.RESOURCE)
     return A10Appliance(rv)
