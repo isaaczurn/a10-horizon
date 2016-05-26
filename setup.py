@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "a10-horizon",
-    version = "0.1.5a",
+    version = "0.1.5",
     packages = find_packages(),
 
     author = "A10 Networks",
