@@ -1,0 +1,31 @@
+{% load i18n sizeformat %}
+
+<h3>Scaling Policy Overview</h3>
+<div class="info detail">
+    <dl class="dl-horizontal">
+        <!-- Name -->
+        <dt title="{% trans 'Name' %}">{% trans "Name" %}</dt>
+        <dd>{{ scaling_policy.name|default:_("None") }}</dd>
+
+        <!-- Description (conditional) -->
+        {% if scaling_policy.description %}
+        <dt title="{% trans 'Description' %}">{% trans "Description" %}</dt>
+        <dd>{{ scaling_policy.name|default:_("None") }}</dd>
+        {% endif %}
+
+        <!-- Cooldown -->
+        <dt title="{% trans 'Cooldown Period' %}">{% trans "Cooldown Period"%}
+        <dd>{{ scaling_policy.cooldown}} seconds</dd>
+
+        <!-- Minimum Instances -->
+        <dt title="{% trans 'Minimum Instances' %}">{% trans "Minimum Instances" %}
+        <dd>{{ scaling_policy.min_instances}}</dd>
+
+        <!-- Maximum Instances -->
+        {% if scaling_policy.max_instances > 0 %}
+        <dt title="{% trans 'Maximum Instances' %}">{% trans "Maximum Instances" %}
+        <dd>{{ scaling_policy.max_instances}}</dd>
+        {% endif %}
+
+    </dl>
+</div>

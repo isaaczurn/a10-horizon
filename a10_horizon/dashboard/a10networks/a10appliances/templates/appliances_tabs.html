@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}{% trans "A10 Load Balancer Device Instances" %}{% endblock %}
+
+{% block main %}
+{% include "logo.html" with logotitle="Load Balancer Device Instances" %}
+<div class="row">
+
+  <div class="col-sm-12">
+  {{ tab_group.render }}
+  </div>
+
+</div>
+
+{% endblock %}

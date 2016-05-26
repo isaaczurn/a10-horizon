@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}{% trans "A10 Networks SSL Certificate Management" %}{% endblock %}
+
+
+{% block main %}
+{% include "logo.html" with logotitle="SSL Certificate Management" %}
+<div class="row">
+  <div class="col-sm-12">
+  {{ tab_group.render }}
+  </div>
+</div>
+{% endblock %}
