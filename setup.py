@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "a10-horizon",
-    version = "1.0.0alpha",
+    version = "0.1.0",
     packages = find_packages(),
 
     author = "A10 Networks",
@@ -28,5 +28,5 @@ setup(
 
     include_package_data=True,
 
-    install_requires = ['a10-neutron-lbaas>=1.5.0alpha']
+    install_requires = ['a10-neutronclient>=0.1.4']
 )
