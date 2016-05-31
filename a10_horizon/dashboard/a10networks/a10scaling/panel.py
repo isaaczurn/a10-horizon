@@ -14,13 +14,13 @@
 from django.utils.translation import ugettext_lazy as _
 import logging
 
-import horizon
-
+from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
 
 LOG = logging.getLogger(__name__)
 
 
-class A10ScalingPanel(horizon.Panel):
+class A10ScalingPanel(NeutronExtensionPanelBase):
+    REQUIRED_EXTENSIONS = ["a10-scaling-group"]
     name = _("LB Scaling")
     slug = "a10scaling"
     permissions = ("openstack.services.network", )

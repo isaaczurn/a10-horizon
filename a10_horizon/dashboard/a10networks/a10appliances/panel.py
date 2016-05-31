@@ -15,14 +15,16 @@
 import logging
 
 from django.utils.translation import ugettext_lazy as _
-import horizon
 
-# from openstack_dashboard.api import neutron
+from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
+
 
 LOG = logging.getLogger(__name__)
 
 
-class A10Appliances(horizon.Panel):
+class A10Appliances(NeutronExtensionPanelBase):
+    REQUIRED_EXTENSIONS = ["a10-device-instance"]
+
     name = unicode(_("LB Appliances"))
     slug = "a10appliances"
     permissions = ('openstack.services.network',)
