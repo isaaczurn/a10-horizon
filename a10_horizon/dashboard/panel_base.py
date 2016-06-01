@@ -22,11 +22,15 @@ class NeutronExtensionPanelBase(horizon.Panel):
             # Ensure all of the named extensions are present.  Else, return false.
             try:
                 exts = [x["alias"] for x in neutron_api.list_extensions(context.request)]
-                missing_exts = [x not in exts for x in self.REQUIRED_EXTENSIONS]
+                missing_exts = set(self.REQUIRED_EXTENSIONS) - set(exts)
+
                 if len(missing_exts) > 0:
-                    msg = "The following extensions are required to load this plugin:" + "\n"
+                    msg = "\n\n\n"
+                    msg += "-------------- A10 NETWORKS SUPPORT INFORMATION --------------\n"
+                    msg += "The following extensions are required to load this plugin:" + "\n\n"
                     msg += "\n".join(missing_exts)
-                    msg += "\nPlease contact A10 Account Team to enable."
+                    msg += "\n\nPlease contact A10 Account Team to enable.\n"
+                    msg += "--------------------------------------------------------------\n"
                     LOG.error(msg)
                     return False
                 else:
