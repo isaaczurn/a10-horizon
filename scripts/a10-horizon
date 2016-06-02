@@ -26,7 +26,7 @@ sudo ln -sf $hooks "$od/local/enabled"
 
 # Rebuild assets
 
-echo yes | sudo `python -c 'import horizon; print(horizon.__path__[0])'`/../manage.py collectstatic
+echo yes | sudo "$od/../manage.py" collectstatic
 
 # Web server needs a kick
 
