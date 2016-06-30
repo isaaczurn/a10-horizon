@@ -20,7 +20,7 @@ import a10_horizon
 # The slug of the panel group to be added to HORIZON_CONFIG. Required.
 PANEL = "a10admin"
 # The display name of the PANEL_GROUP. Required.
-PANEL_GROUP = 'a10networks'
+PANEL_GROUP = 'admin'
 
 PANEL_GROUP_NAME = _('A10 Networks A')
 # The slug of the dashboard the PANEL_GROUP associated with. Required.

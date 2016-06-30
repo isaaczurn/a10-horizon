@@ -20,7 +20,7 @@ PANEL_DASHBOARD = 'admin'
 PANEL_GROUP = 'a10admin'
 
 # Python panel class of the PANEL to be added.
-ADD_PANEL = 'a10_horizon.dashboard.admin.a10loadbalancers.panel.A10LoadBalancersPanel'
+ADD_PANEL = 'a10_horizon.dashboard.admin.a10loadbalancers.panels.A10Appliances'
 
-ADD_INSTALLED_APPS = ['a10_horizon.dashboard.admin.a10loadbalancers']
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.admin.a10admin']
 AUTO_DISCOVER_STATIC_FILES = True
