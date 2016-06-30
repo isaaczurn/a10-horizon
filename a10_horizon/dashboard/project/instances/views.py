@@ -1,4 +1,4 @@
-# Copyright 2015,  A10 Networks
+# Copyright 2015 A10 Networks
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -12,16 +12,16 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+from django.utils.translation import ugettext_lazy as _
 
-from django.conf.urls import patterns
-from django.conf.urls import url
+from horizon import tabs
+from horizon import workflows
 
-from a10_horizon.dashboard.a10networks.a10appliances import views
+import a10_horizon.dashboard.project.instances.tabs as p_tabs
+import a10_horizon.dashboard.project.instances.workflows as p_workflows
 
 
-urlpatterns = patterns(
-    'a10_horizon.dashboard.a10networks.a10appliances.views',
-    url(r'^$', views.IndexView.as_view(), name='index')
-    # url(r'^deleteappliance$', views.DeleteApplianceView.as_view(), name='deleteappliance')
-    # url(r'^addimage$', views.AddImageView.as_view(), name="addimage")
-)
+class IndexView(tabs.TabbedTableView):
+    tab_group_class = p_tabs.A10Tabs
+    template_name = "appliances_tabs.html"
+

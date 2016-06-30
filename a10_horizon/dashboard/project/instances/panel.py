@@ -21,7 +21,7 @@ from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
 
 LOG = logging.getLogger(__name__)
 
-class A10Appliances(NeutronExtensionPanelBase):
+class A10DeviceInstances(NeutronExtensionPanelBase):
     REQUIRED_EXTENSIONS = ["a10-device-instance"]
 
     name = unicode(_("LB Appliances"))
