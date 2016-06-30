@@ -18,15 +18,14 @@ import a10_horizon
 
 
 # The slug of the panel group to be added to HORIZON_CONFIG. Required.
-PANEL_GROUP = 'a10networks'
-# The slug of the dashboard the PANEL_GROUP associated with. Required.
-PANEL_GROUP_DASHBOARD = 'project'
-
+PANEL = "a10admin"
+PANEL_GROUP = 'a10admin'
 # The display name of the PANEL_GROUP. Required.
-PANEL_GROUP_NAME = _('A10 Networks')
-
+PANEL_GROUP_NAME = _('A10 Networks A')
+# The slug of the dashboard the PANEL_GROUP associated with. Required.
+PANEL_GROUP_DASHBOARD = 'admin'
 AUTO_DISCOVER_STATIC_FILES = True
-ADD_INSTALLED_APPS = ['a10_horizon.dashboard.admin.a10admin']
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.admin.a10networks']
 
 STATIC_URL = "/a10static/"
-STATICFILES_DIR = "{0}/dashboard/project/a10networks{1}".format(a10_horizon.__path__[0], STATIC_URL)
+STATICFILES_DIR = "{0}/dashboard/{1}".format(a10_horizon.__path__[0], STATIC_URL)
