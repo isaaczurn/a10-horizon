@@ -26,11 +26,6 @@ class DeleteCertificateLink(tables.DeleteAction):
     data_type_singular = _("Certificate")
     data_type_plural = _("Certificates")
 
-    # def allowed(self, request, datum=None):
-    #     is_allowed = (datum and datum.id)
-    #     LOG.debug("DeleteCertificateLink:allowed(): datum=%s,is_allowed=%s" % (datum, is_allowed))
-    #     return True
-
 
 class DeleteCertificateBindingLink(tables.DeleteAction):
     name = "deletecertificatebinding"
@@ -38,12 +33,6 @@ class DeleteCertificateBindingLink(tables.DeleteAction):
     action_past = _("Scheduled deletion of %(data_type)s")
     data_type_singular = _("Certificate Association")
     data_type_plural = _("Certificate Associations")
-
-    # def allowed(self, request, datum=None):
-    #     is_allowed = (datum and datum.id)
-    #     LOG.debug("DeleteCertificateBindingLink:allowed(): datum=%s,is_allowed=%s").format(
-    #         datum, is_allowed)
-    #     return True
 
 
 class AddCertificateBindingLink(tables.LinkAction):
