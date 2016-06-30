@@ -15,10 +15,14 @@ import logging
 
 import horizon
 
+from a10_horizon.dashboard.a10networks.panel_base import NeutronExtensionPanelBase
+
 LOG = logging.getLogger(__name__)
 
 
-class A10SSLPanel(horizon.Panel):
+class A10SSLPanel(NeutronExtensionPanelBase):
+    REQUIRED_EXTS = ["certificate"]
+
     name = _("SSL")
     slug = "a10ssl"
     permissions = ("openstack.services.network", )

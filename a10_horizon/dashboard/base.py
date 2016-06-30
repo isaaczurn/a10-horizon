@@ -1,15 +1,15 @@
-# Copyright (C) 2014-2015, A10 Networks Inc. All rights reserved.
+# Copyright (C) 2014-2016, A10 Networks Inc. All rights reserved.
 
 import importlib
 import logging
 import re
 
-from django.core.urlresolvers import reverse
 from django.core.urlresolvers import resolve
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 
-logger = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
 
 
 def post_hack(self, request, *args, **kwargs):
@@ -85,7 +85,7 @@ def post_hack(self, request, *args, **kwargs):
 
 
 def add_tab(url, tab, idx=None):
-    logger.debug("add_tab(), url:%s, tabl: %s, idx: %s", url, tab, idx)
+    LOG.debug("add_tab(), url:%s, tabl: %s, idx: %s", url, tab, idx)
     # Get the index view via it's url name
     view_func = resolve(reverse(url)).func
     module = importlib.import_module(view_func.__module__)
