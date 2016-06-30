@@ -26,7 +26,7 @@ PANEL_GROUP_DASHBOARD = 'project'
 PANEL_GROUP_NAME = _('A10 Networks')
 
 AUTO_DISCOVER_STATIC_FILES = True
-ADD_INSTALLED_APPS = ['a10_horizon.dashboard.admin.a10admin']
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.project.a10networks']
 
 STATIC_URL = "/a10static/"
 STATICFILES_DIR = "{0}/dashboard/project/a10networks{1}".format(a10_horizon.__path__[0], STATIC_URL)
