@@ -21,6 +21,7 @@ from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
 
 LOG = logging.getLogger(__name__)
 
+import pdb; pdb.set_trace()
 class A10Appliances(NeutronExtensionPanelBase):
     REQUIRED_EXTENSIONS = ["a10-device-instance"]
 

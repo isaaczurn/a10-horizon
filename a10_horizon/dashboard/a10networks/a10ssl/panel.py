@@ -15,7 +15,7 @@ import logging
 
 import horizon
 
-from a10_horizon.dashboard.a10networks.panel_base import NeutronExtensionPanelBase
+from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
 
 LOG = logging.getLogger(__name__)
 
@@ -26,15 +26,3 @@ class A10SSLPanel(NeutronExtensionPanelBase):
     name = _("SSL")
     slug = "a10ssl"
     permissions = ("openstack.services.network", )
-
-    # def can_register(self):
-    #     rv = False
-
-    #     try:
-    #         import a10_openstack  # noqa
-    #         rv = True
-    #     except Exception:
-    #         msg = "{0} cannot be displayed.  Please contact A10 Account Team to enable."
-    #         rv = False
-    #         LOG.exception(msg.format("A10 SSL"))
-    #     return rv

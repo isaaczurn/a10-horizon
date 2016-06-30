@@ -20,19 +20,9 @@ LOG = logging.getLogger(__name__)
 
 
 class A10ScalingPanel(NeutronExtensionPanelBase):
+
     REQUIRED_EXTENSIONS = ["a10-scaling-group"]
+
     name = _("LB Scaling")
     slug = "a10scaling"
     permissions = ("openstack.services.network", )
-
-    # def can_register(self):
-    #     rv = False
-
-    #     try:
-    #         import a10_openstack  # noqa
-    #         rv = True
-    #     except Exception:
-    #         msg = "{0} cannot be displayed.  Please contact A10 Account Team to enable."
-    #         rv = False
-    #         LOG.exception(msg.format("A10 Scaling"))
-    #     return rv

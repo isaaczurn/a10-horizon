@@ -23,7 +23,7 @@ PANEL_GROUP = 'a10networks'
 PANEL_GROUP_DASHBOARD = 'project'
 
 # The display name of the PANEL_GROUP. Required.
-PANEL_GROUP_NAME = _('A10 ADMIN')
+PANEL_GROUP_NAME = _('A10 Networks')
 
 AUTO_DISCOVER_STATIC_FILES = True
 ADD_INSTALLED_APPS = ['a10_horizon.dashboard.project.a10networks']
