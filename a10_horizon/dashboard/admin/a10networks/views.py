@@ -33,3 +33,19 @@ LOG = logging.getLogger(__name__)
 
 class IndexView(views.HorizonTemplateView):
     template_name = "horizon/common/_detail.html"
+
+
+class InstanceIndexView(views.HorizonTemplateView):
+    template_name = "horizon/common/_detail.html"
+
+
+class ScalingGroupIndexView(views.HorizonTemplateView):
+    template_name = "horizon/common/_detail.html"
+
+
+class VipsIndexView(views.HorizonTemplateView):
+    template_name = "horizon/common/_detail.html"
+
+
+class OverviewIndexView(views.HorizonTemplateView):
+    template_name = "horizon/common/_detail.html"

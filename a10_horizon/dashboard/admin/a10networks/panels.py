@@ -25,7 +25,7 @@ LOG = logging.getLogger(__name__)
 ADMIN_PERMISSIONS = ('openstack.services.network',)
 
 
-class A10OverviewPanel(NeutronExtensionPanelBase):
+class A10OverviewAdminPanel(NeutronExtensionPanelBase):
 
     name = "Overview"
     slug = "a10overview_admin"

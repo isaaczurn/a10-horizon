@@ -21,16 +21,6 @@ from django.conf.urls import static
 import a10_horizon
 import views
 
-from instances import urls as instance_urls
-from overview import urls as overview_urls
-from scalinggroups import urls as sg_urls
-from vips import urls as vip_urls
-
-
-urlpatterns = patterns("",
-    url(r'', views.IndexView.as_view(), name='index'),
-    url(r'^a10overview_admin/', include(overview_urls, "a10admin", "overview")),
-    url(r'^a10vips_admin/', include(vip_urls, "a10admin", "vips")),
-    url(r'a10deviceinstances_admin/', include(instance_urls, "a10admin", "instances")),
-    url(r'a10scalinggroups_admin/', include(sg_urls, "a10admin", "scalinggroups")),
+urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.vips.views",
+    url(r'^$', views.IndexView.as_view(), name='index'),
 )

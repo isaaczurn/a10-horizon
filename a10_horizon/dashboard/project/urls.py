@@ -15,5 +15,6 @@ urlpatterns = patterns("",
     url(r'^a10networks/', views.IndexView.as_view(), name='index'),
     # url(r'^a10ssl/', include(ssl_urls, app_namesppace="a10networks", namespace="a10ssl")),
     # url(r'^a10scaling/', include(scaling_urls, app_namesppace="a10networks", namespace="a10scaling")),
-    url(r'^instances/', include(instances_urls, app_namesppace="a10networks", namespace="a10devices"))
+    url(r'^instances/',
+        include((instances_urls, app_namespace="a10networks"), namespace="a10devices"))
 )

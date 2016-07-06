@@ -12,19 +12,15 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+from django.conf.urls import url
+from django.conf.urls import include
+from django.conf.urls import patterns
+from django.conf import settings
+from django.conf.urls import static
 
-import horizon
-import logging
+import a10_horizon
+import views
 
-from django.utils.translation import ugettext_lazy as _
-
-from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
-
-LOG = logging.getLogger(__name__)
-
-
-class A10DeviceInstancesAdmin(horizon.Panel):
-
-    name = "LB Instances"
-    slug = "a10deviceinstancesadmin"
-    permissions = ('openstack.services.network',)
+urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.scalinggroups.views",
+    url(r'^$', views.IndexView.as_view(), name='index'),
+)

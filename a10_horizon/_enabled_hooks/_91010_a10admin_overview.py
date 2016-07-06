@@ -1,5 +1,4 @@
-# Copyright 2015,  A10 Networks
-#
+# Copyright (C) 2016, A10 Networks Inc. All rights reserved.
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
 #    a copy of the License at
@@ -12,20 +11,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.utils.translation import ugettext_lazy as _
-
-from horizon import exceptions
-from horizon import tabs
-
-import a10_horizon.dashboard.project.a10networks.instances.tables as p_tables
-import a10_horizon.dashboard.api.a10devices as a10api
-
-
-TABLE_TEMPLATE = "horizon/common/_detail_table.html"
-DEFAULT_TEMPLATE = "horizon/common/_detail.html"
-
-
-class A10Tabs(tabs.TabGroup):
-    slug = "a10tabs"
-    tabs = tuple()
-    sticky = False
+PANEL = 'a10overview_admin'
+PANEL_DASHBOARD = 'admin'
+PANEL_GROUP = 'a10networks_admin'
+ADD_PANEL = 'a10_horizon.dashboard.admin.a10networks.panels.A10OverviewAdminPanel'
