@@ -17,8 +17,8 @@ from django.utils.translation import ugettext_lazy as _
 from horizon import tabs
 from horizon import workflows
 
-import a10_horizon.dashboard.project.instances.tabs as p_tabs
-import a10_horizon.dashboard.project.instances.workflows as p_workflows
+import a10_horizon.dashboard.project.a10networks.instances.tabs as p_tabs
+import a10_horizon.dashboard.project.a10networks.instances.workflows as p_workflows
 
 
 class IndexView(tabs.TabbedTableView):

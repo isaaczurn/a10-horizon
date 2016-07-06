@@ -9,10 +9,8 @@ LOG = logging.getLogger(__name__)
 
 
 class NeutronExtensionPanelBase(horizon.Panel):
-
     """Name of Neutron extension(s) that enables the panel.
     """
-
     REQUIRED_EXTENSIONS = []
 
     def allowed(self, context):
@@ -37,8 +35,10 @@ class NeutronExtensionPanelBase(horizon.Panel):
                     return True
 
             except Exception as ex:
-                LOG.error("There was a problem retrieving the extension list.  See exception for details.")
+                LOG.error("There was a problem retrieving the extension list."
+                          "See exception for details.")
                 LOG.exception(ex)
-
-        # If we got this far without returning anything, something is wrong. No display.
-        return True
+            return False
+        # explicit else - we'd fall through to this.
+        else:
+            return True

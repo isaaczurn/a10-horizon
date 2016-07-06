@@ -1,4 +1,4 @@
-# Copyright 2015,  A10 Networks
+# Copyright (C) 2016, A10 Networks Inc. All rights reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -12,19 +12,24 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import logging
-
+from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
-from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
+from horizon import exceptions
+from horizon import forms
+from horizon.utils import memoized
+from horizon import messages
+from horizon import tabs
+from horizon import views
+from horizon import workflows
 
+import logging
+
+
+import re
 
 LOG = logging.getLogger(__name__)
 
-import pdb; pdb.set_trace()
-class A10Appliances(NeutronExtensionPanelBase):
-    REQUIRED_EXTENSIONS = ["a10-device-instance"]
 
-    name = unicode(_("LB Appliances"))
-    slug = "a10appliances"
-    permissions = ('openstack.services.network',)
+class IndexView(views.HorizonTemplateView):
+    pass

@@ -16,7 +16,7 @@
 from django.conf.urls import patterns
 from django.conf.urls import url
 
-from a10_horizon.dashboard.project.instances import views
+from a10_horizon.dashboard.project.a10networks.instances import views
 
 
 urlpatterns = patterns(

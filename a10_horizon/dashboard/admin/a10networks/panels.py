@@ -1,4 +1,5 @@
-# Copyright (C) 2016, A10 Networks Inc. All rights reserved.
+# Copyright 2015,  A10 Networks
+#
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
 #    a copy of the License at
@@ -11,7 +12,18 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-PANEL_GROUP = 'a10networks_admin'
-PANEL_GROUP_NAME = 'A10 Networks'
-PANEL_DASHBOARD = "admin"
-PANEL_GROUP_DASHBOARD = PANEL_DASHBOARD
+import logging
+
+from django.utils.translation import ugettext_lazy as _
+
+from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
+
+
+LOG = logging.getLogger(__name__)
+
+class A10DeviceInstancesAdmin(NeutronExtensionPanelBase):
+    # REQUIRED_EXTENSIONS = ["a10-device-instance"]
+
+    name = "LB Appliances"
+    slug = "a10deviceinstances_admin"
+    permissions = ('openstack.services.network',)

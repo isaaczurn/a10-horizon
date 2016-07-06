@@ -11,15 +11,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-
-# The slug of the panel to be added to HORIZON_CONFIG. Required.
-PANEL = 'a10appliances'
-# The slug of the dashboard the PANEL associated with. Required.
+PANEL = 'a10deviceinstances'
 PANEL_DASHBOARD = 'project'
-# The slug of the panel group the PANEL is associated with.
-PANEL_GROUP = 'a10networks'
-
-# Python panel class of the PANEL to be added.
-ADD_PANEL = 'a10_horizon.dashboard.project.instances.panel.A10DeviceInstances'
-ADD_INSTALLED_APPS = ['a10_horizon.dashboard.project.instances']
-AUTO_DISCOVER_STATIC_FILES = True
+PANEL_GROUP = 'a10networks_project'
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.project.a10networks.instances']
+ADD_PANEL = 'a10_horizon.dashboard.project.a10networks.instances.panels.A10DeviceInstances'

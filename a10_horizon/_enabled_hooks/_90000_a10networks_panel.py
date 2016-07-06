@@ -16,18 +16,7 @@ from django.utils.translation import ugettext_lazy as _
 from openstack_dashboard.local import local_settings
 import a10_horizon
 
-
-# The slug of the panel group to be added to HORIZON_CONFIG. Required.
-PANEL_GROUP = 'a10networks'
-
-# The slug of the dashboard the PANEL_GROUP associated with. Required.
-PANEL_GROUP_DASHBOARD = 'project'
-
-# The display name of the PANEL_GROUP. Required.
-PANEL_GROUP_NAME = _('A10 Networks')
-
-AUTO_DISCOVER_STATIC_FILES = True
-ADD_INSTALLED_APPS = ['a10_horizon.dashboard.project.a10networks']
-
-STATIC_URL = "/a10static/"
-STATICFILES_DIR = "{0}/dashboard/project/a10networks{1}".format(a10_horizon.__path__[0], STATIC_URL)
+PANEL_GROUP = 'a10networks_project'
+PANEL_GROUP_NAME = 'A10 Networks'
+PANEL_DASHBOARD = "project"
+PANEL_GROUP_DASHBOARD = PANEL_DASHBOARD
