@@ -25,10 +25,10 @@ LOG = logging.getLogger(__name__)
 DEFAULT_PERMISSIONS = ('openstack.services.network',)
 
 
-class A10DeviceInstancesAdmin(NeutronExtensionPanelBase):
+class A10DeviceInstancesAdminPanel(NeutronExtensionPanelBase):
     # REQUIRED_EXTENSIONS = ["a10-device-instance"]
 
-    name = "LB Appliances"
+    name = "LB Device Instances"
     slug = "a10deviceinstances_admin"
     permissions = DEFAULT_PERMISSIONS
 
