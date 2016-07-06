@@ -26,5 +26,5 @@ import views
 
 
 urlpatterns = patterns("",
-    url(r'^admin/a10networks/', views.IndexView.as_view(), name='index'),
+    url(r'^/', views.IndexView.as_view(), name='index'),
 )

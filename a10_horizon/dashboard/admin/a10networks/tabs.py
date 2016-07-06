@@ -1,4 +1,4 @@
-# Copyright (C) 2016, A10 Networks Inc. All rights reserved.
+# Copyright 2015,  A10 Networks
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -12,23 +12,23 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 from horizon import exceptions
-from horizon import forms
-from horizon.utils import memoized
-from horizon import messages
 from horizon import tabs
-from horizon import views
-from horizon import workflows
 
-import logging
-
-import re
-
-LOG = logging.getLogger(__name__)
+import a10_horizon.dashboard.project.a10networks.instances.tables as p_tables
+import a10_horizon.dashboard.api.a10devices as a10api
 
 
-class IndexView(views.HorizonTemplateView):
-    template_name = "horizon/common/_detail.html"
+class A10DeviceInstanceTab(tabs.TableTab):
+    table_classes = tuple()
+    name = _("A10 LB Instances")
+    slug = "a10deviceinstanceadmin_tab"
+    template_name = "horizon/common/_detail_table.html"
+
+
+class A10Tabs(tabs.TabGroup):
+    slug = "a10tabs"
+    tabs = (A10AppliancesTab, )
+    sticky = True
