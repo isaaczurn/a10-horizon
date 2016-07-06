@@ -22,7 +22,14 @@ from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
 LOG = logging.getLogger(__name__)
 
 # TODO(mdurrant) Move these in to a single module for easy reference/update
-DEFAULT_PERMISSIONS = ('openstack.services.network',)
+ADMIN_PERMISSIONS = ('openstack.services.network',)
+
+
+class A10OverviewPanel(NeutronExtensionPanelBase):
+
+    name = "Overview"
+    slug = "a10overview_admin"
+    permissions = ADMIN_PERMISSIONS
 
 
 class A10DeviceInstancesAdminPanel(NeutronExtensionPanelBase):
@@ -30,7 +37,7 @@ class A10DeviceInstancesAdminPanel(NeutronExtensionPanelBase):
 
     name = "LB Device Instances"
     slug = "a10deviceinstances_admin"
-    permissions = DEFAULT_PERMISSIONS
+    permissions = ADMIN_PERMISSIONS
 
 
 class A10VipsAdminPanel(NeutronExtensionPanelBase):
@@ -38,11 +45,11 @@ class A10VipsAdminPanel(NeutronExtensionPanelBase):
 
     name = "VIPs"
     slug = "a10vips_admin"
-    permissions = DEFAULT_PERMISSIONS
+    permissions = ADMIN_PERMISSIONS
 
 
 class A10ScalingGroupsAdminPanel(NeutronExtensionPanelBase):
 
     name = "Scaling Groups"
     slug = "a10scalinggroups_admin"
-    permissions = DEFAULT_PERMISSIONS
+    permissions = ADMIN_PERMISSIONS
