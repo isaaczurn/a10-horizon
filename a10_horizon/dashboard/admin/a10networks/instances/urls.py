@@ -21,6 +21,6 @@ from django.conf.urls import static
 import a10_horizon
 import views
 
-urlpatterns = patterns("",
-    url(r'^admin/a10networks/', views.IndexView.as_view(), name='index'),
+urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.instances.views",
+    url(r'a10deviceinstances$', views.IndexView.as_view(), name='index'),
 )

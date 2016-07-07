@@ -28,7 +28,7 @@ ADMIN_PERMISSIONS = ('openstack.services.network',)
 class A10OverviewAdminPanel(NeutronExtensionPanelBase):
 
     name = "Overview"
-    slug = "a10overview_admin"
+    slug = "a10overview"
     permissions = ADMIN_PERMISSIONS
 
 
@@ -36,7 +36,7 @@ class A10DeviceInstancesAdminPanel(NeutronExtensionPanelBase):
     # REQUIRED_EXTENSIONS = ["a10-device-instance"]
 
     name = "LB Device Instances"
-    slug = "a10deviceinstances_admin"
+    slug = "a10deviceinstances"
     permissions = ADMIN_PERMISSIONS
 
 
@@ -44,12 +44,12 @@ class A10VipsAdminPanel(NeutronExtensionPanelBase):
     # REQUIRED_EXTENSIOSN = ["a10-scaling-groups"]
 
     name = "VIPs"
-    slug = "a10vips_admin"
+    slug = "a10vips"
     permissions = ADMIN_PERMISSIONS
 
 
 class A10ScalingGroupsAdminPanel(NeutronExtensionPanelBase):
 
     name = "Scaling Groups"
-    slug = "a10scalinggroups_admin"
+    slug = "a10scalinggroups"
     permissions = ADMIN_PERMISSIONS
