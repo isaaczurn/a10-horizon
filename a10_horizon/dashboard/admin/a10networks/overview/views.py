@@ -36,3 +36,4 @@ LOG = logging.getLogger(__name__)
 class IndexView(tabs.TabView):
     template_name = "horizon/common/_detail.html"
     tab_group_class = p_tabs.OverviewAdminTabs
+    page_title = "SLB Overview"

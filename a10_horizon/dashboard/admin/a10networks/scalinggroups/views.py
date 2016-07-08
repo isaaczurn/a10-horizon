@@ -35,3 +35,4 @@ LOG = logging.getLogger(__name__)
 class IndexView(tabs.TabView):
     template_name = "horizon/common/_detail.html"
     tab_group_class = p_tabs.ScalingGroupAdminTabs
+    page_title = "Scaling Groups Overview"

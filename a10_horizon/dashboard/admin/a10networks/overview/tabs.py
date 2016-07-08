@@ -45,7 +45,7 @@ class OverviewAdminTabs(tabs.TabGroup):
     slug = "overviewadmintabs"
     template_name = "horizon/common/_tab_group.html"
     sticky = False
-    show_single_tab = False
+    show_single_tab = True
     tabs = (OverviewAdminTableTab,)
 
 class OverviewAdminTabView(tabs.TabView):

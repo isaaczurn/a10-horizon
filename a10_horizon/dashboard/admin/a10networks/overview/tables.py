@@ -31,9 +31,6 @@ class OverviewAdminTable(tables.DataTable):
 
     class Meta(object):
         name = "overviewadmintable"
-        verbose_name = _("A10 Device Instances")
+        verbose_name = _("SLB Overview")
         table_actions = ()
         row_actions = ()
-
-    def get_overviewadmintable_data(self):
-        return []

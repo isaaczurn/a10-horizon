@@ -23,7 +23,7 @@ import a10_horizon.dashboard.api.a10devices as a10api
 
 class DeviceInstanceAdminTab(tabs.TableTab):
     table_classes = (p_tables.A10ApplianceTable,)
-    name = _("A10 Device Instances")
+    name = _("LB Device Instances")
     slug = "deviceinstanceadmin_tab"
     template_name = "horizon/common/_detail_table.html"
     preload = False
