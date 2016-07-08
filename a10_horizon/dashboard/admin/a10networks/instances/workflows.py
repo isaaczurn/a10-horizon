@@ -1,4 +1,4 @@
-# Copyright (C) 2016, A10 Networks Inc. All rights reserved.
+# Copyright (C) 2014-2016, A10 Networks Inc. All rights reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -12,17 +12,15 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.conf.urls import url
-from django.conf.urls import include
-from django.conf.urls import patterns
-from django.conf import settings
-from django.conf.urls import static
+import logging
+import uuid
 
-import a10_horizon
-import views
+from django.utils.translation import ugettext_lazy as _
 
-# app_name = "a10deviceinstances"
-urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.instances.views",
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    # url(r'^delete$', views.DeleteApplianceView.as_view(), name='deleteappliance')
-)
+import horizon.forms as forms
+import horizon.tables as tables
+import horizon.workflows as workflows
+
+from a10_horizon.dashboard.api import deviceinstances
+
+

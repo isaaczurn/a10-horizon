@@ -25,7 +25,9 @@ from horizon import workflows
 import logging
 import re
 
+import a10_horizon.dashboard.api.deviceinstances as a10api
 import tabs as p_tabs
+
 
 LOG = logging.getLogger(__name__)
 
@@ -34,3 +36,26 @@ class IndexView(tabs.TabView):
     template_name = "horizon/common/_detail.html"
     tab_group_class = p_tabs.DeviceInstanceAdminTabs
     page_title = "LB Device Instance Overview"
+
+
+    def post(self, request, *args, **kwargs):
+        obj_ids = request.POST.getlist('object_ids')
+        action = request.POST['action']
+
+        # m = re.search('.delete([a-z]+)', action).group(1)
+        if obj_ids == []:
+            obj_ids.append(re.search('([0-9a-z-]+)$', action).group(1))
+
+        delete_action = a10api.delete_a10_device_instance
+        for obj_id in obj_ids:
+            success_msg = "Deleted {0} {1}".format("Instance", obj_id)
+            failure_msg = "Unable to delete {0} {1}".format("Instance", obj_id)
+
+            try:
+                delete_action(request, obj_id)
+                messages.success(request, success_msg)
+            except Exception as ex:
+                exceptions.handle(request, failure_msg)
+                LOG.exception(ex)
+
+        return self.get(request, *args, **kwargs)

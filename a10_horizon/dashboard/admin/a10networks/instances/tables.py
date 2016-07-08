@@ -21,30 +21,25 @@ from django.utils.translation import ungettext_lazy
 
 from horizon import tables
 
+import a10_horizon.dashboard.api.deviceinstances as a10api
 
 LOG = logging.getLogger(__name__)
 
-
-class MigrateDeviceInstanceAction(tables.LinkAction):
-    name = "migratedeviceinstance"
-    verbose_name = _("Migrate...")
-    url = "horizon:project:a10appliances:addappliance"
-    icon = "plus"
-    classes = ("ajax-modal",)
+URL_PREFIX = "horizon:admin:a10instances:"
 
 
-class TerminateDeviceInstanceAction(tables.Action):
+class TerminateDeviceInstanceAction(tables.DeleteAction):
     name = "terminatedeviceinstance"
-    verbose_name = _("Terminate Device Instance")
-    url = "horizon:admin:a10networks:instances:deleteinstance"
+    verbose_name = _("TTerminate Device Instance")
     icon = "minus"
-    classes = ("ajax-modal", )
+    # classes = ("ajax-modal", )
+    # policy_rules = ()
 
     @staticmethod
     def action_present(count):
         return ungettext_lazy(
-            u"Terminate Device Instance",
-            u"Terminate Device Instance",
+            u"TTerminate Device Instance",
+            u"Terminate Device Instances",
             count
         )
 
@@ -52,17 +47,33 @@ class TerminateDeviceInstanceAction(tables.Action):
     def action_past(count):
         return ungettext_lazy(
             u"Scheduled deletion of A10 Device Instance",
-            u"Scheduled deletion of A10 Device Instance",
+            u"Scheduled deletion of A10 Device Instances",
             count
         )
 
-    def handle(self, data_table, request, object_ids):
-        for obj_id in object_ids:
-            instance_id = data_table.get_object_by_id(obj_id)["nova_instance_id"]
+    def handle(self, request, obj_ids):
+        import pdb; pdb.set_trace()
+        pass
+
+    def delete(self, request, obj_id):
+        import pdb; pdb.set_trace()
+        try:
             a10api.delete_a10_appliance(request, obj_id)
-            imgr = instance_manager_for(request)
-            imgr.delete_instance(instance_id)
-            # super(DeleteApplianceAction, self).handle(data_table, request, object_ids)
+        except Exception as ex:
+            msg = _("Failed to delete scaling policy")
+            LOG.exception(ex)
+            exceptions.handle(request, msg, redirect="http://google.com")
+
+    def allowed(self, request, obj):
+        return True
+
+
+class MigrateDeviceInstanceAction(tables.LinkAction):
+    name = "migratedeviceinstance"
+    verbose_name = _("Migrate")
+    url = "horizon:project:a10appliances:addappliance"
+    icon = "plus"
+    classes = ("ajax-modal",)
 
 
 class DeviceInstanceAdminTable(tables.DataTable):
@@ -77,3 +88,4 @@ class DeviceInstanceAdminTable(tables.DataTable):
         verbose_name = _("Device Instances")
         table_actions = (TerminateDeviceInstanceAction,)
         row_actions = (TerminateDeviceInstanceAction,)
+

@@ -17,11 +17,33 @@ from django.utils.translation import ugettext_lazy as _
 from horizon import tabs
 from horizon import workflows
 
-import a10_horizon.dashboard.project.a10networks.instances.tabs as p_tabs
-import a10_horizon.dashboard.project.a10networks.instances.workflows as p_workflows
+import tabs as p_tabs
+import workflows as p_workflows
+
+import a10_horizon.dashboard.api.deviceinstances as a10api
 
 
 class IndexView(tabs.TabbedTableView):
     tab_group_class = p_tabs.A10Tabs
     template_name = "appliances_tabs.html"
 
+    def post(self, request, *args, **kwargs):
+        obj_ids = request.POST.getlist('object_ids')
+        action = request.POST['action']
+        m = re.search('.delete([a-z]+)', action).group(1)
+        if obj_ids == []:
+            obj_ids.append(re.search('([0-9a-z-]+)$', action).group(1))
+
+        delete_action = a10api.delete_a10_appliance
+        for obj_id in obj_ids:
+            success_msg = "Deleted {0} {1}".format("Instance", obj_id)
+            failure_msg = "Unable to delete {0} {1}".format("Instance", obj_id)
+
+            try:
+                delete_action(request, obj_id)
+                messages.success(request, success_msg)
+            except Exception as ex:
+                exceptions.handle(request, failure_msg)
+                LOG.exception(ex)
+
+        return self.get(request, *args, **kwargs)

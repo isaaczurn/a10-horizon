@@ -39,8 +39,8 @@ def get_a10_device_instances(request, id, **params):
     return A10Appliance(rv)
 
 
-def delete_a10_device_instances(request, id):
-    neutronclient(request).delete_a10_device_instances(id)
+def delete_a10_device_instance(request, id):
+    neutronclient(request).delete_a10_device_instance(id)
 
 
 def create_a10_device_instance(request, **kwargs):
