@@ -1,4 +1,6 @@
-# Copyright (C) 2016, A10 Networks Inc. All rights reserved.
+
+# Copyright (C) 2014-2016, A10 Networks Inc. All rights reserved.
+#
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
 #    a copy of the License at
@@ -11,8 +13,11 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-PANEL = 'a10scalinggroups_admin'
-PANEL_DASHBOARD = 'admin'
-PANEL_GROUP = 'a10networks_admin'
-ADD_PANEL = 'a10_horizon.dashboard.admin.a10networks.scalinggroups.panel.A10ScalingGroupsAdminPanel'
-ADD_INSTALLED_APPS = ['a10_horizon.dashboard.admin.a10networks.scalinggroups']
+from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
+
+
+class A10OverviewAdminPanel(NeutronExtensionPanelBase):
+
+    name = "Overview"
+    slug = "a10overview_admin"
+    permissions = ('openstack.services.network',)

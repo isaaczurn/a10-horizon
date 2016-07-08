@@ -14,4 +14,5 @@
 PANEL = 'a10vips_admin'
 PANEL_DASHBOARD = 'admin'
 PANEL_GROUP = 'a10networks_admin'
-ADD_PANEL = 'a10_horizon.dashboard.admin.a10networks.panels.A10VipsAdminPanel'
+ADD_PANEL = 'a10_horizon.dashboard.admin.a10networks.vips.panel.A10VipsAdminPanel'
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.admin.a10networks.vips']

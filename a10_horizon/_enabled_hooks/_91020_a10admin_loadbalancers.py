@@ -14,4 +14,5 @@
 PANEL = 'a10deviceinstances'
 PANEL_DASHBOARD = 'admin'
 PANEL_GROUP = 'a10networks_admin'
-ADD_PANEL = 'a10_horizon.dashboard.admin.a10networks.panels.A10DeviceInstancesAdminPanel'
+ADD_PANEL = 'a10_horizon.dashboard.admin.a10networks.instances.panel.A10DeviceInstancesAdminPanel'
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.admin.a10networks.instances']
