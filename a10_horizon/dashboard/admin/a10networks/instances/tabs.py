@@ -17,18 +17,18 @@ from django.utils.translation import ugettext_lazy as _
 from horizon import exceptions
 from horizon import tabs
 
-import a10_horizon.dashboard.project.a10networks.instances.tables as p_tables
+import tables as p_tables
 import a10_horizon.dashboard.api.a10devices as a10api
 
 
-class DeviceInstanceAdminTab(tabs.TableTab):
-    table_classes = (p_tables.A10ApplianceTable,)
+class DeviceInstanceAdminTableTab(tabs.TableTab):
+    table_classes = (p_tables.DeviceInstanceAdminTable,)
     name = _("LB Device Instances")
     slug = "deviceinstanceadmin_tab"
     template_name = "horizon/common/_detail_table.html"
     preload = False
 
-    def get_a10appliancestable_data(self):
+    def get_deviceinstanceadmintable_data(self):
         result = []
 
         try:
@@ -45,12 +45,9 @@ class DeviceInstanceAdminTabs(tabs.TabGroup):
     template_name = "horizon/common/_tab_group.html"
     sticky = False
     show_single_tab = True
-    tabs = (DeviceInstanceAdminTab,)
+    tabs = (DeviceInstanceAdminTableTab,)
 
 
 class DeviceInstanceTabView(tabs.TabView):
     tab_group_class = DeviceInstanceAdminTabs
     template_name = "horizon/common/_detail.html"
-
-
-

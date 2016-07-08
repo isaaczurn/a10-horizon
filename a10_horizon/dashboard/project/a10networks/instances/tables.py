@@ -34,7 +34,7 @@ def instance_manager_for(request):
 
 class AddApplianceAction(tables.LinkAction):
     name = "addappliance"
-    verbose_name = _("Create Asegfsergfsergsegstregserppliance")
+    verbose_name = _("Create Appliance")
     url = "horizon:project:a10appliances:addappliance"
     icon = "plus"
     classes = ("ajax-modal",)
