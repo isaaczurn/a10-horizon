@@ -21,8 +21,36 @@ import a10_horizon.dashboard.project.a10networks.instances.tables as p_tables
 import a10_horizon.dashboard.api.a10devices as a10api
 
 
-class InstanceTabs(tabs.TabGroup):
+class DeviceInstanceAdminTab(tabs.TableTab):
+    table_classes = (p_tables.A10ApplianceTable,)
+    name = _("A10 Device Instances")
+    slug = "deviceinstanceadmin_tab"
+    template_name = "horizon/common/_detail_table.html"
+    preload = False
+
+    def get_a10appliancestable_data(self):
+        result = []
+
+        try:
+            result = a10api.get_a10_appliances(self.request)
+        except Exception:
+            result = []
+            exceptions.handle(self.tab_group.request,
+                              _('Unable to retrieve appliance list.'))
+        return result
+
+
+class DeviceInstanceAdminTabs(tabs.TabGroup):
     slug = "instancetabs"
     template_name = "horizon/common/_tab_group.html"
     sticky = False
-    show_single_tab = False
+    show_single_tab = True
+    tabs = (DeviceInstanceAdminTab,)
+
+
+class DeviceInstanceTabView(tabs.TabView):
+    tab_group_class = DeviceInstanceAdminTabs
+    template_name = "horizon/common/_detail.html"
+
+
+

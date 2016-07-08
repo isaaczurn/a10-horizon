@@ -28,9 +28,10 @@ from vips import urls as vip_urls
 
 
 urlpatterns = patterns("",
-    url(r'', views.IndexView.as_view(), name='index'),
-    url(r'^a10overview/', include(overview_urls, "a10admin", "overview")),
-    url(r'^a10vips/', include(vip_urls, "a10admin", "vips")),
-    url(r'^a10deviceinstances/', include(instance_urls, "a10admin", "instances")),
-    url(r'^a10scalinggroups/', include(sg_urls, "a10admin", "scalinggroups")),
+    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^a10overview/', include(overview_urls, namespace="a10overview")),
+    url(r'^a10vips/', include(vip_urls, namespace="a10vips")),
+    url(r'^a10deviceinstances/', include(instance_urls, namespace="a10deviceinstances")),
+    url(r'^a10scalinggroups/', include(sg_urls, namespace="a10scalinggroups")),
+    # app_namespace="admin"
 )

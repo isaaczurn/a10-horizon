@@ -21,23 +21,16 @@ import tables as p_tables
 import a10_horizon.dashboard.api.a10devices as a10api
 
 
-class VipTabs(tabs.TabGroup):
-    slug = "viptabs"
-    template_name = "horizon/common/_tab_group.html"
-    sticky = False
-    show_single_tab = False
-
-
-class VipTableTab(tabs.TableTab):
+class VipAdminTableTab(tabs.TableTab):
     table_classes = (p_tables.VipTable,)
     name = _("VIPs")
     slug = "vipadmintable"
     template_name = "horizon/common/_detail_table.html"
     preload = False
 
-    def get_vipadmintable_data(self):
+    def get_viptable_data(self):
         try:
-            pass
+            rv = []
             # Return all VIPs, ordered by tenant.
         except Exception as ex:
             rv = []
@@ -46,3 +39,14 @@ class VipTableTab(tabs.TableTab):
             exceptions.handle(self.tab_group.request, errmsg)
 
         return rv
+
+class VipAdminTabs(tabs.TabGroup):
+    slug = "viptabs"
+    template_name = "horizon/common/_tab_group.html"
+    sticky = False
+    show_single_tab = True
+    tabs = (VipAdminTableTab, )
+
+
+class VipTabView(tabs.TabView):
+    tab_group_class = VipAdminTabs

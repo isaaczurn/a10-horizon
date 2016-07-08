@@ -29,3 +29,4 @@ class A10Tabs(tabs.TabGroup):
     slug = "a10tabs"
     tabs = tuple()
     sticky = False
+    show_single_tab = True

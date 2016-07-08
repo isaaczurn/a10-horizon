@@ -37,3 +37,6 @@ class VipTable(tables.DataTable):
         verbose_name = "viptable"
         table_actions = ()
         row_actions = ()
+
+    def get_viptable_data(self):
+        return []

@@ -22,13 +22,14 @@ from horizon import messages
 from horizon import tabs
 from horizon import views
 from horizon import workflows
-
 import logging
-
 import re
+
+import tabs as p_tabs
 
 LOG = logging.getLogger(__name__)
 
 
-class IndexView(views.HorizonTemplateView):
+class IndexView(tabs.TabView):
     template_name = "horizon/common/_detail.html"
+    tab_group_class = p_tabs.DeviceInstanceAdminTabs

@@ -23,3 +23,17 @@ from horizon import tables
 
 
 LOG = logging.getLogger(__name__)
+
+
+class OverviewAdminTable(tables.DataTable):
+    id = tables.Column("id", verbose_name=_("ID"), hidden=True)
+    name = tables.Column("name", verbose_name=_("Hostname"), hidden=False)
+
+    class Meta(object):
+        name = "overviewadmintable"
+        verbose_name = _("A10 Device Instances")
+        table_actions = ()
+        row_actions = ()
+
+    def get_overviewadmintable_data(self):
+        return []

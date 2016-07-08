@@ -23,3 +23,18 @@ from horizon import tables
 
 
 LOG = logging.getLogger(__name__)
+
+
+class ScalingGroupAdminTable(tables.DataTable):
+    id = tables.Column("id", verbose_name=_("ID"), hidden=True)
+    ip_address = tables.Column("ip_address", verbose_name=_("IP Address"), hidden=True)
+    #
+    nova_instance_id = tables.Column("nova_instance_id", verbose_name=_("Nova Instance ID"),
+                                     hidden=False, )
+
+    class Meta(object):
+        name = "scalinggroupadmintable"
+        verbose_name = "scalinggroupadmintable"
+        table_actions = ()
+        row_actions = ()
+

@@ -21,6 +21,8 @@ from django.conf.urls import static
 import a10_horizon
 import views
 
+
+app_name = "a10vips"
 urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.vips.views",
     url(r'^$', views.IndexView.as_view(), name='index'),
 )

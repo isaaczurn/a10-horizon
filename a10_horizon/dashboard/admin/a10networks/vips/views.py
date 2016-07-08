@@ -33,4 +33,4 @@ LOG = logging.getLogger(__name__)
 
 class IndexView(tabs.TabView):
     template_name = "horizon/common/_detail.html"
-    tab_group = p_tabs.VipTabs
+    tab_group_class = p_tabs.VipAdminTabs

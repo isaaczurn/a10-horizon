@@ -23,3 +23,20 @@ from horizon import tables
 
 
 LOG = logging.getLogger(__name__)
+
+
+class DeviceInstanceAdminTable(tables.DataTable):
+    id = tables.Column("id", verbose_name=_("ID"), hidden=True)
+    name = tables.Column("name", verbose_name=_("Hostname"), hidden=False, link=get_instance_detail)
+    ip = tables.Column("host", verbose_name="Management IP")
+    api_ver = tables.Column("api_version", verbose_name="API Version")
+    nova_instance_id = tables.Column("nova_instance_id", hidden=False, link=get_instance_detail)
+
+    class Meta(object):
+        name = "deviceinstanceadmintable"
+        verbose_name = _("Device Instances")
+        table_actions = ()
+        row_actions = ()
+
+    def get_a10admindeviceinstancetable_data(self):
+        return []

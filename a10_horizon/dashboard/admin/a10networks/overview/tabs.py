@@ -17,12 +17,36 @@ from django.utils.translation import ugettext_lazy as _
 from horizon import exceptions
 from horizon import tabs
 
-import a10_horizon.dashboard.project.a10networks.instances.tables as p_tables
+import tables as p_tables
 import a10_horizon.dashboard.api.a10devices as a10api
 
 
-class OverviewTabs(tabs.TabGroup):
-    slug = "overviewtabs"
+class OverviewAdminTableTab(tabs.TableTab):
+    table_classes = (p_tables.OverviewAdminTable,)
+    name = _("SLB Overview")
+    slug = "overviewadmintable"
+    template_name = "horizon/common/_detail_table.html"
+    preload = False
+
+    def get_overviewadmintable_data(self):
+        try:
+            rv = []
+            # Return all VIPs, ordered by tenant.
+        except Exception as ex:
+            rv = []
+            LOG.exception(ex)
+            errmsg = _("Unable to retrieve VIP list")
+            exceptions.handle(self.tab_group.request, errmsg)
+
+        return rv
+
+
+class OverviewAdminTabs(tabs.TabGroup):
+    slug = "overviewadmintabs"
     template_name = "horizon/common/_tab_group.html"
     sticky = False
     show_single_tab = False
+    tabs = (OverviewAdminTableTab,)
+
+class OverviewAdminTabView(tabs.TabView):
+    tab_group_class = OverviewAdminTabs

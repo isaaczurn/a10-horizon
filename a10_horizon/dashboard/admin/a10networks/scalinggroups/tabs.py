@@ -17,12 +17,38 @@ from django.utils.translation import ugettext_lazy as _
 from horizon import exceptions
 from horizon import tabs
 
-import a10_horizon.dashboard.project.a10networks.instances.tables as p_tables
+import tables as p_tables
 import a10_horizon.dashboard.api.a10devices as a10api
 
 
-class ScalingGroupTabs(tabs.TabGroup):
-    slug = "scalinggrouptabs"
+
+class ScalingGroupAdminTableTab(tabs.TableTab):
+    table_classes = (p_tables.ScalingGroupAdminTable,)
+    name = _("Scaling Groups")
+    slug = "scalinggroupadmintable"
+    template_name = "horizon/common/_detail_table.html"
+    preload = False
+
+    def get_scalinggroupadmintable_data(self):
+        try:
+            rv = []
+            # Return all VIPs, ordered by tenant.
+        except Exception as ex:
+            rv = []
+            LOG.exception(ex)
+            errmsg = _("Unable to retrieve VIP list")
+            exceptions.handle(self.tab_group.request, errmsg)
+
+        return rv
+
+
+class ScalingGroupAdminTabs(tabs.TabGroup):
+    slug = "scalinggroupadmintabs"
     template_name = "horizon/common/_tab_group.html"
     sticky = False
-    show_single_tab = False
+    show_single_tab = True
+    tabs = (ScalingGroupAdminTableTab, )
+
+
+class ScalingGroupTabView(tabs.TabView):
+    tab_group_class = ScalingGroupAdminTabs

@@ -1,4 +1,4 @@
-# Copyright 2015,  A10 Networks
+# Copyright 2014-2016,  A10 Networks
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -20,36 +20,3 @@ from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
 
 
 LOG = logging.getLogger(__name__)
-
-# TODO(mdurrant) Move these in to a single module for easy reference/update
-ADMIN_PERMISSIONS = ('openstack.services.network',)
-
-
-class A10OverviewAdminPanel(NeutronExtensionPanelBase):
-
-    name = "Overview"
-    slug = "a10overview"
-    permissions = ADMIN_PERMISSIONS
-
-
-class A10DeviceInstancesAdminPanel(NeutronExtensionPanelBase):
-    # REQUIRED_EXTENSIONS = ["a10-device-instance"]
-
-    name = "LB Device Instances"
-    slug = "a10deviceinstances"
-    permissions = ADMIN_PERMISSIONS
-
-
-class A10VipsAdminPanel(NeutronExtensionPanelBase):
-    # REQUIRED_EXTENSIOSN = ["a10-scaling-groups"]
-
-    name = "VIPs"
-    slug = "a10vips"
-    permissions = ADMIN_PERMISSIONS
-
-
-class A10ScalingGroupsAdminPanel(NeutronExtensionPanelBase):
-
-    name = "Scaling Groups"
-    slug = "a10scalinggroups"
-    permissions = ADMIN_PERMISSIONS
