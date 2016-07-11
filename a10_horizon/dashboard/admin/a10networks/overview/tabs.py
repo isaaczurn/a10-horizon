@@ -41,12 +41,19 @@ class OverviewAdminTableTab(tabs.TableTab):
         return rv
 
 
+class OverviewTopologyAdminTab(tabs.Tab):
+    name = _("SLB Topology")
+    slug = "overtopologyadmin_tab"
+    template_name = "horizon/common/_detail.html"
+
+
 class OverviewAdminTabs(tabs.TabGroup):
     slug = "overviewadmintabs"
     template_name = "horizon/common/_tab_group.html"
     sticky = False
     show_single_tab = True
-    tabs = (OverviewAdminTableTab,)
+    tabs = (OverviewAdminTableTab, OverviewTopologyAdminTab)
+
 
 class OverviewAdminTabView(tabs.TabView):
     tab_group_class = OverviewAdminTabs
