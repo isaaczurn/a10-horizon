@@ -1,4 +1,5 @@
-# Copyright (C) 2016, A10 Networks Inc. All rights reserved.
+# Copyright (C) 2014-2016, A10 Networks Inc. All rights reserved.
+#
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
 #    a copy of the License at
@@ -11,8 +12,13 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-PANEL = 'a10deviceinstances'
-PANEL_DASHBOARD = 'project'
-PANEL_GROUP = 'a10networks_project'
-ADD_PANEL = 'a10_horizon.dashboard.project.a10networks.instances.panels.A10DeviceInstances'
-AUTO_DISCOVER_STATIC_FILES = True
+from django.conf.urls import include
+from django.conf.urls import patterns
+from django.conf.urls import url
+
+import views
+
+urlpatterns = patterns(
+    'a10_horizon.dashboard.project.a10networks.overviews',
+    url(r'^$', views.IndexView.as_view(), name='index'),
+)

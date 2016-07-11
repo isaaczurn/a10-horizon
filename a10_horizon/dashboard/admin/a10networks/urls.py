@@ -26,12 +26,12 @@ from overview import urls as overview_urls
 from scalinggroups import urls as sg_urls
 from vips import urls as vip_urls
 
+APP_NAMESPACE = "a10admin"
 
 urlpatterns = patterns("",
     url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^a10overview/', include(overview_urls, namespace="a10overview")),
-    url(r'^a10vips/', include(vip_urls, namespace="a10vips")),
-    url(r'^a10deviceinstances/', include(instance_urls, namespace="a10deviceinstances")),
-    url(r'^a10scalinggroups/', include(sg_urls, namespace="a10scalinggroups")),
-    # app_namespace="admin"
+    url(r'^a10overview/', include(overview_urls, APP_NAMESPACE, "a10overview")),
+    url(r'^a10vips/', include(vip_urls, APP_NAMESPACE, "a10vips")),
+    url(r'^a10deviceinstances/', include(instance_urls, APP_NAMESPACE, "a10deviceinstances")),
+    url(r'^a10scalinggroups/', include(sg_urls, APP_NAMESPACE, "a10scalinggroups")),
 )

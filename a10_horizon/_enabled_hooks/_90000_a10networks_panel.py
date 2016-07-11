@@ -20,3 +20,5 @@ PANEL_GROUP = 'a10networks_project'
 PANEL_GROUP_NAME = 'A10 Networks'
 PANEL_DASHBOARD = "project"
 PANEL_GROUP_DASHBOARD = PANEL_DASHBOARD
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.project.a10networks']
+AUTO_DISCOVER_STATIC_FILES = True

@@ -25,7 +25,7 @@ import a10_horizon.dashboard.api.deviceinstances as a10api
 
 class IndexView(tabs.TabbedTableView):
     tab_group_class = p_tabs.A10Tabs
-    template_name = "appliances_tabs.html"
+    template_name = "instances/_tabs.html"
 
     def post(self, request, *args, **kwargs):
         obj_ids = request.POST.getlist('object_ids')
