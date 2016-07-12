@@ -11,7 +11,9 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-PANEL_GROUP = 'a10networks_admin'
+PANEL_GROUP = 'a10admin'
 PANEL_GROUP_NAME = 'A10 Networks'
 PANEL_DASHBOARD = "admin"
 PANEL_GROUP_DASHBOARD = PANEL_DASHBOARD
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.admin']
+AUTO_DISCOVER_STATIC_FILES = True

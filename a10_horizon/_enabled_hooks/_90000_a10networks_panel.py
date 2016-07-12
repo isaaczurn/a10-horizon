@@ -16,9 +16,9 @@ from django.utils.translation import ugettext_lazy as _
 from openstack_dashboard.local import local_settings
 import a10_horizon
 
-PANEL_GROUP = 'a10networks_project'
+PANEL_GROUP = 'a10networks'
 PANEL_GROUP_NAME = 'A10 Networks'
 PANEL_DASHBOARD = "project"
 PANEL_GROUP_DASHBOARD = PANEL_DASHBOARD
-ADD_INSTALLED_APPS = ['a10_horizon.dashboard.project.a10networks']
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.project']
 AUTO_DISCOVER_STATIC_FILES = True

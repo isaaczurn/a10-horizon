@@ -12,6 +12,6 @@
 #    under the License.
 
 PANEL = 'a10deviceinstances'
-PANEL_DASHBOARD = 'admin'
-PANEL_GROUP = 'a10admin'
-ADD_PANEL = 'a10_horizon.dashboard.admin.a10networks.instances.panel.A10DeviceInstancesAdminPanel'
+PANEL_DASHBOARD = 'project'
+PANEL_GROUP = 'a10networks'
+ADD_PANEL = 'a10_horizon.dashboard.project.a10networks.instances.panel.A10DeviceInstances'

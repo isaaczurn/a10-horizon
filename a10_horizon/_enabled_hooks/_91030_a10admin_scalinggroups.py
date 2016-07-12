@@ -11,8 +11,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-PANEL = 'a10scalinggroups_admin'
+PANEL = 'a10scalinggroups'
 PANEL_DASHBOARD = 'admin'
-PANEL_GROUP = 'a10networks_admin'
+PANEL_GROUP = 'a10admin'
 ADD_PANEL = 'a10_horizon.dashboard.admin.a10networks.scalinggroups.panel.A10ScalingGroupsAdminPanel'
-ADD_INSTALLED_APPS = ['a10_horizon.dashboard.admin.a10networks.scalinggroups']
