@@ -18,7 +18,7 @@ from horizon import exceptions
 from horizon import tabs
 
 import tables as p_tables
-import a10_horizon.dashboard.api.a10devices as a10api
+import a10_horizon.dashboard.api.deviceinstances as a10api
 
 
 class DeviceInstanceAdminTableTab(tabs.TableTab):
