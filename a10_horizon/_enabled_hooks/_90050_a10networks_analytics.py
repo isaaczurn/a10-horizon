@@ -1,5 +1,4 @@
 # Copyright (C) 2016, A10 Networks Inc. All rights reserved.
-#
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
 #    a copy of the License at
@@ -12,16 +11,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.conf.urls import url
-from django.conf.urls import include
-from django.conf.urls import patterns
-from django.conf import settings
-from django.conf.urls import static
-
-import a10_horizon
-import views
-
-
-urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.vips.views",
-    url(r'^$', views.IndexView.as_view(), name='index'),
-)
+PANEL = 'a10analytics'
+PANEL_DASHBOARD = 'project'
+PANEL_GROUP = 'a10networks'
+ADD_PANEL = 'a10_horizon.dashboard.project.a10networks.analytics.panel.AnalyticsPanel'

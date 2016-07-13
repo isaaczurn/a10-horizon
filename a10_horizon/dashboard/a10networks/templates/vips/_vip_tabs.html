@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}A10 VIPs Overview{% endblock %}
+
+{% block main %}
+{% include "logo.html" with logotitle="VIPs Overview"%}
+<div class="row">
+  <div class="col-sm-12">
+  {{ tab_group.render }}
+  </div>
+</div>
+
+{% endblock %}

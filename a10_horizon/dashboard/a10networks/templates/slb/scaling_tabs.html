@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load staticfiles %}
-{% block title %}A10 Scalable Load Balancing{% endblock %}
+
+{% block title %}
+  {{ page_title }}
+{% endblock %}
+{% load breadcrumb_nav %}
+{% block page_header %}
+  <div class='page-header'>
+    {% breadcrumb_nav %}
+  </div>
+{% endblock %}
 
 {% block main %}
-{% include "logo.html" with logotitle="Scalable Load Balancing"%}
-<div class="row">
-
-  <div class="col-sm-12">
-  {{ tab_group.render }}
+  {% include "logo.html" with logotitle="Scalable Load Balancing"%}
+  <div class="row">
+    <div class="col-sm-12">
+      {{ tab_group.render }}
+    </div>
   </div>
-
-</div>
-
 {% endblock %}

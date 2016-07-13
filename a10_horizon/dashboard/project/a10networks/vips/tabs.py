@@ -25,13 +25,11 @@ TABLE_TEMPLATE = "horizon/common/_detail_table.html"
 DEFAULT_TEMPLATE = "horizon/common/_detail.html"
 
 
-
-
 class VipsTab(tabs.TableTab):
     table_classes = (p_tables.VipTable,)
     name = _("VIPs")
     slug = "a10vipstab"
-    template_name = "vips/vip_tabs.html"
+    template_name = TABLE_TEMPLATE
     preload = False
 
     def get_viptable_data(self):

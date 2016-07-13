@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load staticfiles %}
 
-{% block title %}{% trans "A10 Load Balancing Device Instances"  %}{% endblock %}
+{% block title %}
+  {{ page_title }}
+{% endblock %}
+{% load breadcrumb_nav %}
+{% block page_header %}
+  <div class='page-header'>
+    {% breadcrumb_nav %}
+  </div>
+{% endblock %}
 
 {% block main %}
-{% include "logo.html" with logotitle="Load Balancer Device Instances"%}
-
-<div class="row">
-
-  <div class="col-sm-12">
-  {{ tab_group.render }}
+  {% include "logo.html" with logotitle="Load Balancer Device Instances"%}
+  <div class="row">
+    <div class="col-sm-12">
+      {{ tab_group.render }}
+    </div>
   </div>
-
-</div>
-
 {% endblock %}

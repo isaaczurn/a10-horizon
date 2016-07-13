@@ -1,4 +1,4 @@
-# Copyright (C) 2016, A10 Networks Inc. All rights reserved.
+# Copyright (C) 2014-2016, A10 Networks Inc. All rights reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -12,16 +12,11 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.conf.urls import url
-from django.conf.urls import include
-from django.conf.urls import patterns
-from django.conf import settings
-from django.conf.urls import static
-
-import a10_horizon
-import views
+from a10_horizon.dashboard.panel_base import NeutronExtensionPanelBase
 
 
-urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.vips.views",
-    url(r'^$', views.IndexView.as_view(), name='index'),
-)
+class AnalyticsPanel(NeutronExtensionPanelBase):
+
+    name = "Analytics"
+    slug = "a10analytics"
+    permissions = ('openstack.services.network',)

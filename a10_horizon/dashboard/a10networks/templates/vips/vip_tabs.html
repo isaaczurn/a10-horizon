@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load staticfiles %}
-{% block title %}{% trans "A10 VIPs Overview" %}{% endblock %}
+{% load breadcrumb_nav %}
+
+{% block title %}
+  {{ page_title }}
+{% endblock %}
+
+{% block page_header %}
+  <div class='page-header'>
+    {% breadcrumb_nav %}
+  </div>
+{% endblock %}
 
 {% block main %}
-{% include "logo.html" with logotitle="VIPs Overview"%}
-<div class="row">
-
-  <div class="col-sm-12">
-  {{ tab_group.render }}
+  {% include "logo.html" with logotitle="VIPs"%}
+  <div class="row">
+    <div class="col-sm-12">
+      {{ tab_group.render }}
+    </div>
   </div>
-
-</div>
-
 {% endblock %}

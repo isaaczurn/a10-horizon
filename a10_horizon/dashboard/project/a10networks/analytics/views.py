@@ -12,16 +12,24 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.conf.urls import url
-from django.conf.urls import include
-from django.conf.urls import patterns
-from django.conf import settings
-from django.conf.urls import static
+from django.core.urlresolvers import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 
-import a10_horizon
-import views
+from horizon import exceptions
+from horizon import forms
+from horizon.utils import memoized
+from horizon import messages
+from horizon import tabs
+from horizon import views
+from horizon import workflows
+
+import logging
 
 
-urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.vips.views",
-    url(r'^$', views.IndexView.as_view(), name='index'),
-)
+import re
+
+LOG = logging.getLogger(__name__)
+
+
+class IndexView(views.HorizonTemplateView):
+    template_name = "analytics/analytics_tabs.html"
