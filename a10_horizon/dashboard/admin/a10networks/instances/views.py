@@ -33,9 +33,9 @@ LOG = logging.getLogger(__name__)
 
 
 class IndexView(tabs.TabView):
-    template_name = "horizon/common/_detail.html"
+    template_name = "instances/_tabs.html"
     tab_group_class = p_tabs.DeviceInstanceAdminTabs
-    page_title = "LB Device Instance Overview"
+    page_title = ""
 
 
     def post(self, request, *args, **kwargs):

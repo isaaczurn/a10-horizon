@@ -45,7 +45,7 @@ URL_PREFIX = "horizon:project:a10scaling:"
 
 class IndexView(tabs.TabView):
     tab_group_class = (project_tabs.A10ScalingTabs)
-    template_name = 'scaling_tabs.html'
+    template_name = 'slb/scaling_tabs.html'
     form_url = reverse_lazy(URL_PREFIX + "index")
 
     delete_actions = {

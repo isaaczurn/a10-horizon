@@ -2,7 +2,7 @@
 from django.conf.urls import patterns
 from django.conf.urls import url
 
-from a10_horizon.dashboard.a10networks.a10scaling import views
+from a10_horizon.dashboard.project.a10networks.slb import views
 
 # TODO(mdurrant): Create urls from cross product of nouns/verbs...itertools.product?
 urlpatterns = patterns("a10_horizon.dashboard.a10networks.a10scaling.views",

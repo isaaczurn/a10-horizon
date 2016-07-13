@@ -21,7 +21,7 @@ LOG = logging.getLogger(__name__)
 
 class A10ScalingPanel(NeutronExtensionPanelBase):
 
-    REQUIRED_EXTENSIONS = ["a10-scaling-group"]
+    # REQUIRED_EXTENSIONS = ["a10-scaling-group"]
 
     name = _("LB Scaling")
     slug = "a10scaling"

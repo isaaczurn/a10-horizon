@@ -12,9 +12,8 @@ from horizon import tables
 from horizon import workflows
 
 # a10_horizon.dashboard.api.client.Client extends neutron.api.client.Client
-from a10_neutronclient.resources import a10_scaling_group as scaling_resources
 from a10_horizon.dashboard.api import scaling as api
-
+from a10_openstack_lib.resources import a10_scaling_group as scaling_resources
 
 LOG = logging.getLogger(__name__)
 

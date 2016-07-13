@@ -12,28 +12,17 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.core.urlresolvers import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.conf.urls import url
+from django.conf.urls import include
+from django.conf.urls import patterns
+from django.conf import settings
+from django.conf.urls import static
 
-import logging
-
-import re
-
-from horizon import exceptions
-from horizon import forms
-from horizon.utils import memoized
-from horizon import messages
-from horizon import tabs
-from horizon import views
-from horizon import workflows
-
-import tabs as p_tabs
+import a10_horizon
+import views
 
 
-LOG = logging.getLogger(__name__)
-
-
-class IndexView(views.HorizonTemplateView):
-    template_name = "overview/overview_tabs.html"
-    tab_group_class = p_tabs.OverviewAdminTabs
-    page_title = ""
+app_name = "a10vips"
+urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.vips.views",
+    url(r'^$', views.IndexView.as_view(), name='index'),
+)

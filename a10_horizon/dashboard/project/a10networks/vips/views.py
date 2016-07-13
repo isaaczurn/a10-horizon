@@ -15,10 +15,6 @@
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
-import logging
-
-import re
-
 from horizon import exceptions
 from horizon import forms
 from horizon.utils import memoized
@@ -27,13 +23,15 @@ from horizon import tabs
 from horizon import views
 from horizon import workflows
 
-import tabs as p_tabs
+import logging
 
+import tabs as p_tabs
+import re
 
 LOG = logging.getLogger(__name__)
 
 
-class IndexView(views.HorizonTemplateView):
-    template_name = "overview/overview_tabs.html"
-    tab_group_class = p_tabs.OverviewAdminTabs
-    page_title = ""
+class IndexView(tabs.TabView):
+    template_name = "vips/vip_tabs.html"
+    tab_group_class = p_tabs.VipTabs
+    page_title = "VIPs"

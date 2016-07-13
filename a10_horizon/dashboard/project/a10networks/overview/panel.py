@@ -21,8 +21,8 @@ LOG = logging.getLogger(__name__)
 
 class A10OverviewPanel(NeutronExtensionPanelBase):
 
-    # REQUIRED_EXTENSIONS = ["a10-scaling-group"]
+    REQUIRED_EXTENSIONS = ["a10-scaling-group"]
 
     name = _("SLB Overview")
-    slug = "a10scaling"
+    slug = "a10overview"
     permissions = ("openstack.services.network", )

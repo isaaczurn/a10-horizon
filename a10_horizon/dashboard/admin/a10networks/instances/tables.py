@@ -52,11 +52,9 @@ class TerminateDeviceInstanceAction(tables.DeleteAction):
         )
 
     def handle(self, request, obj_ids):
-        import pdb; pdb.set_trace()
         pass
 
     def delete(self, request, obj_id):
-        import pdb; pdb.set_trace()
         try:
             a10api.delete_a10_appliance(request, obj_id)
         except Exception as ex:
