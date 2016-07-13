@@ -11,7 +11,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-PANEL = 'a10overview'
+PANEL = 'a10vips'
 PANEL_DASHBOARD = 'project'
 PANEL_GROUP = 'a10networks'
-ADD_PANEL = 'a10_horizon.dashboard.project.a10networks.overview.panel.A10OverviewPanel'
+ADD_PANEL = 'a10_horizon.dashboard.project.a10networks.vips.panel.A10VipPanel'

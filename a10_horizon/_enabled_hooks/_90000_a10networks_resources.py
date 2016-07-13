@@ -11,7 +11,10 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-PANEL = 'a10overview'
-PANEL_DASHBOARD = 'project'
-PANEL_GROUP = 'a10networks'
-ADD_PANEL = 'a10_horizon.dashboard.project.a10networks.overview.panel.A10OverviewPanel'
+
+from django.utils.translation import ugettext_lazy as _
+from openstack_dashboard.local import local_settings
+import a10_horizon
+
+ADD_INSTALLED_APPS = ['a10_horizon.dashboard.a10networks']
+FEATURE = "a10networks"
