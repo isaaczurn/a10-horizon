@@ -21,7 +21,7 @@ import a10_horizon.dashboard.project.a10networks.instances.tables as p_tables
 import a10_horizon.dashboard.api.deviceinstances as a10api
 
 
-class A10AppliancesTab(tabs.TableTab):
+class InstancesTableTab(tabs.TableTab):
     table_classes = (p_tables.A10ApplianceTable,)
     name = _("A10 Appliances")
     slug = "a10appliancestab"
@@ -40,12 +40,7 @@ class A10AppliancesTab(tabs.TableTab):
         return result
 
 
-class A10DeviceInstanceTab(tabs.TableTab):
-    table_classes = (p_tables.A10DeviceInstanceTable,)
-    name = "a10deviceinstancestab"
-
-
-class A10Tabs(tabs.TabGroup):
-    slug = "a10tabs"
-    tabs = (A10AppliancesTab, )
+class InstanceTabs(tabs.TabGroup):
+    slug = "instancetabs"
+    tabs = (InstancesTableTab, )
     sticky = True
