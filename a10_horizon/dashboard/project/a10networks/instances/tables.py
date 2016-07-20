@@ -78,18 +78,20 @@ def get_instance_detail(datum):
 
 
 def get_a10web_link(datum):
-    import pdb; pdb.set_trace()
-    protocol = datum.get("protocol")
-    ip_address = datum.get("ip_address")
+    # import pdb; pdb.set_trace()
+    protocol = "https"
+    # datum.get("protocol", "https")
+    ip_address = datum.get("host")
     port = datum.get("port")
 
-    return '<a href="{0}://{1}{3}{2}">{1}</a>'.format(protocol, ip_address, port, ":" if port is not None else None)
+    return '{0}://{1}{3}{2}">{1}</a>'.format(protocol, ip_address, port, ":" if port is not None else None)
+
 
 class A10DeviceInstanceTable(tables.DataTable):
     id = tables.Column("id", verbose_name=_("ID"), hidden=True)
     name = tables.Column("name", verbose_name=_("Name"))
     tenant_id = tables.Column("tenant_id", verbose_name=_("Tenant ID"), hidden=True)
-    ip_address = tables.Column("ip_address", verbose_name=_("IP Address"), hidden=False,)
+    ip_address = tables.Column("host", link=get_a10web_link, verbose_name=_("IP Address"), hidden=False,)
     nova_instance_id = tables.Column("nova_instance_id", verbose_name=_("Nova Instance ID"),
                                      hidden=False, link=get_instance_detail)
 
