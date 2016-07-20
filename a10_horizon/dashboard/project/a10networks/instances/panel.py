@@ -25,5 +25,5 @@ class A10DeviceInstances(NeutronExtensionPanelBase):
     # REQUIRED_EXTENSIONS = ["a10-device-instance"]
 
     name = unicode(_("LB Device Instances"))
-    slug = "a10deviceinstances"
+    slug = "a10instances"
     permissions = ('openstack.services.network',)

@@ -34,7 +34,7 @@ def get_a10_device_instances(request, **kwargs):
     return map(A10Appliance, rv)
 
 
-def get_a10_device_instances(request, id, **params):
+def get_a10_device_instance(request, id, **params):
     rv = neutronclient(request).show_a10_device_instance(id).get(a10_device_instance.RESOURCE)
     return A10Appliance(rv)
 

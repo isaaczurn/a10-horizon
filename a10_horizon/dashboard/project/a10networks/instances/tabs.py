@@ -22,13 +22,13 @@ import a10_horizon.dashboard.api.deviceinstances as a10api
 
 
 class InstancesTableTab(tabs.TableTab):
-    table_classes = (p_tables.A10ApplianceTable,)
+    table_classes = (p_tables.A10DeviceInstanceTable,)
     name = _("A10 Appliances")
     slug = "a10appliancestab"
     template_name = "horizon/common/_detail_table.html"
     preload = False
 
-    def get_a10appliancestable_data(self):
+    def get_a10deviceinstancetable_data(self):
         result = []
 
         try:

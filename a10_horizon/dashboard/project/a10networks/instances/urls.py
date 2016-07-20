@@ -20,8 +20,9 @@ from a10_horizon.dashboard.project.a10networks.instances import views
 
 
 urlpatterns = patterns(
-    'a10_horizon.dashboard.project.instances.views',
-    url(r'^$', views.IndexView.as_view(), name='index')
+    'a10_horizon.dashboard.a10networks.a10instances.views',
+    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^adddeviceinstance$', views.AddDeviceInstanceView.as_view(), name='adddeviceinstance'),
     # url(r'^deleteappliance$', views.DeleteApplianceView.as_view(), name='deleteappliance')
     # url(r'^addimage$', views.AddImageView.as_view(), name="addimage")
 )

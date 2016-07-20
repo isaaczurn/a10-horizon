@@ -32,34 +32,31 @@ def instance_manager_for(request):
         session=base.session_for(request))
 
 
-class AddApplianceAction(tables.LinkAction):
-    name = "addappliance"
-    verbose_name = _("Create Appliance")
-    url = "horizon:project:a10appliances:addappliance"
+class AddDeviceInstanceAction(tables.LinkAction):
+    name = "adddeviceinstance"
+    verbose_name = _("Add Device Instance")
+    url = "horizon:project:a10instances:adddeviceinstance"
     icon = "plus"
     classes = ("ajax-modal",)
 
 
-class DeleteApplianceAction(tables.Action):
-    name = "deleteappliance"
-    verbose_name = _("Delete Appliance")
-    # url = "horizon:project:a10appliances:deleteappliance"
-    # icon = "minus"
-    # classes = ("ajax-modal", )
+class DeleteDeviceInstanceAction(tables.Action):
+    name = "deletedeviceinstance"
+    verbose_name = _("Delete Device Instance")
 
     @staticmethod
     def action_present(count):
         return ungettext_lazy(
-            u"Delete Appliance",
-            u"Delete A10 Appliances",
+            u"Delete A10 vThunder Device Instance",
+            u"Delete A10 vThunder Device Instances",
             count
         )
 
     @staticmethod
     def action_past(count):
         return ungettext_lazy(
-            u"Scheduled deletion of A10 Appliance",
-            u"Scheduled deletion of A10 Appliances",
+            u"Scheduled deletion of A10 vThunder Device Instance",
+            u"Scheduled deletion of A10 vThunder Device Instances",
             count
         )
 
@@ -76,18 +73,18 @@ def get_instance_detail(datum):
     return reverse_lazy('horizon:project:instances:detail', args=[datum["nova_instance_id"]])
 
 
-class A10ApplianceTable(tables.DataTable):
-    id = tables.Column("id", verbose_name=_("ID"), hidden=True)
-    name = tables.Column("name", verbose_name=_("Hostname"), hidden=False, link=get_instance_detail)
-    ip = tables.Column("host", verbose_name="Management IP")
-    api_ver = tables.Column("api_version", verbose_name="API Version")
-    nova_instance_id = tables.Column("nova_instance_id", hidden=False, link=get_instance_detail)
+# class A10ApplianceTable(tables.DataTable):
+#     id = tables.Column("id", verbose_name=_("ID"), hidden=True)
+#     name = tables.Column("name", verbose_name=_("Hostname"), hidden=False, link=get_instance_detail)
+#     ip = tables.Column("host", verbose_name="Management IP")
+#     api_ver = tables.Column("api_version", verbose_name="API Version")
+#     nova_instance_id = tables.Column("nova_instance_id", hidden=False, link=get_instance_detail)
 
-    class Meta(object):
-        name = "a10appliancestable"
-        verbose_name = _("A10 Appliances")
-        table_actions = ()
-        row_actions = ()
+#     class Meta(object):
+#         name = "a10appliancestable"
+#         verbose_name = _("A10 Appliances")
+#         table_actions = ()
+#         row_actions = ()
 
 
 def get_instance_detail(datum):
@@ -104,5 +101,5 @@ class A10DeviceInstanceTable(tables.DataTable):
     class Meta(object):
         name = "a10deviceinstancetable"
         verbose_name = "a10deviceinstancetable"
-        table_actions = ()
-        row_actions = ()
+        table_actions = (AddDeviceInstanceAction, DeleteDeviceInstanceAction,)
+        row_actions = (DeleteDeviceInstanceAction,)
