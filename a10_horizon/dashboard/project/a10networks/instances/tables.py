@@ -73,30 +73,26 @@ def get_instance_detail(datum):
     return reverse_lazy('horizon:project:instances:detail', args=[datum["nova_instance_id"]])
 
 
-# class A10ApplianceTable(tables.DataTable):
-#     id = tables.Column("id", verbose_name=_("ID"), hidden=True)
-#     name = tables.Column("name", verbose_name=_("Hostname"), hidden=False, link=get_instance_detail)
-#     ip = tables.Column("host", verbose_name="Management IP")
-#     api_ver = tables.Column("api_version", verbose_name="API Version")
-#     nova_instance_id = tables.Column("nova_instance_id", hidden=False, link=get_instance_detail)
-
-#     class Meta(object):
-#         name = "a10appliancestable"
-#         verbose_name = _("A10 Appliances")
-#         table_actions = ()
-#         row_actions = ()
-
-
 def get_instance_detail(datum):
     return reverse_lazy('horizon:project:instances:detail', args=[datum["nova_instance_id"]])
 
 
+def get_a10web_link(datum):
+    import pdb; pdb.set_trace()
+    protocol = datum.get("protocol")
+    ip_address = datum.get("ip_address")
+    port = datum.get("port")
+
+    return '<a href="{0}://{1}{3}{2}">{1}</a>'.format(protocol, ip_address, port, ":" if port is not None else None)
+
 class A10DeviceInstanceTable(tables.DataTable):
     id = tables.Column("id", verbose_name=_("ID"), hidden=True)
+    name = tables.Column("name", verbose_name=_("Name"))
     tenant_id = tables.Column("tenant_id", verbose_name=_("Tenant ID"), hidden=True)
-    ip_address = tables.Column("ip_address", verbose_name=_("IP Address"), hidden=True)
+    ip_address = tables.Column("ip_address", verbose_name=_("IP Address"), hidden=False,)
     nova_instance_id = tables.Column("nova_instance_id", verbose_name=_("Nova Instance ID"),
                                      hidden=False, link=get_instance_detail)
+
 
     class Meta(object):
         name = "a10deviceinstancetable"

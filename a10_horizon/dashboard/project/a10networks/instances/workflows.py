@@ -53,41 +53,10 @@ class SetInstanceDetailsAction(workflows.Action):
 
     # Dynamic population of network choices.
     def __init__(self, request, *args, **kwargs):
-        super(AddPolicyAction, self).__init__(request, *args, **kwargs)
+        super(SetInstanceDetailsAction, self).__init__(request, *args, **kwargs)
 
-        # this populates the dropdowns that allow the user to connect
-        # management network and other networks as needed.
-        # networks = []
-
-        # tenant_id = request.user.tenant_id
-        # is_admin = request.user.is_admin
-
-        # # names of form fields representing vThunder interfaces.
-        # interfaces = ["mgmt_network", "vip_network", "member_network"]
-        # interface_choices = {}
-
-        # mgmt_network_choices = [('', _("Select the management network."))]
-
-        # try:
-        #     if not is_admin:
-        #         kwargs["tenant_id"] = tenant_id
-        #     networks = neutron_api.network_list(request, **kwargs)
-
-        # except Exception as ex:
-        #     LOG.exception(ex)
-        #     exceptions.handle(request, _("Error retrieving networks from neutron."))
-
-        # for i in interfaces:
-        #     interface_choices[i] = []
-        #     for net in networks:
-        #         interface_choices[i].append((net.id, net.name))
-
-        # for x in interfaces:
-        #     self.fields[x] = interface_choices[x]
-
-    # def clean(self):
-    #     super(SetInstanceDetailsAction, self).clean()
-    #     # Validate networks here.
+    def populate_mgmt_network_choices(self, request, context):
+        return instance_utils.network_field_data(request)
 
     def populate_data_networks_choices(self, request, context):
         return instance_utils.network_field_data(request)

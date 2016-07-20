@@ -1,4 +1,4 @@
-# Copyright 2015,  A10 Networks
+# Copyright (C) 2014-2016, A10 Networks Inc. All rights reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -21,7 +21,6 @@ import tables as p_tables
 import a10_horizon.dashboard.api.scaling as a10api
 
 
-
 class ScalingGroupAdminTableTab(tabs.TableTab):
     table_classes = (p_tables.ScalingGroupAdminTable,)
     name = _("Scaling Groups")
@@ -31,12 +30,12 @@ class ScalingGroupAdminTableTab(tabs.TableTab):
 
     def get_scalinggroupadmintable_data(self):
         try:
-            rv = []
+            rv = a10api.get_a10_scaling_groups(self.tab_group.request)
             # Return all VIPs, ordered by tenant.
         except Exception as ex:
             rv = []
             LOG.exception(ex)
-            errmsg = _("Unable to retrieve VIP list")
+            errmsg = _("Unable to retrieve scaling group list")
             exceptions.handle(self.tab_group.request, errmsg)
 
         return rv

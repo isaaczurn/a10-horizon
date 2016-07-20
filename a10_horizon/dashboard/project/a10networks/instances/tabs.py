@@ -12,13 +12,18 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.utils.translation import ugettext_lazy as _
+import logging
 
+from django.utils.translation import ugettext_lazy as _
 from horizon import exceptions
 from horizon import tabs
 
 import a10_horizon.dashboard.project.a10networks.instances.tables as p_tables
 import a10_horizon.dashboard.api.deviceinstances as a10api
+
+
+
+LOG = logging.getLogger(__name__)
 
 
 class InstancesTableTab(tabs.TableTab):
@@ -32,11 +37,13 @@ class InstancesTableTab(tabs.TableTab):
         result = []
 
         try:
-            result = a10api.get_a10_appliances(self.request)
-        except Exception:
+            result = a10api.get_a10_device_instances(self.request)
+        except Exception as ex:
             result = []
+            LOG.exception(ex)
             exceptions.handle(self.tab_group.request,
                               _('Unable to retrieve appliance list.'))
+
         return result
 
 

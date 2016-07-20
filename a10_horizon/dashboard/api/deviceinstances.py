@@ -26,17 +26,17 @@ LOG = logging.getLogger(__name__)
 class A10DeviceInstance(NeutronAPIDictWrapper):
     """Wrapper for a10_appliance dictionary"""
     def __init__(self, apiresource):
-        super(A10Appliance, self).__init__(apiresource)
+        super(A10DeviceInstance, self).__init__(apiresource)
 
 
 def get_a10_device_instances(request, **kwargs):
     rv = neutronclient(request).list_a10_device_instances(**kwargs).get(a10_device_instance.RESOURCES)
-    return map(A10Appliance, rv)
+    return map(A10DeviceInstance, rv)
 
 
 def get_a10_device_instance(request, id, **params):
     rv = neutronclient(request).show_a10_device_instance(id).get(a10_device_instance.RESOURCE)
-    return A10Appliance(rv)
+    return A10DeviceInstance(rv)
 
 
 def delete_a10_device_instance(request, id):
@@ -46,10 +46,10 @@ def delete_a10_device_instance(request, id):
 def create_a10_device_instance(request, **kwargs):
     body = {a10_device_instance.RESOURCE: kwargs}
     rv = neutronclient(request).create_a10_device_instances(body=body).get(a10_device_instance.RESOURCE)
-    return A10Appliance(rv)
+    return A10DeviceInstance(rv)
 
 
 def update_a10_device_instance(request, id, **kwargs):
     body = {a10_device_instance.RESOURCE: kwargs}
     rv = neutronclient(request).update_a10_device_instances(id, body=body).get(a10_device_instance.RESOURCE)
-    return A10Appliance(rv)
+    return A10DeviceInstance(rv)
