@@ -15,11 +15,13 @@
 import logging
 import uuid
 
+from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
-
+from horizon import exceptions
 import horizon.forms as forms
 import horizon.tables as tables
 import horizon.workflows as workflows
+
 from openstack_dashboard import api as os_api
 import openstack_dashboard.api.glance as glance_api
 import openstack_dashboard.api.neutron as neutron_api
@@ -28,14 +30,14 @@ from openstack_dashboard.dashboards.project.instances import utils as instance_u
 
 from a10_horizon.dashboard.api import deviceinstances as api
 
+import instance_helpers
+
 
 GLANCE_API_VERSION_LIST = 2
 GLANCE_API_VERSION_CREATE = 2
 GLANCE_API_VERSION_UPDATE = 1
 
 LOG = logging.getLogger(__name__)
-
-
 
 
 class SetInstanceDetailsAction(workflows.Action):
@@ -79,13 +81,45 @@ class AddDeviceInstanceWorkflow(workflows.Workflow):
     slug = "adddeviceinstance"
     name = _("Add vThunder Instance")
     default_steps = (AddDeviceInstanceStep, )
-    success_url = "a10networks:instances:index"
+
+    success_url = "horizon:project:a10instances:index"
     finalize_button_name = "Create vThunder Instance"
 
     def handle(self, request, context):
+        # Create the instance manager, giving it the context so it knows how to auth
+        auth_url = instance_helpers.url_for(request)
+        config = {
+            "keystone_version": 2,
+            "keystone_auth_url": auth_url,
+            "nova_api_version": "2.1",
+            'username': 'admin',
+            'password': 'a10',
+            "glance_image": "acos4.1.1",
+            "nova_flavor": "vthunder.small",
+        }
+
         try:
+            import pdb; pdb.set_trace()
+            context["image"] ='acos4.1.1'
+            context["flavor"] = "vthunder.small"
+            context["networks"] = [context["mgmt_network"]]
+            for x in context["data_networks"]:
+                context["networks"].append(x)
+
+            instance_mgr = instance_helpers.instance_manager_from_context(config, request)
+            instance_data = instance_mgr.create_instance(context)
+            LOG.debug("Instance: {0}".format(instance_data))
+
+        except Exception as ex:
+            LOG.exception(ex)
+            exceptions.handle(request, _("Unable to create instance due to external error."))
+            # Abort!
+            return False
+
+        try:
+            remove_keys = ["image", "data_networks", "mgmt_network", "flavor", "networks"]
             api.create_a10_device_instance(request, **context)
         except Exception as ex:
             LOG.exception(ex)
-            exceptions.handle(request, _("Unable to delete scaling action"))
+            exceptions.handle(request, _("Unable to create device instance."))
         return redirect(self.success_url)
