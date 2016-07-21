@@ -88,15 +88,7 @@ class AddDeviceInstanceWorkflow(workflows.Workflow):
     def handle(self, request, context):
         # Create the instance manager, giving it the context so it knows how to auth
         auth_url = instance_helpers.url_for(request)
-        config = {
-            "keystone_version": 2,
-            "keystone_auth_url": auth_url,
-            "nova_api_version": "2.1",
-            'username': 'admin',
-            'password': 'a10',
-            "glance_image": "acos4.1.1",
-            "nova_flavor": "vthunder.small",
-        }
+        config = instance_helpers.default_config(request)
 
         try:
             context["image"] ='acos4.1.1'

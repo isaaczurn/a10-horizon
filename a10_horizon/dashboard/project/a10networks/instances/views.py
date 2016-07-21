@@ -14,14 +14,21 @@
 
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
+import logging
 
+from horizon import exceptions
+from horizon import messages
 from horizon import tabs
 from horizon import workflows
+import re
 
 import tabs as project_tabs
 import workflows as project_workflows
 
 import a10_horizon.dashboard.api.deviceinstances as a10api
+
+
+LOG = logging.getLogger(__name__)
 
 
 URL_PREFIX = "a10networks:instances:"
@@ -37,7 +44,7 @@ class IndexView(tabs.TabbedTableView):
         if obj_ids == []:
             obj_ids.append(re.search('([0-9a-z-]+)$', action).group(1))
 
-        delete_action = a10api.delete_a10_appliance
+        delete_action = a10api.delete_a10_device_instance
         for obj_id in obj_ids:
             success_msg = "Deleted {0} {1}".format("Instance", obj_id)
             failure_msg = "Unable to delete {0} {1}".format("Instance", obj_id)
