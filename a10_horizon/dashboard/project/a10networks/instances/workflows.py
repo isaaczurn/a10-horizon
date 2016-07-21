@@ -99,7 +99,6 @@ class AddDeviceInstanceWorkflow(workflows.Workflow):
         }
 
         try:
-            import pdb; pdb.set_trace()
             context["image"] ='acos4.1.1'
             context["flavor"] = "vthunder.small"
             context["networks"] = [context["mgmt_network"]]
@@ -117,9 +116,34 @@ class AddDeviceInstanceWorkflow(workflows.Workflow):
             return False
 
         try:
+            import pdb; pdb.set_trace()
             remove_keys = ["image", "data_networks", "mgmt_network", "flavor", "networks"]
-            api.create_a10_device_instance(request, **context)
+            map(context.pop, remove_keys)
+
+            record = self._build_record(instance_data, context)
+            api.create_a10_device_instance(request, **record)
         except Exception as ex:
             LOG.exception(ex)
             exceptions.handle(request, _("Unable to create device instance."))
-        return redirect(self.success_url)
+        return True
+
+    def _build_record(self, instance, context):
+        # TODO - set these options on the form.
+        rv = {
+            "name": context["name"],
+            "host": instance["ip_address"],
+            "nova_instance_id": instance["nova_instance_id"],
+            "protocol": "https",
+            "port": 443,
+            "api_version": "3.0",
+            "username": "a10",
+            "password": "admin",
+            # "autosnat": True,
+            # "v_method": "ADP",
+            # "shared_partition": "",
+            # "use_float": False,
+            # "default_virtual_server_vrid": 0,
+            # "ipinip": False,
+            # "write_memory": False
+        }
+        return rv
