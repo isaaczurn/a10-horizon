@@ -45,11 +45,11 @@ def delete_a10_device_instance(request, id):
 
 def create_a10_device_instance(request, **kwargs):
     body = {a10_device_instance.RESOURCE: kwargs}
-    rv = neutronclient(request).create_a10_device_instances(body=body).get(a10_device_instance.RESOURCE)
+    rv = neutronclient(request).create_a10_device_instance(body=body).get(a10_device_instance.RESOURCE)
     return A10DeviceInstance(rv)
 
 
 def update_a10_device_instance(request, id, **kwargs):
     body = {a10_device_instance.RESOURCE: kwargs}
-    rv = neutronclient(request).update_a10_device_instances(id, body=body).get(a10_device_instance.RESOURCE)
+    rv = neutronclient(request).update_a10_device_instance(id, body=body).get(a10_device_instance.RESOURCE)
     return A10DeviceInstance(rv)
