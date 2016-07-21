@@ -108,7 +108,6 @@ class AddDeviceInstanceWorkflow(workflows.Workflow):
             return False
 
         try:
-            import pdb; pdb.set_trace()
             remove_keys = ["image", "data_networks", "mgmt_network", "flavor", "networks"]
             map(context.pop, remove_keys)
 

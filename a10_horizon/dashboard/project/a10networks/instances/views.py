@@ -26,7 +26,7 @@ import tabs as project_tabs
 import workflows as project_workflows
 
 import a10_horizon.dashboard.api.deviceinstances as a10api
-
+import instance_helpers
 
 LOG = logging.getLogger(__name__)
 
@@ -44,13 +44,19 @@ class IndexView(tabs.TabbedTableView):
         if obj_ids == []:
             obj_ids.append(re.search('([0-9a-z-]+)$', action).group(1))
 
-        delete_action = a10api.delete_a10_device_instance
+        auth_url = instance_helpers.url_for(request)
+        config = instance_helpers.default_config(request)
+
+        instance_mgr = instance_helpers.instance_manager_from_context(config, request)
+
         for obj_id in obj_ids:
             success_msg = "Deleted {0} {1}".format("Instance", obj_id)
             failure_msg = "Unable to delete {0} {1}".format("Instance", obj_id)
 
             try:
-                delete_action(request, obj_id)
+                instance = a10api.get_a10_device_instance(request, obj_id)
+                a10api.delete_a10_device_instance(request, obj_id)
+                instance_mgr.delete_instance(instance.nova_instance_id)
                 messages.success(request, success_msg)
             except Exception as ex:
                 exceptions.handle(request, failure_msg)
