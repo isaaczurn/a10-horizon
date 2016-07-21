@@ -21,6 +21,8 @@ from django.utils.translation import ungettext_lazy
 
 from horizon import tables
 
+import a10_horizon.dashboard.api.deviceinstances as a10api
+import instance_helpers
 
 LOG = logging.getLogger(__name__)
 
@@ -40,9 +42,11 @@ class AddDeviceInstanceAction(tables.LinkAction):
     classes = ("ajax-modal",)
 
 
-class DeleteDeviceInstanceAction(tables.Action):
+class DeleteDeviceInstanceAction(tables.DeleteAction):
     name = "deletedeviceinstance"
     verbose_name = _("Delete Device Instance")
+    icon = "minus"
+    classes = ("danger", )
 
     @staticmethod
     def action_present(count):
@@ -61,11 +65,13 @@ class DeleteDeviceInstanceAction(tables.Action):
         )
 
     def handle(self, data_table, request, object_ids):
+        config = instance_helpers.default_config(request)
+        instance_mgr = instance_helpers.instance_manager_from_context(config, request)
+
         for obj_id in object_ids:
             instance_id = data_table.get_object_by_id(obj_id)["nova_instance_id"]
-            a10api.delete_a10_appliance(request, obj_id)
-            imgr = instance_manager_for(request)
-            imgr.delete_instance(instance_id)
+            a10api.delete_a10_device_instance(request, obj_id)
+            instance_mgr.delete_instance(instance_id)
             # super(DeleteApplianceAction, self).handle(data_table, request, object_ids)
 
 
@@ -74,7 +80,6 @@ def get_instance_detail(datum):
 
 
 def get_a10web_link(datum):
-    # import pdb; pdb.set_trace()
     protocol = "https"
     # datum.get("protocol", "https")
     ip_address = datum.get("host")

@@ -56,7 +56,6 @@ def instance_manager_from_context(config, context):
 
 
 def config_from_context(context):
-    import pdb; pdb.set_trace()
     networks = [context["mgmt_network"]]
     for x in context.get("data_networks", []):
         networks.append(x)
@@ -71,3 +70,15 @@ def record_from_instance(instance):
     rv = copy.copy(instance_manager._default_server)
     rv.update(instance)
     return rv
+
+
+def default_config(request):
+    return {
+        "keystone_version": 2,
+        "keystone_auth_url": url_for(request),
+        "nova_api_version": "2.1",
+        'username': 'admin',
+        'password': 'a10',
+        "glance_image": "acos4.1.1",
+        "nova_flavor": "vthunder.small",
+    }
