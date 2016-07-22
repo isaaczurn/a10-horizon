@@ -19,7 +19,7 @@ from horizon import tabs
 
 import tables as p_tables
 import a10_horizon.dashboard.api.deviceinstances as a10api
-
+import helper
 
 class DeviceInstanceAdminTableTab(tabs.TableTab):
     table_classes = (p_tables.DeviceInstanceAdminTable,)
@@ -32,13 +32,14 @@ class DeviceInstanceAdminTableTab(tabs.TableTab):
         result = []
 
         try:
-            result = a10api.get_a10_appliances(self.request)
+            result = a10api.get_a10_device_instances(self.request)
+            result = helper.get_result(self.request, result)
         except Exception:
             result = []
             exceptions.handle(self.tab_group.request,
                               _('Unable to retrieve appliance list.'))
+#        result = {}
         return result
-
 
 class DeviceInstanceAdminTabs(tabs.TabGroup):
     slug = "instancetabs"

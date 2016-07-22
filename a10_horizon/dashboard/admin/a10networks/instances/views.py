@@ -59,3 +59,33 @@ class IndexView(tabs.TabView):
                 LOG.exception(ex)
 
         return self.get(request, *args, **kwargs)
+
+
+class MigrateDeviceView(forms.ModalFormView):
+    form_class = project_forms.MigrateDeviceView
+    template_name = 'a10networks/instances/migrate_device.html'
+    success_url = reverse_lazy("horizon:admin:a10networks:instances")
+    modal_id = "migrate_device_modal"
+    modal_header = _("Migrate Device")
+    submit_label = _("Migrate Device")
+    submit_url = "horizon:admin:a10networks:instances:migrate_device"
+
+    @memoized.memoized_method
+    def get_object(self):
+        try:
+            return api.nova.server_get(self.request, self.kwargs["nova_instance_id"])
+
+        except Exception:
+            exceptions.handle(self.request, _("Unable to retrieve device."))
+
+        def get_initial(self):
+            return {"nova_instance_id": self.kwargs["nova_instance_id"]}
+
+        def get_context_data(self, **kwargs):
+            context = super(MigrateDeviceView, self).get_context_data(**kwargs)
+            instance_id = self.kwargs["nova_instance_id"]
+            context['instance_id'] = instance_id
+            context['instance'] = self.get_object()
+            context['submit_url'] = reverse(self.submit_url, args=[instance_id])
+            return context
+
