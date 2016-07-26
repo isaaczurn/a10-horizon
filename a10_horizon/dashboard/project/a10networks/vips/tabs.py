@@ -12,14 +12,26 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+import logging
+
 from django.utils.translation import ugettext_lazy as _
 
 from horizon import exceptions
 from horizon import tabs
+from openstack_dashboard.api import lbaas as lbaasv1_api
+
+LOG = logging.getLogger(__name__)
+
+
+# lbaasv2 api
+try:
+    from neutron_lbaas_dashboard.api import lbaasv2 as lbaasv2_api
+except ImportError as ex:
+    LOG.exception(ex)
+    LOG.warning("Could not import lbaasv2 dashboard API")
 
 import tables as p_tables
 # import a10_horizon.dashboard.api.vips as a10api
-
 
 TABLE_TEMPLATE = "horizon/common/_detail_table.html"
 DEFAULT_TEMPLATE = "horizon/common/_detail.html"
@@ -36,7 +48,8 @@ class VipsTab(tabs.TableTab):
         result = []
 
         try:
-            result = a10api.get_a10_appliances(self.request)
+            result = lbaasv2_api.list_loadbalancers(self.request)
+            # result = a10api.get_a10_appliances(self.request)
         except Exception:
             result = []
             exceptions.handle(self.tab_group.request,
