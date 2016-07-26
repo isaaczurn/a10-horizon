@@ -21,6 +21,8 @@ from django.utils.translation import ungettext_lazy
 
 from horizon import tables
 
+import workflows as p_workflows
+
 # lbaasv2 api
 try:
     from neutron_lbaas_dashboard.api import lbaasv2 as lbaasv2_api
@@ -33,6 +35,15 @@ except ImportError as ex:
 LOG = logging.getLogger(__name__)
 URL_PREFIX = "horizon:project:a10vips:"
 
+
+class CreateVipLink(tables.LinkAction):
+    name = "createvip"
+    verbose_name = _("Create VIP")
+    url = URL_PREFIX + "create"
+    classes = ("ajax-modal",)
+    icon = "plus"
+    policy_rules = ("network",)  # FIXME(mdurrant) - A10-specific policies?
+    success_url = "horizon:project:a10vips:index"
 
 
 class DeleteVipAction(tables.DeleteAction):
@@ -81,8 +92,21 @@ class MigrateVipAction(tables.LinkAction):
     pass
 
 
-class TestVipAction(tables.LinkAction):
-    pass
+class TestVipAction(tables.Action):
+    name = "testvip"
+    verbose_name = _("Test VIP")
+    url = URL_PREFIX + "test"
+    classes = tuple()
+    policy_rules = ("network",)
+    success_url = "horizon:project:a10vips:index"
+    method = "GET"
+    requires_input = True
+
+    def single(self, data_table, request, object_id):
+        # Test methods need to be put into a lib
+        # Start low level - ping, tcp, http, https
+        import pdb; pdb.set_trace()
+        return True
 
 
 class EditVipAction(tables.LinkAction):
@@ -92,7 +116,7 @@ class EditVipAction(tables.LinkAction):
     classes = ("ajax-modal",)
     icon = "plus"
     policy_rules = ("network",)  # FIXME(mdurrant) - A10-specific policies?
-    success_url = "horizon:project:a10scaling:index"
+    success_url = "horizon:project:a10vips:index"
 
     def get_link_url(self, datum):
         base_url = reverse(URL_PREFIX + "edit",
@@ -113,5 +137,7 @@ class VipTable(tables.DataTable):
     class Meta(object):
         name = "viptable"
         verbose_name = "viptable"
-        table_actions = (DeleteVipAction,)
-        row_actions = (EditVipAction, DeleteVipAction, )
+        table_actions = (CreateVipLink, DeleteVipAction,)
+        row_actions = (EditVipAction,
+                       DeleteVipAction,
+                       TestVipAction)

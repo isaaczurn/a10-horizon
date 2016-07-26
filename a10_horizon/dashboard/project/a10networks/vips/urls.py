@@ -24,6 +24,9 @@ import views
 
 urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.vips.views",
     url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^create/$',
+        views.CreateVipView.as_view(),
+        name="create"),
     url(r'^edit/(?P<id>[^/]*)$',
         views.EditVipView.as_view(),
         name="edit")
