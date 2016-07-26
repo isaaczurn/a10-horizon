@@ -1,1 +1,3 @@
 a10-neutronclient>=0.1.4
+# TODO(mdurrant) This needs to be incremented once patch is submitted upstream.
+neutron-lbaas-dashboard==1.0.0
