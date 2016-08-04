@@ -21,8 +21,6 @@ from django.utils.translation import ungettext_lazy
 
 from horizon import tables
 
-import workflows as p_workflows
-
 # lbaasv2 api
 try:
     from neutron_lbaas_dashboard.api import lbaasv2 as lbaasv2_api
