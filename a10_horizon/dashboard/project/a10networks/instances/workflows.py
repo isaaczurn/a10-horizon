@@ -91,7 +91,7 @@ class AddDeviceInstanceWorkflow(workflows.Workflow):
         config = instance_helpers.default_config(request)
 
         try:
-            context["image"] ='acos4.1.1'
+            context["image"] ='54115e55-82b0-4551-9f09-4cf0ce138f8a'
             context["flavor"] = "vthunder.small"
             context["networks"] = [context["mgmt_network"]]
             for x in context["data_networks"]:
