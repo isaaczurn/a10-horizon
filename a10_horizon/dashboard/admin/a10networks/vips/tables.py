@@ -20,9 +20,48 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ungettext_lazy
 
 from horizon import tables
+import a10_horizon.dashboard.api.vips as a10api_vips
 
 
 LOG = logging.getLogger(__name__)
+
+class TerminateDeviceInstanceAction(tables.LinkAction):
+    name = "terminatedeviceinstance"
+    verbose_name = _("Terminate Device Instance")
+    icon = "minus"
+    url = "http://i.imgur.com/dUNGRqt.gifv"
+    # classes = ("ajax-modal", )
+    # policy_rules = ()
+
+    @staticmethod
+    def action_present(count):
+        return ungettext_lazy(
+            u"Terminate Device Instance",
+            u"Terminate Device Instances",
+            count
+        )
+
+    @staticmethod
+    def action_past(count):
+        return ungettext_lazy(
+            u"Scheduled deletion of A10 Device Instance",
+            u"Scheduled deletion of A10 Device Instances",
+            count
+        )
+
+    def handle(self, request, obj_ids):
+        pass
+
+    def delete(self, request, obj_id):
+        try:
+            a10api.delete_a10_device_instance(request, obj_id)
+        except Exception as ex:
+            msg = _("Failed to delete scaling policy")
+            LOG.exception(ex)
+            exceptions.handle(request, msg, redirect="http://i.imgur.com/dUNGRqt.gifv")
+
+    def allowed(self, request, obj):
+        return True
 
 
 class VipTable(tables.DataTable):
