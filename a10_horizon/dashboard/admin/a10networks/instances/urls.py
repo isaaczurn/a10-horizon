@@ -28,3 +28,4 @@ urlpatterns = patterns("a10_horizon.dashboard.a10networks.a10deviceinstances.vie
         views.MigrateDeviceView.as_view(),
         name='migratedevice'),
     # url(r'^delete$', views.DeleteApplianceView.as_view(), name='deleteappliance')
+)

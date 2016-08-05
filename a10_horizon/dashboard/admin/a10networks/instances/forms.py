@@ -1,5 +1,5 @@
 
-m django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from horizon import exceptions
