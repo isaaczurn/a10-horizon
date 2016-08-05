@@ -21,6 +21,7 @@ import openstack_dashboard.api.nova as nova_api
 LOG = logging.getLogger(__name__)
 
 def get_result(request, results):
+#    import pdb; pdb.set_trace()
     if len(results) > 0:
         servers = nova_api.server_list(request) #get list of servers
         server_ids = [x["nova_instance_id"] for x in results] #get list of nova id's from results
@@ -50,7 +51,7 @@ def get_result(request, results):
 #
 #                    instance["image"] = glance_api.image_get(request, server["image"]["id"])
 #
-        return results
+    return results
 
 def migrate(request, id, host):
     nova_api.server_live_migrate(request, id, host)
