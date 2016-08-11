@@ -32,7 +32,6 @@ class DeviceInstanceAdminTableTab(tabs.TableTab):
         result = []
         try:
             result = a10api.get_a10_device_instances(self.request)
-            import pdb; pdb.set_trace()
             result = helper.get_result(self.request, result)
         except Exception:
             result = []

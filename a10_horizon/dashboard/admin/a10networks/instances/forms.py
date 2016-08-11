@@ -5,7 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 from horizon import exceptions
 from horizon import forms
 
+import logging
 import helper
+
+LOG = logging.getLogger(__name__)
 
 def array_to_choices(choices):
     return map(lambda x: (x, x), choices)
@@ -26,10 +29,11 @@ class MigrateDevice(forms.SelfHandlingForm):
     def handle(self, request, data):
         try:
             migrate = helper.migrate(request,
-                    data['instance_id'],
+                    data['nova_instance_id'],
                     data['host'])
             return migrate
-        except Exception:
+        except Exception as e:
+            LOG.exception(e)
             exceptions.handle(request,
                     _('Unable to make the migration.'))
 

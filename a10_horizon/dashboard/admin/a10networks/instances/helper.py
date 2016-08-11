@@ -54,10 +54,16 @@ def get_result(request, results):
     return results
 
 def migrate(request, id, host):
-    nova_api.server_live_migrate(request, id, host)
+    try:
+        nova_api.server_live_migrate(request, id, host)
+    except Exception:
+        LOG.exception("Failure to migrate.")
 
 def get_hosts(request):
-    host_list = nova_api.host_list(request)
+    hyper_list = nova_api.hypervisor_list(request)
+    host_list = []
+    for hyper in hyper_list:
+        host_list.append(hyper.host_ip)
+
     if host_list:
        return host_list
-    return ["192.168.1.0"]
