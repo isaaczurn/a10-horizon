@@ -54,7 +54,7 @@ class TerminateDeviceInstanceAction(tables.LinkAction):
 
     def delete(self, request, obj_id):
         try:
-            a10api.delete_a10_device_instance(request, obj_id)
+            a10api_vips.delete_vip(request, obj_id)
         except Exception as ex:
             msg = _("Failed to delete scaling policy")
             LOG.exception(ex)
