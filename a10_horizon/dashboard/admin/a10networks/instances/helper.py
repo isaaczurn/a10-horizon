@@ -21,23 +21,19 @@ import openstack_dashboard.api.nova as nova_api
 LOG = logging.getLogger(__name__)
 
 def get_result(request, results):
-#    import pdb; pdb.set_trace()
-    if len(results) > 0:
-        servers = nova_api.server_list(request) #get list of servers
-        server_ids = [x["nova_instance_id"] for x in results] #get list of nova id's from results
-#        LOG.info("SERVER_ID")
-#        LOG.info(servers)
-#        LOG.info(servers["servers"])
+#    if len(results) > 0:
+#        servers = nova_api.server_list(request) #get list of servers
+#        server_ids = [x["nova_instance_id"] for x in results] #get list of nova id's from results
 #        instance_server_ids = []
 #        for x in servers["servers"]:
 #            if x["id"] in server_ids:
 #                instance_server_ids.append(x["id"])       
-        #instance_servers = [nova_api.server_get(request, x) for x in instance_server_ids] # list of full server object dictionaries
-        #flavors = nova_api.flavor_list(request)
-        #server_flavors = [x["flavor"] for x in instance_servers] # should be a list of flavor dictionaries
-        #instance_flavors = [x for x in flavors["flavors"] if x["id"] in server_flavors]
-        #tenants= keystone_api.tenant_list(request)
-
+#        instance_servers = [nova_api.server_get(request, x) for x in instance_server_ids] # list of full server object dictionaries
+#        flavors = nova_api.flavor_list(request)
+#        server_flavors = [x["flavor"] for x in instance_servers] # should be a list of flavor dictionaries
+#        instance_flavors = [x for x in flavors["flavors"] if x["id"] in server_flavors]
+#        tenants= keystone_api.tenant_list(request)
+#
 #        for instance in results:
 #            for server in instance_servers:
 #                if instance["nova_instance_id"] == server["id"]:
@@ -49,9 +45,21 @@ def get_result(request, results):
 #                        if server["tenant_id"] == tenant["id"]:
 #                            instance["owner"] = tenant["name"]
 #
-#                    instance["image"] = glance_api.image_get(request, server["image"]["id"])
-#
-    return results
+                   # instance["image"] = glance_api.image_get(request, server["image"]["id"])
+    result_list = []
+    for instance in results:
+        server = nova_api.server_get(request, instance["nova_instance_id"])
+        flavor = server.flavor
+        flavor_id = flavor["id"]
+
+        tenants = keystone_api.tenant_list(request)
+        
+        setattr(instance, "flavor", nova_api.flavor_get(request, flavor_id))
+        setattr(instance, "image", server.image_name)
+        setattr(instance, "owner", keystone_api.tenant_get(request, server.tenant_id).name)
+        setattr(instance, "comp_ip", server.host_server)
+        result_list.append(instance)
+    return result_list
 
 def migrate(request, id, host):
     try:

@@ -92,9 +92,9 @@ def get_a10web_link(datum):
 def get_spec_summary(datum):
     flavor = datum.get("flavor")
     if flavor:
-        ram = flavor.get("ram")
-        cpus = flavor.get("vcpus")
-        return 'RAM: {0} \nVCPUS: {1}'.format(ram, cpus)
+        ram = flavor.ram
+        cpus = flavor.vcpus
+        return 'RAM: {0}mb   VCPUS: {1}'.format(ram, cpus)
 
 class DeviceInstanceAdminTable(tables.DataTable):
     id = tables.Column("id", verbose_name=_("ID"), hidden=True)
@@ -103,6 +103,7 @@ class DeviceInstanceAdminTable(tables.DataTable):
     image = tables.Column("image", verbose_name=_("Image"), hidden=False)
     ip_address = tables.Column("host", link=get_a10web_link, verbose_name=_("IP Address"), hidden=False,)
     specs = tables.Column(get_spec_summary, verbose_name="Specs Summary")
+    comp_ip = tables.Column("comp_ip", link=get_a10web_link, verbose_name=_("Compute Node"), hidden=False,)
     nova_instance_id = tables.Column("nova_instance_id", verbose_name=_("Nova Instance ID"),
                                      hidden=False, link=get_instance_detail)
 
