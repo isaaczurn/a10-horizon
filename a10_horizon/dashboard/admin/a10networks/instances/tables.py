@@ -23,6 +23,8 @@ from horizon import tables
 
 import a10_horizon.dashboard.api.deviceinstances as a10api
 
+import workflows as a_workflows
+
 LOG = logging.getLogger(__name__)
 
 URL_PREFIX = "horizon:admin:a10instances:"
@@ -65,18 +67,11 @@ class TerminateDeviceInstanceAction(tables.DeleteAction):
     def allowed(self, request, obj):
         return True
 
-
-
 class MigrateDeviceInstanceAction(tables.LinkAction):
     name = "migratedevice"
     verbose_name = _("Migrate")
     icon = "plus"
     classes = ("ajax-modal",)
-   
-    def get_link_url(self, datum):
-        base_url = reverse_lazy("horizon:admin:a10deviceinstances:migratedevice",
-                           kwargs={'id': datum["nova_instance_id"]})
-        return base_url
 
 def get_instance_detail(datum):
     return reverse_lazy('horizon:project:instances:detail', args=[datum["nova_instance_id"]])

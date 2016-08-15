@@ -77,6 +77,7 @@ def get_result(request, results):
 
 def migrate(request, id, host):
     try:
+        import pdb; pdb.set_trace()
         nova_api.server_live_migrate(request, id, host)
     except Exception:
         LOG.exception("Failure to migrate.")
