@@ -69,8 +69,11 @@ class TerminateDeviceInstanceAction(tables.DeleteAction):
 
 class MigrateDeviceInstanceAction(tables.LinkAction):
     name = "migratedevice"
-    verbose_name = _("Migrate")
+    verbose_name = _("Migrate Device")
     icon = "plus"
+    url = "horizon:admin:a10deviceinstances:migratedevice"
+    action_type = "danger"
+
     classes = ("ajax-modal",)
 
 def get_instance_detail(datum):
