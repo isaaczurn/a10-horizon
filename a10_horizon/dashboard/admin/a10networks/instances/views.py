@@ -27,6 +27,7 @@ import re
 
 import a10_horizon.dashboard.api.deviceinstances as a10api
 import workflows as a_workflows
+import workflows as p_workflows
 import forms as p_forms
 import tabs as p_tabs
 from openstack_dashboard.api import nova as nova_api
@@ -64,19 +65,28 @@ class IndexView(tabs.TabView):
         return self.get(request, *args, **kwargs)
 
 
-class MigrateDeviceView(forms.views.ModalFormView):
-    name = _("Migrate Device")
-    form_class = p_forms.MigrateDevice
+# class MigrateDeviceView(forms.views.ModalFormView):
+#     name = _("Migrate Device")
+#     form_class = p_forms.MigrateDevice
+#     template_name = "instances/migrate_device.html"
+
+#     def get_context_data(self, **kwargs):
+#         context = super(MigrateDeviceView, self).get_context_data(**kwargs)
+#         context["nova_instance_id"] = self.kwargs["id"]
+#         return context
+
+#     @memoized.memoized_method
+#     def _get_object(self, *args, **kwargs):
+#         return {"nova_instance_id": self.kwargs["id"]}
+
+#     def get_initial(self):
+#         return self._get_object()
+
+
+class MigrateDeviceView(workflows.WorkflowView):
+    # name = _("Migrate Instance")
+    workflow_class = p_workflows.MigrateDeviceInstanceWorkflow
     success_url = reverse_lazy("horizon:admin:a10deviceinstances:index")
-    template_name = "instances/migrate_device.html"
-    submit_url = None
 
-    def post(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
-        pass
-
-    def get_context_data(self, **kwargs):
-        context = super(MigrateDeviceView, self).get_context_data(**kwargs)
-        import pdb; pdb.set_trace()
-        context["nova_instance_id"] = self.kwargs["id"]
-        return context
+    # def get_initial(self):
+    #     return self.kwargs.get("id")

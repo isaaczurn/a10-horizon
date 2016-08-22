@@ -34,7 +34,6 @@ def array_to_choices(choices):
 
 
 class MigrateDeviceAction(workflows.Action):
-    
     nova_instance_id = forms.CharField(label=_("Nova Instance ID"),
                                   required=True)
     host = forms.ChoiceField(label=_("Host IP"),
@@ -42,8 +41,7 @@ class MigrateDeviceAction(workflows.Action):
 
     def __init__(self, request, *args, **kwargs):
         super(MigrateDeviceAction, self).__init__(request, *args, **kwargs)
-        import pdb; pdb.set_trace()
-        self.fields["nova_instance_id"].value = kwargs["nova_instance_id"]
+        # self.fields["nova_instance_id"].initial = kwargs["nova_instance_id"]
 
     def populate_host_choices(self, request, context):
         host_list = helper.get_hosts(request)
@@ -54,19 +52,20 @@ class MigrateDeviceAction(workflows.Action):
         permissions = ("openstack.services.network",)
         help_text = _("Migrate device to a new host")
 
+
 class MigrateDeviceStep(workflows.Step):
     action_class = MigrateDeviceAction
     contributes = ("nova_instance_id", "host")
 
-class MigrateDeviceWorkflow(workflows.Workflow):
+
+class MigrateDeviceInstanceWorkflow(workflows.Workflow):
     slug = "migratedevice"
     name = _("Migrate Device")
     default_steps = (MigrateDeviceStep, )
-    success_url = "horizon:admin:a10deviceinstances"
+    success_url = "horizon:admin:a10deviceinstances:index"
     finalize_button_name = "Create Migration"
 
     def handle(self, request, context):
-        import pdb; pdb.set_trace()
         success = True
         try:
             migrate = helper.migrate(request,
@@ -76,3 +75,4 @@ class MigrateDeviceWorkflow(workflows.Workflow):
             LOG.exception(ex)
             exceptions.handle(request, _("Unable to migrate"))
         return success
+

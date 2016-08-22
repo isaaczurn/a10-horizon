@@ -11,23 +11,27 @@ def array_to_choices(choices=[]):
 
 
 class MigrateDevice(forms.SelfHandlingForm):
+    instance_id = forms.CharField(label=_("Instance ID"),
+                                  widget=forms.TextInput(attrs={'readonly': 'readonly'}),
+                                              required=True)
+    host = forms.ChoiceField(label=_("Host IP"),
+                              required=True)
+
     def __init__(self, *args, **kwargs):
         super(MigrateDevice, self).__init__(*args, **kwargs)
-        instance_id = forms.CharField(label=_("Instance ID"),
-                                              widget=forms.HiddenInput(),
-                                              required=True)
-        host_list = helper.get_hosts(self.request)
-        host = forms.ChoiceField(label=_("Host IP"),
-                                  choices=array_to_choices(host_list),
-                                  required=True)
+        instance_id = str(kwargs.get("initial").get("nova_instance_id"))
+        self.fields["host"].choices = array_to_choices(helper.get_hosts(self.request))
+        self.fields["instance_id"].initial = instance_id
 
-    def handle(self, request, data):
+    def handle(self, request, context):
+        host_id = context["id"]
         try:
             migrate = helper.migrate(request,
-                    data['instance_id'],
-                    data['host'])
+                    context['instance_id'],
+                    context['host'])
             return migrate
         except Exception:
             exceptions.handle(request,
                     _('Unable to make the migration.'))
+
 
