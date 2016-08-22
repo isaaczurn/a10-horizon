@@ -27,6 +27,7 @@ import re
 
 import a10_horizon.dashboard.api.deviceinstances as a10api
 import workflows as a_workflows
+import forms as p_forms
 import tabs as p_tabs
 from openstack_dashboard.api import nova as nova_api
 
@@ -63,8 +64,19 @@ class IndexView(tabs.TabView):
         return self.get(request, *args, **kwargs)
 
 
-class MigrateDeviceView(workflows.WorkflowView):
+class MigrateDeviceView(forms.views.ModalFormView):
     name = _("Migrate Device")
-    workflow_class = a_workflows.MigrateDeviceWorkflow
-    success_url = reverse_lazy("horizon:admin:a10deviceinstances")
+    form_class = p_forms.MigrateDevice
+    success_url = reverse_lazy("horizon:admin:a10deviceinstances:index")
+    template_name = "instances/migrate_device.html"
+    submit_url = None
 
+    def post(self, request, *args, **kwargs):
+        import pdb; pdb.set_trace()
+        pass
+
+    def get_context_data(self, **kwargs):
+        context = super(MigrateDeviceView, self).get_context_data(**kwargs)
+        import pdb; pdb.set_trace()
+        context["nova_instance_id"] = self.kwargs["id"]
+        return context

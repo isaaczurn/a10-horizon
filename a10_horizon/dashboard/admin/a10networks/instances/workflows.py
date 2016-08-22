@@ -34,15 +34,16 @@ def array_to_choices(choices):
 
 
 class MigrateDeviceAction(workflows.Action):
-
+    
     nova_instance_id = forms.CharField(label=_("Nova Instance ID"),
-                                  widget=forms.HiddenInput(),
                                   required=True)
     host = forms.ChoiceField(label=_("Host IP"),
                              required=True)
 
     def __init__(self, request, *args, **kwargs):
         super(MigrateDeviceAction, self).__init__(request, *args, **kwargs)
+        import pdb; pdb.set_trace()
+        self.fields["nova_instance_id"].value = kwargs["nova_instance_id"]
 
     def populate_host_choices(self, request, context):
         host_list = helper.get_hosts(request)
@@ -50,6 +51,7 @@ class MigrateDeviceAction(workflows.Action):
 
     class Meta(object):
         name = _("Migrate Device")
+        permissions = ("openstack.services.network",)
         help_text = _("Migrate device to a new host")
 
 class MigrateDeviceStep(workflows.Step):
@@ -64,6 +66,7 @@ class MigrateDeviceWorkflow(workflows.Workflow):
     finalize_button_name = "Create Migration"
 
     def handle(self, request, context):
+        import pdb; pdb.set_trace()
         success = True
         try:
             migrate = helper.migrate(request,

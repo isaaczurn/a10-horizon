@@ -67,17 +67,20 @@ class TerminateDeviceInstanceAction(tables.DeleteAction):
     def allowed(self, request, obj):
         return True
 
-class MigrateDeviceInstanceAction(tables.LinkAction):
-    name = "migratedevice"
-    verbose_name = _("Migrate Device")
-    icon = "plus"
-    url = "horizon:admin:a10deviceinstances:migratedevice"
-    action_type = "danger"
 
-    classes = ("ajax-modal",)
+class MigrateDeviceInstanceAction(tables.LinkAction):
+     name = "migratedevice"
+     verbose_name = _("Migrate Device")
+     icon = "plus"
+     url = "horizon:admin:a10deviceinstances:migratedevice"
+     action_type = "danger"
+ 
+     classes = ("ajax-modal",)
+
 
 def get_instance_detail(datum):
     return reverse_lazy('horizon:project:instances:detail', args=[datum["nova_instance_id"]])
+
 
 def get_a10web_link(datum):
     protocol = "https"
@@ -86,9 +89,11 @@ def get_a10web_link(datum):
 
     return 'https://{0}'.format(ip_address)
 
+
 def get_compute_link(datum):
     hyper_id = "{0}_{1}".format(datum["comp_id"], datum["comp_name"])
     return reverse_lazy('horizon:admin:hypervisors:detail', kwargs={"hypervisor": hyper_id})
+
 
 def get_spec_summary(datum):
     flavor = datum.get("flavor")
@@ -96,6 +101,7 @@ def get_spec_summary(datum):
         ram = flavor.ram
         cpus = flavor.vcpus
         return 'RAM: {0}   VCPUS: {1}'.format(ram, cpus)
+
 
 class DeviceInstanceAdminTable(tables.DataTable):
     id = tables.Column("id", verbose_name=_("ID"), hidden=True)
@@ -111,5 +117,5 @@ class DeviceInstanceAdminTable(tables.DataTable):
     class Meta(object):
         name = "deviceinstanceadmintable"
         verbose_name = _("Device Instances")
-        table_actions = (MigrateDeviceInstanceAction, TerminateDeviceInstanceAction,)
+        table_actions = (TerminateDeviceInstanceAction,)
         row_actions = (MigrateDeviceInstanceAction, TerminateDeviceInstanceAction,)
