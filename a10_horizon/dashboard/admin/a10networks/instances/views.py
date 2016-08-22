@@ -72,8 +72,9 @@ class MigrateDeviceView(forms.views.ModalFormView):
     submit_url = None
 
     def post(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
-        pass
+        super(MigrateDeviceView, self).post(request, *args, **kwargs)
+#        import pdb; pdb.set_trace()
+#        pass
 
     def get_context_data(self, **kwargs):
         context = super(MigrateDeviceView, self).get_context_data(**kwargs)

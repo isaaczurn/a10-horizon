@@ -13,10 +13,11 @@ def array_to_choices(choices=[]):
 class MigrateDevice(forms.SelfHandlingForm):
     def __init__(self, *args, **kwargs):
         super(MigrateDevice, self).__init__(*args, **kwargs)
+        host_list = helper.get_hosts(self.request)
+
         instance_id = forms.CharField(label=_("Instance ID"),
                                               widget=forms.HiddenInput(),
                                               required=True)
-        host_list = helper.get_hosts(self.request)
         host = forms.ChoiceField(label=_("Host IP"),
                                   choices=array_to_choices(host_list),
                                   required=True)
