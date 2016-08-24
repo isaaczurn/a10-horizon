@@ -12,6 +12,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
@@ -27,6 +28,7 @@ import re
 
 import a10_horizon.dashboard.api.deviceinstances as a10api
 import workflows as a_workflows
+import workflows as p_workflows
 import forms as p_forms
 import tabs as p_tabs
 from openstack_dashboard.api import nova as nova_api
@@ -65,19 +67,41 @@ class IndexView(tabs.TabView):
 
 
 class MigrateDeviceView(forms.views.ModalFormView):
-    name = _("Migrate Device")
-    form_class = p_forms.MigrateDevice
-    success_url = reverse_lazy("horizon:admin:a10deviceinstances:index")
-    template_name = "instances/migrate_device.html"
-    submit_url = None
+     name = _("Migrate Device")
+     form_class = p_forms.MigrateDevice
+     template_name = "instances/migrate_device.html"
+     success_url = reverse_lazy("horizon:admin:a10deviceinstances:index")
+     submit_url = "horizon:admin:a10deviceinstances:migratedevice"
 
-    def post(self, request, *args, **kwargs):
-        super(MigrateDeviceView, self).post(request, *args, **kwargs)
+     def get_context_data(self, **kwargs):
+         context = super(MigrateDeviceView, self).get_context_data(**kwargs)
+         context["nova_instance_id"] = self.kwargs["id"]
+         context["submit_url"] = reverse(self.submit_url, args=[self.kwargs["id"]])
+         return context
+
+     @memoized.memoized_method
+     def _get_object(self, *args, **kwargs):
+         #import pdb; pdb.set_trace()
+         #return {"nova_instance_id": self.kwargs["nova_instance_id"]}
+         pass
+
+     def get_initial(self):
+         return {"nova_instance_id": self.kwargs["id"]}
+
+#class MigrateDeviceView(workflows.WorkflowView):
+    # name = _("Migrate Instance")
+#    workflow_class = p_workflows.MigrateDeviceInstanceWorkflow
+#    success_url = reverse_lazy("horizon:admin:a10deviceinstances:index")
+#
+#    def post(self, request, *args, **kwargs):
+#        super(MigrateDeviceView, self).post(request, *args, **kwargs)
+##        import pdb; pdb.set_trace()
+##        pass
+#
+#    def get_context_data(self, **kwargs):
+#        context = super(MigrateDeviceView, self).get_context_data(**kwargs)
 #        import pdb; pdb.set_trace()
-#        pass
-
-    def get_context_data(self, **kwargs):
-        context = super(MigrateDeviceView, self).get_context_data(**kwargs)
-        import pdb; pdb.set_trace()
-        context["nova_instance_id"] = self.kwargs["id"]
-        return context
+#        context["nova_instance_id"] = self.kwargs["id"]
+#        return context
+#    # def get_initial(self):
+##    #     return self.kwargs.get("id")

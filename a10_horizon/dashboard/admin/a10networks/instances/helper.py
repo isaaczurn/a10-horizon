@@ -29,7 +29,7 @@ def get_hosts(request, filter=None):
 
     host_list = []
     for hyper in hyper_list:
-        host_list.append(hyper.host_ip)
+        host_list.append(hyper.hypervisor_hostname)
 
     return host_list
 
@@ -76,7 +76,8 @@ def get_result(request, results):
     return result_list
 
 def migrate(request, id, host):
+    import pdb; pdb.set_trace()
     try:
-        nova_api.server_live_migrate(request, id, host)
+        nova_api.server_live_migrate(request, id, host, block_migration=True)
     except Exception:
         LOG.exception("Failure to migrate.")
