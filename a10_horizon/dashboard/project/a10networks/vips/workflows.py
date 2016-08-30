@@ -72,10 +72,6 @@ class CreateLbAction(workflows.Action):
 
 
 class CreateVipAction(workflows.Action):
-    listener_name = forms.CharField(label=_("Name"), min_length=1, max_length=255,
-                           required=True)
-    listener_description = forms.CharField(label=_("Description"), min_length=1,
-                                  max_length=255, required=False)
     protocol = forms.ChoiceField(label=_("Protocol"), required=True)
     protocol_port = forms.IntegerField(label=_("Protocol Port"), min_value=1, max_value=65535, required=True)
 
@@ -106,7 +102,7 @@ class CreateLbStep(workflows.Step):
 
 class CreateVipStep(workflows.Step):
     action_class = CreateVipAction
-    contributes = ("listener_name", "listener_desc", "protocol", "protocol_port")
+    contributes = ("protocol", "protocol_port")
 
 
 class CreateVipWorkflow(workflows.Workflow):
@@ -125,12 +121,10 @@ class CreateVipWorkflow(workflows.Workflow):
 
         try:
             lb_body = self._get_lb_body_from_context(context)
-            lb = lbaasv2.create_loadbalancer(request, lb_body).get("loadbalancer")
-            import pdb; pdb.set_trace()
+            lb = lbaasv2.create_loadbalancer(request, lb_body)
             lb_id = lb.get("id")
 
-
-            listener_body = self._get_listener_body_from_context(context)
+            listener_body = self._get_listener_body_from_context(context, lb_id)
             listener = lbaasv2.create_listener(request, listener_body)
             success = True
         except Exception as ex:
@@ -152,9 +146,10 @@ class CreateVipWorkflow(workflows.Workflow):
 
     def _get_listener_body_from_context(self, context, lb_id):
         return {"listener": {
-                "name": context.get("listener_name"),
-                "description": context.get("listener_desc"),
-                "loadbalancer_id": lb_id,
-                "protocol": context.get("protocol"),
+                "name": str("{0}_{1}".format(context.get("protocol"),
+                                             context.get("protocol_port"))),
+                "description": str(context.get("listener_desc")),
+                "loadbalancer_id": str(lb_id),
+                "protocol": str(context.get("protocol")),
                 "protocol_port": context.get("protocol_port")
         }}

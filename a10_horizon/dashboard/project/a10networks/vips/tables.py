@@ -102,7 +102,6 @@ class TestVipAction(tables.Action):
     def single(self, data_table, request, object_id):
         # Test methods need to be put into a lib
         # Start low level - ping, tcp, http, https
-        import pdb; pdb.set_trace()
         return True
 
 
@@ -130,6 +129,9 @@ class VipTable(tables.DataTable):
     op_status = tables.Column("op_status",
                               verbose_name=_("Operating Status"))
     name = tables.Column("name", verbose_name=_("Name"))
+
+    def get_object_id(self, datum):
+        return datum.get("id")
 
     class Meta(object):
         name = "viptable"
