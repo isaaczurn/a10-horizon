@@ -74,7 +74,7 @@ def record_from_instance(instance):
 
 def default_config(request):
     return {
-        "keystone_version": 2,
+        "keystone_version": 3,
         "keystone_auth_url": url_for(request),
         "nova_api_version": "2.1",
         'username': 'admin',

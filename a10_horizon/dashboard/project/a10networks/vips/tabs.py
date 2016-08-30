@@ -48,12 +48,12 @@ class VipsTab(tabs.TableTab):
         result = []
 
         try:
-            result = lbaasv2_api.list_loadbalancers(self.request)
+            result = lbaasv2_api.list_listeners(self.request)
             # result = a10api.get_a10_appliances(self.request)
         except Exception:
             result = []
             exceptions.handle(self.tab_group.request,
-                              _('Unable to retrieve appliance list.'))
+                              _('Unable to retrieve VIP list.'))
         return result
 
 
