@@ -66,7 +66,6 @@ class IndexView(tabs.TabView):
 
 
     def post(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
         obj_ids = request.POST.getlist('object_ids')
         action = request.POST['action']
         m = re.search('.delete([a-z]+)', action).group(1)
