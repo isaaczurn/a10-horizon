@@ -10,7 +10,6 @@ from horizon import forms
 
 import helper
 
-<<<<<<< HEAD
 def array_to_choices(choices=[]):
     return map(lambda x: (x, x), choices)
 
@@ -25,7 +24,6 @@ class MigrateDevice(forms.SelfHandlingForm):
         host = forms.ChoiceField(label=_("Host IP"),
                                   choices=array_to_choices(host_list),
                                   required=True)
-=======
 def array_to_choices(choices):
     return map(lambda x: (x, x), choices)
 
@@ -41,7 +39,6 @@ class MigrateDevice(forms.SelfHandlingForm):
         host = forms.ChoiceField(label=_("Host IP"),
             choices=array_to_choices(host_list),
             required=True)
->>>>>>> 3fdc4e58f6cb12d84fa5763f4a9445ad9d21bc13
 
     def handle(self, request, data):
         try:
@@ -53,9 +50,6 @@ class MigrateDevice(forms.SelfHandlingForm):
             exceptions.handle(request,
                     _('Unable to make the migration.'))
 
-<<<<<<< HEAD
-=======
 
             def get_hosts(request):
                 nova_api.host_list(request)
->>>>>>> 3fdc4e58f6cb12d84fa5763f4a9445ad9d21bc13
