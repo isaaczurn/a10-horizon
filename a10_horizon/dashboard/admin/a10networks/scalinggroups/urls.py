@@ -12,16 +12,12 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.conf.urls import url
-from django.conf.urls import include
 from django.conf.urls import patterns
-from django.conf import settings
-from django.conf.urls import static
+from django.conf.urls import url
 
-import a10_horizon
 import views
 
 app_name = "a10scalinggroups"
 urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.scalinggroups.views",
-    url(r'^$', views.IndexView.as_view(), name='index'),
+                       url(r'^$', views.IndexView.as_view(), name='index'),
 )

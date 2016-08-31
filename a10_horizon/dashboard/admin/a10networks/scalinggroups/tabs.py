@@ -18,7 +18,12 @@ from horizon import exceptions
 from horizon import tabs
 
 import tables as p_tables
+
 import a10_horizon.dashboard.api.scaling as a10api
+import logging
+
+
+LOG = logging.getLogger(__name__)
 
 
 class ScalingGroupAdminTableTab(tabs.TableTab):

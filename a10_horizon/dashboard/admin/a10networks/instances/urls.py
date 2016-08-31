@@ -22,7 +22,10 @@ import a10_horizon
 import views
 
 # app_name = "a10deviceinstances"
-urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.instances.views",
+urlpatterns = patterns("a10_horizon.dashboard.a10networks.a10deviceinstances.views",
     url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^migratedevice/(?P<id>[^/]*)$',
+        views.MigrateDeviceView.as_view(),
+        name='migratedevice'),
     # url(r'^delete$', views.DeleteApplianceView.as_view(), name='deleteappliance')
 )
