@@ -75,7 +75,6 @@ class VipsTab(tabs.TableTab):
                     "provisioning_status": lb.get("provisioning_status"),
                     "op_status": lb.get("operating_status"),
                     "provider": lb.get("provider")
-
                 }
                 rv.append(row)
 

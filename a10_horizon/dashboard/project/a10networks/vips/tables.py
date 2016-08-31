@@ -66,6 +66,7 @@ class DeleteVipAction(tables.DeleteAction):
         )
 
     def handle(self, data_table, request, object_ids):
+        import pdb; pdb.set_trace()
         for obj_id in object_ids:
             try:
                 lbaasv2_api.vip_delete(request, obj_id)

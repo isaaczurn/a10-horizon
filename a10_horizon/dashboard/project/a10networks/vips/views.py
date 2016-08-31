@@ -49,11 +49,44 @@ PLURAL = "plural"
 class IndexView(tabs.TabView):
     template_name = "vips/vip_tabs.html"
     tab_group_class = p_tabs.VipTabs
-    page_title = "VIPs"
+    page_title = "A10 Networks - VIPs"
+
+    def _lb_delete_nested(request, lb_id):
+        success = False
+
+        import pdb; pdb.set_trace()
+
+        lb_details = lbaasv2_api.get_loadbalancer(request, lb_id)
+
+        errors = []
+
+        for listener in lb_details.get("listeners"):
+            listener_id = listener.get("id")
+            try:
+                lbaasv2_api.delete_listener(request, listener_id)
+            except Exception as e:
+                # We can't continue with things we can't delete.
+                LOG.exception(e)
+                errors.append("Could not delete listener {0}".format(listener_id))
+                break
+
+        if len(errors) < 1:
+            try:
+                lbaasv2_api.loadbalancer_delete(request, lb_id)
+            except Exception as e:
+                LOG.exception(e)
+                errors.append("Could not delete load balancer {0}")
+                success = False
+        else:
+            joined = "\n".join(errors)
+            exceptions.handle(_(joined))
+
+        return len(errors) < 1
+
 
     delete_actions = {
         "vip": {
-            ACTION: lbaasv2_api.loadbalancer_delete,
+            ACTION: _lb_delete_nested,
             NOUN: "Load Balancer",
             PLURAL: "Load Balancers",
         },
@@ -72,6 +105,7 @@ class IndexView(tabs.TabView):
         if obj_ids == []:
             obj_ids.append(re.search('([0-9a-z-]+)$', action).group(1))
 
+        import pdb; pdb.set_trace()
         if m in self.delete_actions:
             delete_action = self.delete_actions[m]
             for obj_id in obj_ids:
@@ -86,6 +120,7 @@ class IndexView(tabs.TabView):
                     LOG.exception(ex)
 
         return self.get(request, *args, **kwargs)
+
 
 
 class EditVipView(forms.views.ModalFormView):
@@ -107,7 +142,7 @@ class EditVipView(forms.views.ModalFormView):
                                        kwargs={"id": id})
         if id:
             try:
-                rv = lbaasv2_api.show_loadbalancer(self.request, id)
+                rv = lbaasv2_api.get_loadbalancer(self.request, id)
                 LOG.info(rv)
                 return rv
             except Exception as ex:
