@@ -68,7 +68,9 @@ class TerminateDeviceInstanceAction(tables.DeleteAction):
         return True
 
 
+
 class MigrateDeviceInstanceAction(tables.LinkAction):
+<<<<<<< HEAD
      name = "migratedevice"
      verbose_name = _("Migrate Device")
      icon = "plus"
@@ -77,16 +79,31 @@ class MigrateDeviceInstanceAction(tables.LinkAction):
  
      classes = ("ajax-modal",)
 
+=======
+    name = "migratedevice"
+    verbose_name = _("Migrate")
+    icon = "plus"
+    classes = ("ajax-modal",)
+   
+    def get_link_url(self, datum):
+        base_url = reverse_lazy("horizon:admin:a10deviceinstances:migratedevice",
+                           kwargs={'id': datum["nova_instance_id"]})
+        return base_url
+>>>>>>> 3fdc4e58f6cb12d84fa5763f4a9445ad9d21bc13
 
 def get_instance_detail(datum):
     return reverse_lazy('horizon:project:instances:detail', args=[datum["nova_instance_id"]])
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3fdc4e58f6cb12d84fa5763f4a9445ad9d21bc13
 def get_a10web_link(datum):
     protocol = "https"
     ip_address = datum.get("host")
     port = datum.get("port")
 
+<<<<<<< HEAD
     return 'https://{0}'.format(ip_address)
 
 
@@ -102,6 +119,17 @@ def get_spec_summary(datum):
         cpus = flavor.vcpus
         return 'RAM: {0}   VCPUS: {1}'.format(ram, cpus)
 
+=======
+#    return '{0}://{1}{3}{2}">{1}</a>'.format(protocol, ip_address, port, ":" if port is not None else None)
+    return 'https://{0}'.format(ip_address)
+
+def get_spec_summary(datum):
+    flavor = datum.get("flavor")
+    if flavor:
+        ram = flavor.get("ram")
+        cpus = flavor.get("vcpus")
+        return 'RAM: {0} \nVCPUS: {1}'.format(ram, cpus)
+>>>>>>> 3fdc4e58f6cb12d84fa5763f4a9445ad9d21bc13
 
 class DeviceInstanceAdminTable(tables.DataTable):
     id = tables.Column("id", verbose_name=_("ID"), hidden=True)
@@ -110,12 +138,19 @@ class DeviceInstanceAdminTable(tables.DataTable):
     image = tables.Column("image", verbose_name=_("Image"), hidden=False)
     ip_address = tables.Column("host", link=get_a10web_link, verbose_name=_("IP Address"), hidden=False,)
     specs = tables.Column(get_spec_summary, verbose_name="Specs Summary")
+<<<<<<< HEAD
     comp_name = tables.Column("comp_name", link=get_compute_link, verbose_name=_("Compute Node"), hidden=False,)
+=======
+>>>>>>> 3fdc4e58f6cb12d84fa5763f4a9445ad9d21bc13
     nova_instance_id = tables.Column("nova_instance_id", verbose_name=_("Nova Instance ID"),
                                      hidden=False, link=get_instance_detail)
 
     class Meta(object):
         name = "deviceinstanceadmintable"
         verbose_name = _("Device Instances")
+<<<<<<< HEAD
         table_actions = (TerminateDeviceInstanceAction,)
+=======
+        table_actions = (MigrateDeviceInstanceAction, TerminateDeviceInstanceAction,)
+>>>>>>> 3fdc4e58f6cb12d84fa5763f4a9445ad9d21bc13
         row_actions = (MigrateDeviceInstanceAction, TerminateDeviceInstanceAction,)

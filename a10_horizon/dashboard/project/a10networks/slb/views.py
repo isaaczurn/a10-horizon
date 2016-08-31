@@ -47,7 +47,7 @@ class IndexView(tabs.TabView):
     tab_group_class = (project_tabs.A10ScalingTabs)
     template_name = 'slb/scaling_tabs.html'
     form_url = reverse_lazy(URL_PREFIX + "index")
-
+    page_title = "LB Scaling"
     delete_actions = {
         "scalingpolicy": {
             ACTION: api.delete_a10_scaling_policy,

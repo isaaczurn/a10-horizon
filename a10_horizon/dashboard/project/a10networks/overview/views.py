@@ -33,3 +33,4 @@ LOG = logging.getLogger(__name__)
 
 class IndexView(views.HorizonTemplateView):
     template_name = "overview/overview_tabs.html"
+    page_title = "Overview"

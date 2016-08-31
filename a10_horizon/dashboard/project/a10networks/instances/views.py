@@ -36,6 +36,7 @@ URL_PREFIX = "a10networks:instances:"
 class IndexView(tabs.TabbedTableView):
     tab_group_class = project_tabs.InstanceTabs
     template_name = "instances/_tabs.html"
+    page_title = "LB Device Instances"
 
     def post(self, request, *args, **kwargs):
         obj_ids = request.POST.getlist('object_ids')
