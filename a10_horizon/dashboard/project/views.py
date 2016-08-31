@@ -5,11 +5,11 @@ from django.utils.translation import ugettext_lazy as _
 
 from horizon import exceptions
 from horizon import forms
-from horizon.utils import memoized
 from horizon import messages
 from horizon import tabs
 from horizon import views
 from horizon import workflows
+from horizon.utils import memoized
 
 import logging
 
