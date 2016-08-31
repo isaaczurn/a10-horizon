@@ -65,23 +65,6 @@ class DeleteVipAction(tables.DeleteAction):
             count
         )
 
-    def handle(self, data_table, request, object_ids):
-        import pdb; pdb.set_trace()
-        for obj_id in object_ids:
-            try:
-                lbaasv2_api.vip_delete(request, obj_id)
-                redirect = reverse(self.redirect_url)
-            except Exception as ex:
-                msg = self.failure_message
-                LOG.exception(ex)
-                exceptions.handle(request, msg, redirect=self.redirect_url)
-
-            self.success_url = self.redirect_url
-            msg = _('VIP deleted.')
-            messages.success(request, msg)
-
-        return redirect(self.redirect_url)
-
     def allowed(self, request, obj):
         return True
 
@@ -99,10 +82,16 @@ class TestVipAction(tables.Action):
     success_url = "horizon:project:a10vips:index"
     method = "GET"
     requires_input = True
+    enabled = False
 
     def single(self, data_table, request, object_id):
         # Test methods need to be put into a lib
         # Start low level - ping, tcp, http, https
+        return True
+
+    def allowed(self, request, obj):
+        # Put in logic here for whether or not we can actually test something.
+        # This will allow is to do simple TCP tests in the beginning and slowly expand our wheelhouse.
         return True
 
 

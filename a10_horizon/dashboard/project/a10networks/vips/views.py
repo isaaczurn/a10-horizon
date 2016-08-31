@@ -54,8 +54,6 @@ class IndexView(tabs.TabView):
     def _lb_delete_nested(request, lb_id):
         success = False
 
-        import pdb; pdb.set_trace()
-
         lb_details = lbaasv2_api.get_loadbalancer(request, lb_id)
 
         errors = []
@@ -105,7 +103,6 @@ class IndexView(tabs.TabView):
         if obj_ids == []:
             obj_ids.append(re.search('([0-9a-z-]+)$', action).group(1))
 
-        import pdb; pdb.set_trace()
         if m in self.delete_actions:
             delete_action = self.delete_actions[m]
             for obj_id in obj_ids:
