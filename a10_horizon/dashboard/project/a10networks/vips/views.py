@@ -49,7 +49,7 @@ PLURAL = "plural"
 class IndexView(tabs.TabView):
     template_name = "vips/vip_tabs.html"
     tab_group_class = p_tabs.VipTabs
-    page_title = "A10 Networks - VIPs"
+    page_title = "VIPs"
 
     def _lb_delete_nested(request, lb_id):
         success = False
