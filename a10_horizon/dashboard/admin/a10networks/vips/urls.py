@@ -29,5 +29,8 @@ urlpatterns = patterns("a10_horizon.dashboard.admin.a10networks.vips.views",
         name="create"),
     url(r'^edit/(?P<id>[^/]*)$',
         views.EditVipView.as_view(),
-        name="edit")
+        name="edit"),
+    url(r'^migrate/(?P<id>[^/]*)$'),
+        views.MigrateVipView.as_view(),
+        name="migrate")
 )

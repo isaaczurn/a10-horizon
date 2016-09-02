@@ -74,7 +74,7 @@ class MigrateVipAction(tables.LinkAction):
     # verbose_name = _("Migrate VIP")
     # url = URL_PREFIX + "migrate"
     # icon = "plus"
-    # url = "horizon:admin:a10vips:migratevip"
+    # url = "horizon:admin:a10vips:migrate"
     # success_url = "horizon:admin:a10vips:index"
     # classes = ("ajax-modal",)
     pass

@@ -155,11 +155,20 @@ class CreateVipWorkflow(workflows.Workflow):
         }}
 
 class MigrateVipAction(workflows.Action):
-    
+    host = forms.ChoiceField(label=_("Host IP"), required = True)
+
+    def populate_host_choices(self, request, context):
+        # Similar to instance migrate. Get hosts with helper.
+
+    class Meta(object):
+        name = ("Host")
+        permissions = ("openstack.services.network", )
+        help_text = _("Specify host to migrate to.")
 
 
 class MigrateVipStep(workflows.Step):
-
+    action_class = MigrateVipAction
+    contributes = ()
 
 
 class MigrateVipWorkflow(workflows.Workflow):
@@ -170,3 +179,7 @@ class MigrateVipWorkflow(workflows.Workflow):
     finalize_button_name = "Migrate VIP"
 
     def handle(self, request, context):
+        # TODO(izurn): RE durrant's advice: get actions that have been performed
+        # on the server, perform said actions on new server. In the words of Durrant,
+        # "Adjust the plumbing."
+        pass

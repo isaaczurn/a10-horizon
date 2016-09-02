@@ -39,7 +39,7 @@ import tabs as p_tabs
 import workflows as p_workflows
 
 LOG = logging.getLogger(__name__)
-URL_PREFIX = "horizon:project:a10vips:"
+URL_PREFIX = "horizon:admin:a10vips:"
 
 ACTION = "action"
 NOUN = "noun"
@@ -155,4 +155,10 @@ class EditVipView(forms.views.ModalFormView):
 class CreateVipView(workflows.WorkflowView):
     name = _("Create VIP")
     workflow_class = p_workflows.CreateVipWorkflow
+    success_url = reverse_lazy(URL_PREFIX + "index")
+
+
+class MigrateVipView(workflows.WorkflowView):
+    name = _("Migrate VIP")
+    workflow_class = p_workflows.MigrateVipWorkflow
     success_url = reverse_lazy(URL_PREFIX + "index")
