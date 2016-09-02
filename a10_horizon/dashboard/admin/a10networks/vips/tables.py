@@ -30,7 +30,7 @@ except ImportError as ex:
 
 
 LOG = logging.getLogger(__name__)
-URL_PREFIX = "horizon:project:a10vips:"
+URL_PREFIX = "horizon:admin:a10vips:"
 
 
 class CreateVipLink(tables.LinkAction):
@@ -39,8 +39,8 @@ class CreateVipLink(tables.LinkAction):
     url = URL_PREFIX + "create"
     classes = ("ajax-modal",)
     icon = "plus"
-    policy_rules = ("network",)  # FIXME(mdurrant) - A10-specific policies?
-    success_url = "horizon:project:a10vips:index"
+    policy_rules = ("network",)
+    success_url = "horizon:admin:a10vips:index"
 
 
 class DeleteVipAction(tables.DeleteAction):
@@ -70,6 +70,13 @@ class DeleteVipAction(tables.DeleteAction):
 
 
 class MigrateVipAction(tables.LinkAction):
+    # name = "migratevip"
+    # verbose_name = _("Migrate VIP")
+    # url = URL_PREFIX + "migrate"
+    # icon = "plus"
+    # url = "horizon:admin:a10vips:migratevip"
+    # success_url = "horizon:admin:a10vips:index"
+    # classes = ("ajax-modal",)
     pass
 
 
@@ -79,7 +86,7 @@ class TestVipAction(tables.Action):
     url = URL_PREFIX + "test"
     classes = tuple()
     policy_rules = ("network",)
-    success_url = "horizon:project:a10vips:index"
+    success_url = "horizon:admin:a10vips:index"
     method = "GET"
     requires_input = True
     enabled = False
@@ -101,8 +108,8 @@ class EditVipAction(tables.LinkAction):
     url = URL_PREFIX + "edit"
     classes = ("ajax-modal",)
     icon = "plus"
-    policy_rules = ("network",)  # FIXME(mdurrant) - A10-specific policies?
-    success_url = "horizon:project:a10vips:index"
+    policy_rules = ("network",)
+    success_url = "horizon:admin:a10vips:index"
 
     def get_link_url(self, datum):
         base_url = reverse(URL_PREFIX + "edit",

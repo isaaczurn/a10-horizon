@@ -109,7 +109,7 @@ class CreateVipWorkflow(workflows.Workflow):
     slug = "addvip"
     name = _("Create VIP")
     default_steps = (CreateLbStep, CreateVipStep, )
-    success_url = "horizon:project:a10vips:index"
+    success_url = "horizon:admin:a10vips:index"
     finalize_button_name = "Create VIP"
 
     def handle(self, request, context):
@@ -153,3 +153,20 @@ class CreateVipWorkflow(workflows.Workflow):
                 "protocol": str(context.get("protocol")),
                 "protocol_port": context.get("protocol_port")
         }}
+
+class MigrateVipAction(workflows.Action):
+    
+
+
+class MigrateVipStep(workflows.Step):
+
+
+
+class MigrateVipWorkflow(workflows.Workflow):
+    slug = "migrate"
+    name = _("Migrate VIP")
+    default_steps = (MigrateVipStep, )
+    success_url = "horizon:admin:a10vips:index"
+    finalize_button_name = "Migrate VIP"
+
+    def handle(self, request, context):

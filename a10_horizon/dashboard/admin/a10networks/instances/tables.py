@@ -70,23 +70,18 @@ class TerminateDeviceInstanceAction(tables.DeleteAction):
 
 
 class MigrateDeviceInstanceAction(tables.LinkAction):
-     name = "migratedevice"
-     verbose_name = _("Migrate Device")
-     icon = "plus"
-     url = "horizon:admin:a10deviceinstances:migratedevice"
-     action_type = "danger"
-
-     classes = ("ajax-modal",)
-
     name = "migratedevice"
-    verbose_name = _("Migrate")
+    verbose_name = _("Migrate Device")
     icon = "plus"
+    url = "horizon:admin:a10deviceinstances:migratedevice"
+    action_type = "danger"
     classes = ("ajax-modal",)
 
     def get_link_url(self, datum):
         base_url = reverse_lazy("horizon:admin:a10deviceinstances:migratedevice",
                            kwargs={'id': datum["nova_instance_id"]})
         return base_url
+
 
 def get_instance_detail(datum):
     return reverse_lazy('horizon:project:instances:detail', args=[datum["nova_instance_id"]])
